@@ -4,7 +4,7 @@
 
 # Site
 title: 今晚不熬夜's blog
-subtitle: '记录码农成长'
+subtitle: '记录个人成长'
 description: ''
 keywords:
 author: 今晚不熬夜
@@ -44,14 +44,14 @@ post_asset_folder: false
 relative_link: false
 future: true
 highlight:
-  enable: true
+  enable: false
   line_number: true
   auto_detect: false
   tab_replace: ''
   wrap: true
   hljs: false
 prismjs:
-  enable: false
+  enable: true
   preprocess: true
   line_number: true
   tab_replace: ''
@@ -105,3 +105,18 @@ deploy:
   type: git
   repository: git@github.com:quanquan170/quanquan170.github.io.git
   branch: gh-pages
+
+search:
+  path: search.xml
+  field: post
+
+permalink_pinyin:
+  enable: true
+  separator: '-' # default: '-'
+
+githubEmojis:
+  enable: true
+  className: github-emoji
+  inject: true
+  styles:
+  customEmojis:
