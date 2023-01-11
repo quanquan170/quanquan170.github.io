@@ -1,0 +1,1570 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="第六章、应用层, 今晚不熬夜&#39;s blog">
+    <meta name="description" content="第六章、应用层Application Layer
+编程在不同的端系统上运行通过网络基础设施提供的服务，应用进程彼此通信如Web: Web 服务器软件与浏览器软件通信 
+网络核心中没有应用层软件网络核心没有应用层功能网络应用只在端系统上存在，">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>第六章、应用层 | 今晚不熬夜&#39;s blog</title>
+    <link rel="icon" type="image/svg+xml" href="/medias/avatar.svg">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/avatar.svg" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">今晚不熬夜&#39;s blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <!-- <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li> -->
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/avatar.svg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">今晚不熬夜&#39;s blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/quanquan170" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<!-- <a href="https://github.com/quanquan170" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a> -->
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">第六章、应用层</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                                <span class="chip bg-color">计算机网络</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%AC%94%E8%AE%B0/" class="post-category">
+                                笔记
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-01-11
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.1k
+                </div>
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="第六章、应用层"><a href="#第六章、应用层" class="headerlink" title="第六章、应用层"></a>第六章、应用层</h1><p>Application Layer</p>
+<p>编程<br>在不同的端系统上运行<br>通过网络基础设施提供的服务，应用进程彼此通信<br>如Web: Web 服务器软件与浏览器软件通信 </p>
+<p>网络核心中没有应用层软件<br>网络核心没有应用层功能<br>网络应用只在端系统上存在，快速网络应用开发和部署</p>
+<h2 id="5-1-Principles-of-network-applications应用层协议原理"><a href="#5-1-Principles-of-network-applications应用层协议原理" class="headerlink" title="5.1 Principles of network applications应用层协议原理"></a>5.1 Principles of network applications应用层协议原理</h2><h3 id="网络应用的体系结构"><a href="#网络应用的体系结构" class="headerlink" title="网络应用的体系结构"></a>网络应用的体系结构</h3><ul>
+<li><p>客户-服务器模式（C/S:client/server）</p>
+<ul>
+<li><p>服务器:</p>
+<ul>
+<li><p>一直运行的主机</p>
+</li>
+<li><p>固定（permanent）的IP地址和周知的端口号（约定）</p>
+</li>
+<li><p>扩展性：服务器场（server farms for scaling）</p>
+<ul>
+<li>数据中心进行</li>
+<li>扩展性差</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>客户端:</p>
+<ul>
+<li>主动与服务器通信</li>
+<li>与互联网有间歇性的连接</li>
+<li>可能是动态IP 地址</li>
+<li>不直接与其它客户端通信</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>对等模式(P2P:Peer To Peer)</p>
+<ul>
+<li><p>（几乎）没有一直运行的服务器</p>
+</li>
+<li><p>任意（arbitrary）端系统之间可以进行通信</p>
+</li>
+<li><p>参与的主机间歇性连接且可以改变IP 地址</p>
+</li>
+<li><p>每一个节点既是客户端又是服务器</p>
+<ul>
+<li>自扩展性-新peer节点带来新的服务能力，当然也带来新的服务请求（高度可扩展，但难以管理）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>混合体：客户-服务器和对等体系结构/<br>Hybrid of client-server and P2P/<br>C/S和P2P体系结构的混合体</p>
+<ul>
+<li><p>Napster</p>
+<ul>
+<li><p>文件搜索：集中 </p>
+<ul>
+<li>主机在中心服务器上注册其资源</li>
+<li>主机向中心服务器查询资源位置</li>
+</ul>
+</li>
+<li><p>文件传输：P2P</p>
+<ul>
+<li>任意Peer节点之间</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>即时通信</p>
+<ul>
+<li><p>在线检测：集中Presence detection/location centralized</p>
+<ul>
+<li>当用户上线时，向中心服务器注册其IP地址</li>
+<li>用户与中心服务器联系，以找到其在线好友的位置</li>
+</ul>
+</li>
+<li><p>两个用户之间聊天：P2P</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="进程通信-Processes-communicating"><a href="#进程通信-Processes-communicating" class="headerlink" title="进程通信(Processes communicating)"></a>进程通信(Processes communicating)</h3><ul>
+<li><p>进程：在主机上运行的应用程序</p>
+</li>
+<li><p>在同一个主机内，使用进程间通信机制通信（操作系统定义）</p>
+</li>
+<li><p>不同主机，通过交换报文（Message）来通信</p>
+<ul>
+<li><p>使用OS提供的通信服务</p>
+</li>
+<li><p>按照应用协议交换报文</p>
+<ul>
+<li>借助传输层提供的服务</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Sockets套接字"><a href="#Sockets套接字" class="headerlink" title="Sockets套接字"></a>Sockets套接字</h3><ul>
+<li><p>进程向套接字发送报文或从套接字接收报文</p>
+</li>
+<li><p>套接字 &lt;（类比analogous）-&gt; 门户</p>
+<ul>
+<li>发送进程将报文推出门户，发送进程依赖于传输层设施在另外一侧的门将报文交付给接受进程</li>
+<li>接收进程从另外一端的门户收到报文（依赖于传输层设施）</li>
+</ul>
+</li>
+<li><p>API：（1）传输协议的选择;（2）修复一些参数的能力（稍后会详细介绍）</p>
+</li>
+</ul>
+<h3 id="寻址流程Addressing-processes"><a href="#寻址流程Addressing-processes" class="headerlink" title="寻址流程Addressing processes"></a>寻址流程Addressing processes</h3><ul>
+<li><p>对于要接收消息的进程，它必须具有标识符（identifier）</p>
+</li>
+<li><p>主机具有唯一的 32 位 IP 地址</p>
+</li>
+<li><p>问：运行进程的主机的 IP 地址是否足以识别进程？</p>
+</li>
+<li><p>答：不可以，许多进程可以在同一主机上运行</p>
+</li>
+<li><p>标识符包括与主机上的进程关联的 IP 地址和端口号。</p>
+</li>
+<li><p>端口号示例：</p>
+<ul>
+<li>网络版服务器： 80<br>邮件服务器： 25</li>
+</ul>
+</li>
+</ul>
+<h3 id="应用层协议定义运行在不同端系统上"><a href="#应用层协议定义运行在不同端系统上" class="headerlink" title="应用层协议定义运行在不同端系统上"></a>应用层协议定义运行在不同端系统上</h3><p>的应用进程如何相互交换报文</p>
+<ul>
+<li><p>交换的报文类型：如请求和应答报文</p>
+</li>
+<li><p>各种报文类型的语法（syntax）：报文中的各个字段及其描述（delineate）</p>
+</li>
+<li><p>字段的语义（semantics）：即字段取值的含义</p>
+</li>
+<li><p>进程何时、如何发送报文及对报文进行响应的规则</p>
+</li>
+<li><p>公开协议（Public-domain protocols）：</p>
+<ul>
+<li><p>由RFC文档定义</p>
+</li>
+<li><p>允许互操作</p>
+<ul>
+<li>如HTTP, SMTP</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>专用（私有）协议（Proprietary protocols）：协议不公开</p>
+<ul>
+<li>如：Skype</li>
+</ul>
+</li>
+</ul>
+<h3 id="应用需要传输层提供什么样的服务？"><a href="#应用需要传输层提供什么样的服务？" class="headerlink" title="应用需要传输层提供什么样的服务？"></a>应用需要传输层提供什么样的服务？</h3><ul>
+<li><p>数据丢失率Data loss</p>
+<ul>
+<li>有些应用则要求100%的可靠数据传输（如文件）</li>
+<li>有些应用（如音频）能容忍一定比例以下的数据丢失</li>
+</ul>
+</li>
+<li><p>吞吐Bandwidth</p>
+<ul>
+<li>一些应用（如多媒体）必须需要最小限度的吞吐，从而使得应用能够有效运转</li>
+<li>一些应用能充分利用可供使用的吞吐(弹性应用)</li>
+</ul>
+</li>
+<li><p>延迟Timing</p>
+<ul>
+<li><p>一些应用出于有效性考虑，对数据传输有严格的时间限制</p>
+<ul>
+<li>Internet 电话、交互式游戏</li>
+<li>延迟、延迟差</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>安全性（扩展B）</p>
+<ul>
+<li>机密性</li>
+<li>完整性</li>
+<li>可认证性（鉴别）</li>
+</ul>
+</li>
+<li><p>常见应用对传输服务的要求</p>
+</li>
+</ul>
+<h3 id="Internet-传输层提供的服务"><a href="#Internet-传输层提供的服务" class="headerlink" title="Internet 传输层提供的服务"></a>Internet 传输层提供的服务</h3><ul>
+<li><p>TCP 服务：</p>
+<ul>
+<li>面向连接connection-oriented：要求在客户端进程和服务器进程之间建立连接</li>
+<li>流量控制flow control：发送方不会淹没(overwhelm)接受方</li>
+<li>拥塞控制congestion control：当网络出现拥塞时，能抑制发送方</li>
+<li>不能提供的服务：时间保证、最小吞吐保证和安全</li>
+<li>可靠的传输服务reliable transport</li>
+</ul>
+</li>
+<li><p>UDP 服务：不可靠数据传输</p>
+<ul>
+<li><p>不提供的服务：可靠，流量控制、拥塞控制、时间、带宽保证、建立连接</p>
+</li>
+<li><p>UDP存在的必要性</p>
+<p>能够区分不同的进程，而IP服务不能<br>在IP提供的主机到主机端到端功能的基础上，区分了主机的应用进程<br>无需建立连接，省去了建立连接时间，适合事务性的应用<br>不做可靠性的工作，例如检错重发，适合那些对实时性要求比较高而对正确性要求不高的应用<br>因为为了实现可靠性（准确性、保序等），必须付出时间代 价（检错重发）<br>没有拥塞控制和流量控制，应用能够按照设定的速度发送数据<br>而在TCP上面的应用，应用发送数据的速度和主机向网络发送的实际速度是不一致的，因为有流量控制和拥塞控制</p>
+</li>
+</ul>
+</li>
+<li><p>Internet应用及其应用层协议和传输协议</p>
+</li>
+</ul>
+<h2 id="5-2-Web-and-HTTP"><a href="#5-2-Web-and-HTTP" class="headerlink" title="5.2 Web and HTTP"></a>5.2 Web and HTTP</h2><h3 id="一些术语"><a href="#一些术语" class="headerlink" title="一些术语"></a>一些术语</h3><ul>
+<li><p>Web页（Web page）：由一些对象组成</p>
+<ul>
+<li>对象可以是HTML文件、JPEG图像、Java小程序、声音剪辑文件等</li>
+<li>Web页含有一个基本的HTML文件，该基本HTML文件又包含若干对象的引用（链接）</li>
+</ul>
+</li>
+<li><p>通过URL对每个对象进行引用（addressable）</p>
+<ul>
+<li>访问协议，用户名，口令字，端口等；</li>
+</ul>
+</li>
+<li><p>URL格式:</p>
+<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<h3 id="HTTP概况"><a href="#HTTP概况" class="headerlink" title="HTTP概况"></a>HTTP概况</h3><ul>
+<li><p>HTTP: 超文本传输协议（hypertext transfer protocol）</p>
+<ul>
+<li>Web的应用层协议</li>
+<li>客户/服务器模式 （client/server model）</li>
+<li>客户端: 请求、接收和显示Web对象的浏览器（browser）</li>
+<li>服务器: 对请求进行响应，发送对象的Web服务器</li>
+<li>HTTP 1.0: RFC 1945<br>HTTP 1.1: RFC 2068</li>
+</ul>
+</li>
+<li><p>使用TCP:</p>
+<ul>
+<li>客户发起一个与服务器的TCP连接 (建立套接字) ，端口号为 80</li>
+<li>服务器接受客户端的TCP连接</li>
+<li>在浏览器(HTTP客户端)与 Web服务器(HTTP服务器 server)交换HTTP报文 (应用层协议报文)</li>
+<li>TCP连接关闭</li>
+</ul>
+</li>
+<li><p>HTTP是无状态（stateless）的</p>
+<ul>
+<li><p>服务器并不维护关于客户的任何信息</p>
+</li>
+<li><p>注：维护状态的协议很复杂！</p>
+<p>必须维护历史信息(状态)<br>如果服务器/客户端死机（crashes），它们的状态信息可能不一致（inconsistent），二者的信息必须进行协调（reconciled）<br>无状态的服务器能够支持更多的客户端</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="两种类型的HTTP报文：请求request、响应response"><a href="#两种类型的HTTP报文：请求request、响应response" class="headerlink" title="两种类型的HTTP报文：请求request、响应response"></a>两种类型的HTTP报文：请求request、响应response</h3><ul>
+<li><p>HTTP请求报文</p>
+<ul>
+<li>HTTP请求报文：ASCII (人能阅读)</li>
+</ul>
+</li>
+<li><p>HTTP响应报文</p>
+</li>
+</ul>
+<h3 id="用户-服务器状态User-server-state-cookies"><a href="#用户-服务器状态User-server-state-cookies" class="headerlink" title="用户-服务器状态User-server state: cookies"></a>用户-服务器状态User-server state: cookies</h3><ul>
+<li><p>大多数主要的门户网站（web sites）使用 cookies</p>
+</li>
+<li><p>4个组成部分：</p>
+<ul>
+<li><ol>
+<li>在HTTP响应报文中有一个cookie的首部行</li>
+</ol>
+</li>
+<li>2)在HTTP请求报文含有一个cookie的首部行</li>
+<li><ol start="3">
+<li>在用户端系统中保留有一个cookie文件，由用户的浏览器(browser)管理</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>在Web站点(Sites)有一个后端(back-edn)数据库</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>一个栗子</p>
+<p>Susan总是用同一个PC使用Internet Explore上网<br>她第一次访问了一个使用了Cookie的电子商务网站<br>当最初的HTTP请求到达服务器时，该Web站点产生一个唯一ID，并以此作为索引在它的后 端数据库中产生一个项</p>
+</li>
+</ul>
+<h3 id="Web缓存caches-代理服务器proxy-server"><a href="#Web缓存caches-代理服务器proxy-server" class="headerlink" title="Web缓存caches (代理服务器proxy server)"></a>Web缓存caches (代理服务器proxy server)</h3><ul>
+<li><p>目标：不访问原始服务器，就满足客户的请求</p>
+</li>
+<li><p>用户设置浏览器： 通过缓存(cache)访问Web</p>
+</li>
+<li><p>浏览器将所有的HTTP请求发给缓存</p>
+<ul>
+<li>在缓存中的对象：缓存直接返回对象</li>
+<li>如对象不在缓存，缓存请求原始服务器，然后再将对象返回给客户端</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-3-FTP-文件传输协议-file-transfer-protocol"><a href="#5-3-FTP-文件传输协议-file-transfer-protocol" class="headerlink" title="5.3 FTP 文件传输协议(file transfer protocol)"></a>5.3 FTP 文件传输协议(file transfer protocol)</h2><h3 id="向远程主机上传输文件或从远程主机接收文件"><a href="#向远程主机上传输文件或从远程主机接收文件" class="headerlink" title="向远程主机上传输文件或从远程主机接收文件"></a>向远程主机上传输文件或从远程主机接收文件</h3><h3 id="客户-x2F-服务器模式"><a href="#客户-x2F-服务器模式" class="headerlink" title="客户/服务器模式"></a>客户/服务器模式</h3><ul>
+<li>客户端：发起传输的一方</li>
+<li>服务器：远程主机</li>
+</ul>
+<h3 id="ftp-RFC-959"><a href="#ftp-RFC-959" class="headerlink" title="ftp: RFC 959"></a>ftp: RFC 959</h3><h3 id="ftp服务器：端口号为21"><a href="#ftp服务器：端口号为21" class="headerlink" title="ftp服务器：端口号为21"></a>ftp服务器：端口号为21</h3><h3 id="FTP-控制连接与数据连接分开"><a href="#FTP-控制连接与数据连接分开" class="headerlink" title="FTP: 控制连接与数据连接分开"></a>FTP: 控制连接与数据连接分开</h3><ul>
+<li>FTP客户端与FTP服务器通过端口21联系，并指定（specifying）TCP为传输协议</li>
+<li>客户端通过控制连接获得身份确认（authorization）</li>
+<li>客户端通过控制连接发送命令浏览远程目录（remote directory）</li>
+<li>收到一个文件传输命令时，服务器打开一个到客户端的数据连接</li>
+<li>一个文件传输完成后，服务器关闭连接</li>
+<li></li>
+<li>服务器打开第二个TCP数据连接用来传输另一个文件</li>
+<li>控制连接： 带外（ “out of band”）传送</li>
+<li>FTP服务器维护用户的状态信息：当前路径、用户帐户与控制连接对应</li>
+<li>有状态</li>
+</ul>
+<h3 id="FTP命令、响应"><a href="#FTP命令、响应" class="headerlink" title="FTP命令、响应"></a>FTP命令、响应</h3><ul>
+<li><p>命令commands样例：</p>
+<ul>
+<li><strong>在控制连接上以ASCII文本方式传送<br>sent as ASCII text over control channel</strong></li>
+<li>USER username</li>
+<li>PASS password</li>
+<li>LIST：请服务器返回远程主机当前目录的文件列表</li>
+<li>RETR filename：从远程主机的当前目录检索文件(gets)</li>
+<li>STOR filename：向远程主机的当前目录存放文件(puts)</li>
+</ul>
+</li>
+<li><p>返回码return codes样例：</p>
+<ul>
+<li><strong>状态码和状态信息（status code and phrase） (同HTTP)</strong></li>
+<li>331 Username OK, password required</li>
+<li>125 data connection already open; transfer starting</li>
+<li>425 Can’t open data connection</li>
+<li>452 Error writing file</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-4-Electronic-Mail"><a href="#5-4-Electronic-Mail" class="headerlink" title="5.4 Electronic Mail"></a>5.4 Electronic Mail</h2><p>（SMTP, POP3, IMAP）</p>
+<h3 id="Electronic-Mail3个主要组成部分："><a href="#Electronic-Mail3个主要组成部分：" class="headerlink" title="Electronic Mail3个主要组成部分："></a>Electronic Mail3个主要组成部分：</h3><ul>
+<li><p>用户代理user agents </p>
+<ul>
+<li>又名 “邮件阅读器mail reader”</li>
+<li>撰写、编辑和阅读邮件（composing, editing, reading mail messages）</li>
+<li>如., Eudora, Outlook, elm, Netscape Messenger、Foxmail</li>
+<li>输出和输入（outgoing, incoming）邮件保存在服务器上</li>
+</ul>
+</li>
+<li><p>邮件服务器mail servers</p>
+<ul>
+<li><p>邮箱(mailbox)中管理和维护发送给用户的邮件</p>
+</li>
+<li><p>输出(outgoing)报文队列(message queue)保持待发送邮件报文</p>
+</li>
+<li><p>邮件服务器之间的SMTP协议：发送email报文</p>
+<ul>
+<li>客户：发送方邮件服务器</li>
+<li>服务器：接收端邮件服务器</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>简单邮件传输协议：SMTP[RFC 2821]</p>
+<ul>
+<li><p>使用TCP在客户端和服务器之间可靠传送报文，端口号为25</p>
+</li>
+<li><p>直接传输：从发送方服务器到接收方服务器</p>
+</li>
+<li><p>传输的3个阶段</p>
+<ul>
+<li>握手handshaking (greeting)</li>
+<li>传输报文transfer of messages</li>
+<li>关闭closure</li>
+</ul>
+</li>
+<li><p>命令/响应交互</p>
+<ul>
+<li>命令commands：ASCII文本</li>
+<li>响应response：状态码和状态信息</li>
+</ul>
+</li>
+<li><p>报文必须为7位ASCII码</p>
+</li>
+<li><p>一个栗子</p>
+<ol>
+<li>Alice使用用户代理撰写邮件并发送给 <a href="mailto:bob@someschool.edu">bob@someschool.edu</a> 2) Alice的用户代理将邮件发送到她的邮件服务器；邮件放在报文队列中</li>
+<li>SMTP的客户端打开到Bob邮件服务器的TCP连接</li>
+<li>SMTP客户端通过TCP连接发送Alice的邮件</li>
+<li>Bob的邮件服务器将邮件放到 Bob的邮箱</li>
+<li>Bob调用他的用户代理阅读邮件</li>
+</ol>
+<ul>
+<li><p>简单的SMTP交互</p>
+<p>S: 220 hamburger.edu<br>C: HELO crepes.fr<br>S: 250 Hello crepes.fr, pleased to meet you<br>C: MAIL FROM:<br>S: 250 <a href="mailto:alice@crepes.fr">alice@crepes.fr</a>… Sender ok<br>C: RCPT TO:  S: 250 <a href="mailto:bob@hamburger.edu">bob@hamburger.edu</a> … Recipient ok<br>C: DATA<br>S: 354 Enter mail, end with “.” on a line by itself<br>C: Do you like ketchup?<br>C: How about pickles?<br>C: .<br>S: 250 Message accepted for delivery<br>C: QUIT<br>S: 221 hamburger.edu closing connection </p>
+</li>
+<li><p>尝试SMTP交互</p>
+<ul>
+<li>telnet servername 25</li>
+<li>see 220 reply from server</li>
+<li>enter HELO, MAIL FROM, RCPT TO, DATA, QUIT commands </li>
+<li>上面允许您在不使用电子邮件客户端（阅读器）的情况下发送电子邮件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>总结：</p>
+<ul>
+<li><p>SMTP使用持久连接<br>SMTP要求报文（首部和主体）为7位ASCII编码<br>SMTP服务器使用CRLF.CRLF决定报文的尾部</p>
+</li>
+<li><p>HTTP比较：</p>
+<ul>
+<li>HTTP：拉（pull）<br>SMTP：推（push）<br>二者都是ASCII形式的命令/响应交互、状态码<br>HTTP：每个对象封装在各自的响应报文中<br>SMTP：多个对象包含在一个报文中</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="邮件报文格式Mail-message-format"><a href="#邮件报文格式Mail-message-format" class="headerlink" title="邮件报文格式Mail message format"></a>邮件报文格式Mail message format</h3><h3 id="报文格式：多媒体扩展-multimedia-extensions"><a href="#报文格式：多媒体扩展-multimedia-extensions" class="headerlink" title="报文格式：多媒体扩展 multimedia extensions"></a>报文格式：多媒体扩展 multimedia extensions</h3><ul>
+<li>MIME：多媒体邮件扩展（multimedia mail extension）, RFC 2045, 2056</li>
+<li>在报文首部用额外的行申明MIME内容类型</li>
+</ul>
+<h3 id="邮件访问协议Mail-access-protocols"><a href="#邮件访问协议Mail-access-protocols" class="headerlink" title="邮件访问协议Mail access protocols"></a>邮件访问协议Mail access protocols</h3><ul>
+<li><p>SMTP: 传送到接收方的邮件服务器</p>
+</li>
+<li><p>邮件访问协议：从服务器检索（retrieval）邮件 </p>
+<ul>
+<li><p>POP：邮局访问协议（Post Office Protocol）[RFC 1939]</p>
+<ul>
+<li>授权authorization (代理&lt;–&gt;服务器) 并下载</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>IMAP：Internet邮件访问协议（Internet Mail Access Protocol）[RFC 1730] （更多特性 (更复杂)）</p>
+<ul>
+<li><p><strong>在服务器上处理存储的报文（远程管理文件夹）</strong></p>
+</li>
+<li><p>IMAP服务器将每个报文与一个文件夹联系起来</p>
+</li>
+<li><p>允许用户用目录来组织报文</p>
+</li>
+<li><p>允许用户读取报文组件</p>
+</li>
+<li><p>IMAP在会话过程中保留用户状态： </p>
+<ul>
+<li>目录名、报文ID与目录名之间映射</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>HTTP：Hotmail , Yahoo! Mail等</p>
+<ul>
+<li>方便</li>
+</ul>
+</li>
+</ul>
+<h3 id="POP3协议"><a href="#POP3协议" class="headerlink" title="POP3协议"></a>POP3协议</h3><ul>
+<li><strong>（本地管理文件夹）</strong></li>
+<li>先前的例子使用 “下载并删除”模式。<br>（如果改变客户机，Bob不能阅读邮件）</li>
+<li>“下载并保留”：不同客户机上为报文的拷贝</li>
+<li>POP3在会话中是无状态的</li>
+</ul>
+<h2 id="5-5-DNS（Domain-Name-System）域名系统"><a href="#5-5-DNS（Domain-Name-System）域名系统" class="headerlink" title="5.5 DNS（Domain Name System）域名系统"></a>5.5 DNS（Domain Name System）域名系统</h2><h3 id="互联网主机、路由器："><a href="#互联网主机、路由器：" class="headerlink" title="互联网主机、路由器："></a>互联网主机、路由器：</h3><ul>
+<li>IP 地址（32 位） - 用于寻址数据报</li>
+<li>“名称”，例如，ww.yahoo.com - 由人类使用</li>
+</ul>
+<h3 id="DNS域名系统："><a href="#DNS域名系统：" class="headerlink" title="DNS域名系统："></a>DNS域名系统：</h3><ul>
+<li><p>分布式数据库distributed database ：在多个名称服务器的层次结构中实现</p>
+</li>
+<li><p>应用层协议application-layer protocol：主机、路由器、名称服务器，用于通信以解析（resolve）名称（地址/名称转换）</p>
+<ul>
+<li>注：核心互联网功能，作为应用层协议实现</li>
+<li>网络“边缘”的复杂性</li>
+</ul>
+</li>
+</ul>
+<h3 id="DNS的服务"><a href="#DNS的服务" class="headerlink" title="DNS的服务"></a>DNS的服务</h3><ul>
+<li><p>主机名到 IP 地址的转换</p>
+</li>
+<li><p>主机别名Host aliasing</p>
+<ul>
+<li>规范名称和别名Canonical and alias names</li>
+</ul>
+</li>
+<li><p>邮件服务器别名（aliasing）</p>
+</li>
+<li><p>负载分布Load distribution</p>
+<ul>
+<li>复制的(Replicated)Web 服务器：一个规范名称的 IP 地址集</li>
+</ul>
+</li>
+<li><p>为什么不集中化 DNS？</p>
+<ul>
+<li>单点故障single point of failure</li>
+<li>流量traffic volume</li>
+<li>远程集中式数据库distant centralized database</li>
+<li>维护maintenance</li>
+</ul>
+</li>
+</ul>
+<h3 id="分布式分层数据库"><a href="#分布式分层数据库" class="headerlink" title="分布式分层数据库"></a>分布式分层数据库</h3><p>Distributed, Hierarchical Database</p>
+<h3 id="DNS-Root-name-servers"><a href="#DNS-Root-name-servers" class="headerlink" title="DNS: Root name servers"></a>DNS: Root name servers</h3><ul>
+<li><p>无法解析名称的本地名称服务器联系</p>
+</li>
+<li><p>根名称服务器：</p>
+<ul>
+<li>如果名称映射未知，则联系权威名称服务器(authoritative name serve)</li>
+<li>获取映射mapping</li>
+<li>返回到本地名称服务器的映射</li>
+</ul>
+</li>
+</ul>
+<h3 id="TLD-and-Authoritative-Servers-TLD服务器和权威服务器"><a href="#TLD-and-Authoritative-Servers-TLD服务器和权威服务器" class="headerlink" title="TLD and Authoritative Servers(TLD服务器和权威服务器)"></a>TLD and Authoritative Servers(TLD服务器和权威服务器)</h3><ul>
+<li><p>顶级域服务器（Top-level domain ，TLD servers）：负责顶级域名（如com,org, net,edu和gov）和所有国家级的顶级名（如cn, uk, fr, ca,jp ）</p>
+<ul>
+<li>Network solutions 公司维护com TLD服务器</li>
+<li>Educause公司维护edu TLD服务器</li>
+</ul>
+</li>
+<li><p>Authoritative DNS servers组织的 DNS 服务器，为组织的服务器（例如 Web 和邮件）提供 IP 映射的权威主机名。</p>
+<ul>
+<li>可由组织或服务提供商维护</li>
+</ul>
+</li>
+</ul>
+<h3 id="本地名字服务器（Local-Name-Server）"><a href="#本地名字服务器（Local-Name-Server）" class="headerlink" title="本地名字服务器（Local Name Server）"></a>本地名字服务器（Local Name Server）</h3><ul>
+<li>并不严格属于层次结构</li>
+<li>每个ISP (居民区的ISP、公司、大学）都有一个本地DNS服务器</li>
+<li>也称为“默认名字服务器”</li>
+<li>当一个主机发起一个DNS查询时，查询被送到其本地DNS服务器</li>
+<li>起着代理的作用，将查询转发到层次结构中</li>
+</ul>
+<h3 id="一个栗子：cis-poly-edu-的主机需要-gaia-cs-umass-edu-的-IP-地址"><a href="#一个栗子：cis-poly-edu-的主机需要-gaia-cs-umass-edu-的-IP-地址" class="headerlink" title="一个栗子：cis.poly.edu 的主机需要 gaia.cs.umass.edu 的 IP 地址"></a>一个栗子：cis.poly.edu 的主机需要 gaia.cs.umass.edu 的 IP 地址</h3><h3 id="递归查询recursive-query（根服务器的负担太重）"><a href="#递归查询recursive-query（根服务器的负担太重）" class="headerlink" title="递归查询recursive query（根服务器的负担太重）"></a>递归查询recursive query（根服务器的负担太重）</h3><ul>
+<li>名字解析负担都放在当前联络的名字服务器上</li>
+</ul>
+<h3 id="迭代查询iterated-query"><a href="#迭代查询iterated-query" class="headerlink" title="迭代查询iterated query"></a>迭代查询iterated query</h3><ul>
+<li>已联系的服务器回复要联系的服务器的名称</li>
+<li>“我不知道这个名字，但问这个服务器”</li>
+</ul>
+<h2 id="5-6-P2P-file-sharing（P2P应用）"><a href="#5-6-P2P-file-sharing（P2P应用）" class="headerlink" title="5.6 P2P file sharing（P2P应用）"></a>5.6 P2P file sharing（P2P应用）</h2><h2 id="5-7-Socket-programming-with-TCP（TCP套接字编程）"><a href="#5-7-Socket-programming-with-TCP（TCP套接字编程）" class="headerlink" title="5.7 Socket programming with TCP（TCP套接字编程）"></a>5.7 Socket programming with TCP（TCP套接字编程）</h2><h2 id="5-8-Socket-programming-with-UDP（UDP套接字编程）"><a href="#5-8-Socket-programming-with-UDP（UDP套接字编程）" class="headerlink" title="5.8 Socket programming with UDP（UDP套接字编程）"></a>5.8 Socket programming with UDP（UDP套接字编程）</h2><h2 id="5-9-Building-a-Web-server"><a href="#5-9-Building-a-Web-server" class="headerlink" title="5.9 Building a Web server"></a>5.9 Building a Web server</h2><p>​	因为知识点很多，这部分的笔记最开始是用思维导图记的，但是图片都不能导出，xmind格式的到<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1a6knCso-d6e0OU0SeSc5pQ?pwd=tgm7">百度网盘</a>自行下载或者联系我私发叭，笔记效果如下（也不是那么好看，建议还是看PPT或者自己整理效率较高，我的笔记整理效果稍稍欠缺）：</p>
+
+<div class="markmap-container" style="height:800px">
+  <svg data="{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:1,&quot;p&quot;:{&quot;lines&quot;:[1,2]},&quot;v&quot;:&quot;第六章、应用层&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:2,&quot;p&quot;:{&quot;lines&quot;:[14,15]},&quot;v&quot;:&quot;5.1 Principles of network applications应用层协议原理&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[16,17]},&quot;v&quot;:&quot;网络应用的体系结构&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[18,19]},&quot;v&quot;:&quot;客户-服务器模式（C/S:client/server）&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[20,21]},&quot;v&quot;:&quot;服务器:&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[22,23]},&quot;v&quot;:&quot;一直运行的主机&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[23,24]},&quot;v&quot;:&quot;固定（permanent）的IP地址和周知的端口号（约定）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[24,25]},&quot;v&quot;:&quot;扩展性：服务器场（server farms for scaling）&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[26,27]},&quot;v&quot;:&quot;数据中心进行&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[27,28]},&quot;v&quot;:&quot;扩展性差&quot;}]}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[29,30]},&quot;v&quot;:&quot;客户端:&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[31,32]},&quot;v&quot;:&quot;主动与服务器通信&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[32,33]},&quot;v&quot;:&quot;与互联网有间歇性的连接&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[33,34]},&quot;v&quot;:&quot;可能是动态IP 地址&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[34,35]},&quot;v&quot;:&quot;不直接与其它客户端通信&quot;}]}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[36,37]},&quot;v&quot;:&quot;对等模式(P2P:Peer To Peer)&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[38,39]},&quot;v&quot;:&quot;（几乎）没有一直运行的服务器&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[39,40]},&quot;v&quot;:&quot;任意（arbitrary）端系统之间可以进行通信&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[40,41]},&quot;v&quot;:&quot;参与的主机间歇性连接且可以改变IP 地址&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[41,42]},&quot;v&quot;:&quot;每一个节点既是客户端又是服务器&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[43,44]},&quot;v&quot;:&quot;自扩展性-新peer节点带来新的服务能力，当然也带来新的服务请求（高度可扩展，但难以管理）&quot;}]}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[45,48]},&quot;v&quot;:&quot;混合体：客户-服务器和对等体系结构/<br>\nHybrid of client-server and P2P/<br>\nC/S和P2P体系结构的混合体&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[49,50]},&quot;v&quot;:&quot;Napster&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[51,52]},&quot;v&quot;:&quot;文件搜索：集中&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[53,54]},&quot;v&quot;:&quot;主机在中心服务器上注册其资源&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[54,55]},&quot;v&quot;:&quot;主机向中心服务器查询资源位置&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[56,57]},&quot;v&quot;:&quot;文件传输：P2P&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[58,59]},&quot;v&quot;:&quot;任意Peer节点之间&quot;}]}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[60,61]},&quot;v&quot;:&quot;即时通信&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[62,63]},&quot;v&quot;:&quot;在线检测：集中Presence detection/location centralized&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[64,65]},&quot;v&quot;:&quot;当用户上线时，向中心服务器注册其IP地址&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[65,66]},&quot;v&quot;:&quot;用户与中心服务器联系，以找到其在线好友的位置&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[67,68]},&quot;v&quot;:&quot;两个用户之间聊天：P2P&quot;}]}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[69,70]},&quot;v&quot;:&quot;进程通信(Processes communicating)&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[71,72]},&quot;v&quot;:&quot;进程：在主机上运行的应用程序&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[72,73]},&quot;v&quot;:&quot;在同一个主机内，使用进程间通信机制通信（操作系统定义）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[73,74]},&quot;v&quot;:&quot;不同主机，通过交换报文（Message）来通信&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[75,76]},&quot;v&quot;:&quot;使用OS提供的通信服务&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[76,77]},&quot;v&quot;:&quot;按照应用协议交换报文&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[78,79]},&quot;v&quot;:&quot;借助传输层提供的服务&quot;}]}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[80,81]},&quot;v&quot;:&quot;Sockets套接字&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[82,83]},&quot;v&quot;:&quot;进程向套接字发送报文或从套接字接收报文&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[83,84]},&quot;v&quot;:&quot;套接字 &amp;lt;（类比analogous）-&amp;gt; 门户&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[85,86]},&quot;v&quot;:&quot;发送进程将报文推出门户，发送进程依赖于传输层设施在另外一侧的门将报文交付给接受进程&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[86,87]},&quot;v&quot;:&quot;接收进程从另外一端的门户收到报文（依赖于传输层设施）&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[88,89]},&quot;v&quot;:&quot;API：（1）传输协议的选择;（2）修复一些参数的能力（稍后会详细介绍）&quot;}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[90,91]},&quot;v&quot;:&quot;寻址流程Addressing processes&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[92,93]},&quot;v&quot;:&quot;对于要接收消息的进程，它必须具有标识符（identifier）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[93,94]},&quot;v&quot;:&quot;主机具有唯一的 32 位 IP 地址&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[94,95]},&quot;v&quot;:&quot;问：运行进程的主机的 IP 地址是否足以识别进程？&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[95,96]},&quot;v&quot;:&quot;答：不可以，许多进程可以在同一主机上运行&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[96,97]},&quot;v&quot;:&quot;标识符包括与主机上的进程关联的 IP 地址和端口号。&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[97,98]},&quot;v&quot;:&quot;端口号示例：&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[99,101]},&quot;v&quot;:&quot;网络版服务器： 80<br>\n邮件服务器： 25&quot;}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[102,103]},&quot;v&quot;:&quot;应用层协议定义运行在不同端系统上&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[106,107]},&quot;v&quot;:&quot;交换的报文类型：如请求和应答报文&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[107,108]},&quot;v&quot;:&quot;各种报文类型的语法（syntax）：报文中的各个字段及其描述（delineate）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[108,109]},&quot;v&quot;:&quot;字段的语义（semantics）：即字段取值的含义&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[109,110]},&quot;v&quot;:&quot;进程何时、如何发送报文及对报文进行响应的规则&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[110,111]},&quot;v&quot;:&quot;公开协议（Public-domain protocols）：&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[112,113]},&quot;v&quot;:&quot;由RFC文档定义&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[113,114]},&quot;v&quot;:&quot;允许互操作&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[115,116]},&quot;v&quot;:&quot;如HTTP, SMTP&quot;}]}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[117,118]},&quot;v&quot;:&quot;专用（私有）协议（Proprietary protocols）：协议不公开&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[119,120]},&quot;v&quot;:&quot;如：Skype&quot;}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[121,122]},&quot;v&quot;:&quot;应用需要传输层提供什么样的服务？&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[123,124]},&quot;v&quot;:&quot;数据丢失率Data loss&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[125,126]},&quot;v&quot;:&quot;有些应用则要求100%的可靠数据传输（如文件）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[126,127]},&quot;v&quot;:&quot;有些应用（如音频）能容忍一定比例以下的数据丢失&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[128,129]},&quot;v&quot;:&quot;吞吐Bandwidth&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[130,131]},&quot;v&quot;:&quot;一些应用（如多媒体）必须需要最小限度的吞吐，从而使得应用能够有效运转&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[131,132]},&quot;v&quot;:&quot;一些应用能充分利用可供使用的吞吐(弹性应用)&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[133,134]},&quot;v&quot;:&quot;延迟Timing&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[135,136]},&quot;v&quot;:&quot;一些应用出于有效性考虑，对数据传输有严格的时间限制&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[137,138]},&quot;v&quot;:&quot;Internet 电话、交互式游戏&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[138,139]},&quot;v&quot;:&quot;延迟、延迟差&quot;}]}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[140,141]},&quot;v&quot;:&quot;安全性（扩展B）&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[142,143]},&quot;v&quot;:&quot;机密性&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[143,144]},&quot;v&quot;:&quot;完整性&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[144,145]},&quot;v&quot;:&quot;可认证性（鉴别）&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[146,147]},&quot;v&quot;:&quot;常见应用对传输服务的要求&quot;}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[148,149]},&quot;v&quot;:&quot;Internet 传输层提供的服务&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[150,151]},&quot;v&quot;:&quot;TCP 服务：&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[152,153]},&quot;v&quot;:&quot;面向连接connection-oriented：要求在客户端进程和服务器进程之间建立连接&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[153,154]},&quot;v&quot;:&quot;流量控制flow control：发送方不会淹没(overwhelm)接受方&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[154,155]},&quot;v&quot;:&quot;拥塞控制congestion control：当网络出现拥塞时，能抑制发送方&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[155,156]},&quot;v&quot;:&quot;不能提供的服务：时间保证、最小吞吐保证和安全&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[156,157]},&quot;v&quot;:&quot;可靠的传输服务reliable transport&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[158,159]},&quot;v&quot;:&quot;UDP 服务：不可靠数据传输&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[160,161]},&quot;v&quot;:&quot;不提供的服务：可靠，流量控制、拥塞控制、时间、带宽保证、建立连接&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[162,163]},&quot;v&quot;:&quot;UDP存在的必要性&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[172,173]},&quot;v&quot;:&quot;Internet应用及其应用层协议和传输协议&quot;}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:2,&quot;p&quot;:{&quot;lines&quot;:[174,175]},&quot;v&quot;:&quot;5.2 Web and HTTP&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[176,177]},&quot;v&quot;:&quot;一些术语&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[178,179]},&quot;v&quot;:&quot;Web页（Web page）：由一些对象组成&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[180,181]},&quot;v&quot;:&quot;对象可以是HTML文件、JPEG图像、Java小程序、声音剪辑文件等&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[181,182]},&quot;v&quot;:&quot;Web页含有一个基本的HTML文件，该基本HTML文件又包含若干对象的引用（链接）&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[183,184]},&quot;v&quot;:&quot;通过URL对每个对象进行引用（addressable）&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[185,186]},&quot;v&quot;:&quot;访问协议，用户名，口令字，端口等；&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[187,188]},&quot;v&quot;:&quot;URL格式:&quot;}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[191,192]},&quot;v&quot;:&quot;HTTP概况&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[193,194]},&quot;v&quot;:&quot;HTTP: 超文本传输协议（hypertext transfer protocol）&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[195,196]},&quot;v&quot;:&quot;Web的应用层协议&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[196,197]},&quot;v&quot;:&quot;客户/服务器模式 （client/server model）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[197,198]},&quot;v&quot;:&quot;客户端: 请求、接收和显示Web对象的浏览器（browser）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[198,199]},&quot;v&quot;:&quot;服务器: 对请求进行响应，发送对象的Web服务器&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[199,201]},&quot;v&quot;:&quot;HTTP 1.0: RFC 1945<br>\nHTTP 1.1: RFC 2068&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[202,203]},&quot;v&quot;:&quot;使用TCP:&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[204,205]},&quot;v&quot;:&quot;客户发起一个与服务器的TCP连接 (建立套接字) ，端口号为 80&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[205,206]},&quot;v&quot;:&quot;服务器接受客户端的TCP连接&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[206,207]},&quot;v&quot;:&quot;在浏览器(HTTP客户端)与 Web服务器(HTTP服务器 server)交换HTTP报文 (应用层协议报文)&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[207,208]},&quot;v&quot;:&quot;TCP连接关闭&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[209,210]},&quot;v&quot;:&quot;HTTP是无状态（stateless）的&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[211,212]},&quot;v&quot;:&quot;服务器并不维护关于客户的任何信息&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[213,214]},&quot;v&quot;:&quot;注：维护状态的协议很复杂！&quot;}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[219,220]},&quot;v&quot;:&quot;两种类型的HTTP报文：请求request、响应response&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[221,222]},&quot;v&quot;:&quot;HTTP请求报文&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[223,224]},&quot;v&quot;:&quot;HTTP请求报文：ASCII (人能阅读)&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[225,226]},&quot;v&quot;:&quot;HTTP响应报文&quot;}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[227,228]},&quot;v&quot;:&quot;用户-服务器状态User-server state: cookies&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[229,230]},&quot;v&quot;:&quot;大多数主要的门户网站（web sites）使用 cookies&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[231,232]},&quot;v&quot;:&quot;4个组成部分：&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[233,234]},&quot;v&quot;:&quot;&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[233,234],&quot;index&quot;:1},&quot;v&quot;:&quot;1. 在HTTP响应报文中有一个cookie的首部行&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[234,235]},&quot;v&quot;:&quot;2)在HTTP请求报文含有一个cookie的首部行&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[235,236]},&quot;v&quot;:&quot;&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[235,236],&quot;index&quot;:3},&quot;v&quot;:&quot;3. 在用户端系统中保留有一个cookie文件，由用户的浏览器(browser)管理&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[236,238]},&quot;v&quot;:&quot;&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[236,237],&quot;index&quot;:4},&quot;v&quot;:&quot;4. 在Web站点(Sites)有一个后端(back-edn)数据库&quot;}]}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[238,239]},&quot;v&quot;:&quot;一个栗子&quot;}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[244,245]},&quot;v&quot;:&quot;Web缓存caches (代理服务器proxy server)&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[246,247]},&quot;v&quot;:&quot;目标：不访问原始服务器，就满足客户的请求&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[247,248]},&quot;v&quot;:&quot;用户设置浏览器： 通过缓存(cache)访问Web&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[248,249]},&quot;v&quot;:&quot;浏览器将所有的HTTP请求发给缓存&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[250,251]},&quot;v&quot;:&quot;在缓存中的对象：缓存直接返回对象&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[251,252]},&quot;v&quot;:&quot;如对象不在缓存，缓存请求原始服务器，然后再将对象返回给客户端&quot;}]}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:2,&quot;p&quot;:{&quot;lines&quot;:[253,254]},&quot;v&quot;:&quot;5.3 FTP 文件传输协议(file transfer protocol)&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[255,256]},&quot;v&quot;:&quot;向远程主机上传输文件或从远程主机接收文件&quot;},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[257,258]},&quot;v&quot;:&quot;客户/服务器模式&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[259,260]},&quot;v&quot;:&quot;客户端：发起传输的一方&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[260,261]},&quot;v&quot;:&quot;服务器：远程主机&quot;}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[262,263]},&quot;v&quot;:&quot;ftp: RFC 959&quot;},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[264,265]},&quot;v&quot;:&quot;ftp服务器：端口号为21&quot;},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[266,267]},&quot;v&quot;:&quot;FTP: 控制连接与数据连接分开&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[268,269]},&quot;v&quot;:&quot;FTP客户端与FTP服务器通过端口21联系，并指定（specifying）TCP为传输协议&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[269,270]},&quot;v&quot;:&quot;客户端通过控制连接获得身份确认（authorization）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[270,271]},&quot;v&quot;:&quot;客户端通过控制连接发送命令浏览远程目录（remote directory）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[271,272]},&quot;v&quot;:&quot;收到一个文件传输命令时，服务器打开一个到客户端的数据连接&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[272,273]},&quot;v&quot;:&quot;一个文件传输完成后，服务器关闭连接&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[273,274]},&quot;v&quot;:&quot;&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[274,275]},&quot;v&quot;:&quot;服务器打开第二个TCP数据连接用来传输另一个文件&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[275,276]},&quot;v&quot;:&quot;控制连接： 带外（ “out of band”）传送&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[276,277]},&quot;v&quot;:&quot;FTP服务器维护用户的状态信息：当前路径、用户帐户与控制连接对应&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[277,278]},&quot;v&quot;:&quot;有状态&quot;}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[279,280]},&quot;v&quot;:&quot;FTP命令、响应&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[281,282]},&quot;v&quot;:&quot;命令commands样例：&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[283,285]},&quot;v&quot;:&quot;<strong>在控制连接上以ASCII文本方式传送<br>\nsent as ASCII text over control channel</strong>&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[285,286]},&quot;v&quot;:&quot;USER username&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[286,287]},&quot;v&quot;:&quot;PASS password&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[287,288]},&quot;v&quot;:&quot;LIST：请服务器返回远程主机当前目录的文件列表&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[288,289]},&quot;v&quot;:&quot;RETR filename：从远程主机的当前目录检索文件(gets)&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[289,290]},&quot;v&quot;:&quot;STOR filename：向远程主机的当前目录存放文件(puts)&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[291,292]},&quot;v&quot;:&quot;返回码return codes样例：&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[293,294]},&quot;v&quot;:&quot;<strong>状态码和状态信息（status code and phrase） (同HTTP)</strong>&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[294,295]},&quot;v&quot;:&quot;331 Username OK, password required&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[295,296]},&quot;v&quot;:&quot;125 data connection already open; transfer starting&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[296,297]},&quot;v&quot;:&quot;425 Can’t open data connection&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[297,298]},&quot;v&quot;:&quot;452 Error writing file&quot;}]}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:2,&quot;p&quot;:{&quot;lines&quot;:[299,300]},&quot;v&quot;:&quot;5.4 Electronic Mail&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[303,304]},&quot;v&quot;:&quot;Electronic Mail3个主要组成部分：&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[305,306]},&quot;v&quot;:&quot;用户代理user agents&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[307,308]},&quot;v&quot;:&quot;又名 “邮件阅读器mail reader”&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[308,309]},&quot;v&quot;:&quot;撰写、编辑和阅读邮件（composing, editing, reading mail messages）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[309,310]},&quot;v&quot;:&quot;如., Eudora, Outlook, elm, Netscape Messenger、Foxmail&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[310,311]},&quot;v&quot;:&quot;输出和输入（outgoing, incoming）邮件保存在服务器上&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[312,313]},&quot;v&quot;:&quot;邮件服务器mail servers&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[314,315]},&quot;v&quot;:&quot;邮箱(mailbox)中管理和维护发送给用户的邮件&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[315,316]},&quot;v&quot;:&quot;输出(outgoing)报文队列(message queue)保持待发送邮件报文&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[316,317]},&quot;v&quot;:&quot;邮件服务器之间的SMTP协议：发送email报文&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[318,319]},&quot;v&quot;:&quot;客户：发送方邮件服务器&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[319,320]},&quot;v&quot;:&quot;服务器：接收端邮件服务器&quot;}]}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[321,322]},&quot;v&quot;:&quot;简单邮件传输协议：SMTP[RFC 2821]&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[323,324]},&quot;v&quot;:&quot;使用TCP在客户端和服务器之间可靠传送报文，端口号为25&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[325,326]},&quot;v&quot;:&quot;直接传输：从发送方服务器到接收方服务器&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[327,328]},&quot;v&quot;:&quot;传输的3个阶段&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[329,330]},&quot;v&quot;:&quot;握手handshaking (greeting)&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[330,331]},&quot;v&quot;:&quot;传输报文transfer of messages&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[331,332]},&quot;v&quot;:&quot;关闭closure&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[333,334]},&quot;v&quot;:&quot;命令/响应交互&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[335,336]},&quot;v&quot;:&quot;命令commands：ASCII文本&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[336,337]},&quot;v&quot;:&quot;响应response：状态码和状态信息&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[338,339]},&quot;v&quot;:&quot;报文必须为7位ASCII码&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[340,341]},&quot;v&quot;:&quot;一个栗子&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;ordered_list&quot;,&quot;d&quot;:8,&quot;p&quot;:{&quot;lines&quot;:[342,348],&quot;start&quot;:1},&quot;v&quot;:&quot;&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[342,343],&quot;index&quot;:1},&quot;v&quot;:&quot;1. Alice使用用户代理撰写邮件并发送给 bob@someschool.edu 2) Alice的用户代理将邮件发送到她的邮件服务器；邮件放在报文队列中&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[343,344],&quot;index&quot;:2},&quot;v&quot;:&quot;2. SMTP的客户端打开到Bob邮件服务器的TCP连接&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[344,345],&quot;index&quot;:3},&quot;v&quot;:&quot;3. SMTP客户端通过TCP连接发送Alice的邮件&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[345,346],&quot;index&quot;:4},&quot;v&quot;:&quot;4. Bob的邮件服务器将邮件放到 Bob的邮箱&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[346,347],&quot;index&quot;:5},&quot;v&quot;:&quot;5. Bob调用他的用户代理阅读邮件&quot;}]},{&quot;t&quot;:&quot;bullet_list&quot;,&quot;d&quot;:8,&quot;p&quot;:{&quot;lines&quot;:[348,372]},&quot;v&quot;:&quot;&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[348,349]},&quot;v&quot;:&quot;简单的SMTP交互&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[365,366]},&quot;v&quot;:&quot;尝试SMTP交互&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[367,368]},&quot;v&quot;:&quot;telnet servername 25&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[368,369]},&quot;v&quot;:&quot;see 220 reply from server&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[369,370]},&quot;v&quot;:&quot;enter HELO, MAIL FROM, RCPT TO, DATA, QUIT commands&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[370,371]},&quot;v&quot;:&quot;上面允许您在不使用电子邮件客户端（阅读器）的情况下发送电子邮件&quot;}]}]}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[372,373]},&quot;v&quot;:&quot;总结：&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[374,377]},&quot;v&quot;:&quot;SMTP使用持久连接<br>\nSMTP要求报文（首部和主体）为7位ASCII编码<br>\nSMTP服务器使用CRLF.CRLF决定报文的尾部&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[377,378]},&quot;v&quot;:&quot;HTTP比较：&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[379,384]},&quot;v&quot;:&quot;HTTP：拉（pull）<br>\nSMTP：推（push）<br>\n二者都是ASCII形式的命令/响应交互、状态码<br>\nHTTP：每个对象封装在各自的响应报文中<br>\nSMTP：多个对象包含在一个报文中&quot;}]}]}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[385,386]},&quot;v&quot;:&quot;邮件报文格式Mail message format&quot;},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[387,388]},&quot;v&quot;:&quot;报文格式：多媒体扩展 multimedia extensions&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[389,390]},&quot;v&quot;:&quot;MIME：多媒体邮件扩展（multimedia mail extension）, RFC 2045, 2056&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[390,391]},&quot;v&quot;:&quot;在报文首部用额外的行申明MIME内容类型&quot;}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[392,393]},&quot;v&quot;:&quot;邮件访问协议Mail access protocols&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[394,395]},&quot;v&quot;:&quot;SMTP: 传送到接收方的邮件服务器&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[395,396]},&quot;v&quot;:&quot;邮件访问协议：从服务器检索（retrieval）邮件&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[397,398]},&quot;v&quot;:&quot;POP：邮局访问协议（Post Office Protocol）[RFC 1939]&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[399,400]},&quot;v&quot;:&quot;授权authorization (代理&amp;lt;--&amp;gt;服务器) 并下载&quot;}]}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[401,402]},&quot;v&quot;:&quot;IMAP：Internet邮件访问协议（Internet Mail Access Protocol）[RFC 1730] （更多特性 (更复杂)）&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[403,404]},&quot;v&quot;:&quot;<strong>在服务器上处理存储的报文（远程管理文件夹）</strong>&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[404,405]},&quot;v&quot;:&quot;IMAP服务器将每个报文与一个文件夹联系起来&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[405,406]},&quot;v&quot;:&quot;允许用户用目录来组织报文&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[406,407]},&quot;v&quot;:&quot;允许用户读取报文组件&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[407,408]},&quot;v&quot;:&quot;IMAP在会话过程中保留用户状态：&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[409,410]},&quot;v&quot;:&quot;目录名、报文ID与目录名之间映射&quot;}]}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[411,412]},&quot;v&quot;:&quot;HTTP：Hotmail , Yahoo! Mail等&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[413,414]},&quot;v&quot;:&quot;方便&quot;}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[415,416]},&quot;v&quot;:&quot;POP3协议&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[417,418]},&quot;v&quot;:&quot;<strong>（本地管理文件夹）</strong>&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[418,420]},&quot;v&quot;:&quot;先前的例子使用 “下载并删除”模式。<br>\n（如果改变客户机，Bob不能阅读邮件）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[420,421]},&quot;v&quot;:&quot;“下载并保留”：不同客户机上为报文的拷贝&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[421,422]},&quot;v&quot;:&quot;POP3在会话中是无状态的&quot;}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:2,&quot;p&quot;:{&quot;lines&quot;:[423,424]},&quot;v&quot;:&quot;5.5 DNS（Domain Name System）域名系统&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[425,426]},&quot;v&quot;:&quot;互联网主机、路由器：&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[427,428]},&quot;v&quot;:&quot;IP 地址（32 位） - 用于寻址数据报&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[428,429]},&quot;v&quot;:&quot;“名称”，例如，ww.yahoo.com - 由人类使用&quot;}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[430,431]},&quot;v&quot;:&quot;DNS域名系统：&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[432,433]},&quot;v&quot;:&quot;分布式数据库distributed database ：在多个名称服务器的层次结构中实现&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[433,434]},&quot;v&quot;:&quot;应用层协议application-layer protocol：主机、路由器、名称服务器，用于通信以解析（resolve）名称（地址/名称转换）&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[435,436]},&quot;v&quot;:&quot;注：核心互联网功能，作为应用层协议实现&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[436,437]},&quot;v&quot;:&quot;网络“边缘”的复杂性&quot;}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[438,439]},&quot;v&quot;:&quot;DNS的服务&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[440,441]},&quot;v&quot;:&quot;主机名到 IP 地址的转换&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[441,442]},&quot;v&quot;:&quot;主机别名Host aliasing&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[443,444]},&quot;v&quot;:&quot;规范名称和别名Canonical and alias names&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[445,446]},&quot;v&quot;:&quot;邮件服务器别名（aliasing）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[446,447]},&quot;v&quot;:&quot;负载分布Load distribution&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[448,449]},&quot;v&quot;:&quot;复制的(Replicated)Web 服务器：一个规范名称的 IP 地址集&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[450,451]},&quot;v&quot;:&quot;为什么不集中化 DNS？&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[452,453]},&quot;v&quot;:&quot;单点故障single point of failure&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[453,454]},&quot;v&quot;:&quot;流量traffic volume&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[454,455]},&quot;v&quot;:&quot;远程集中式数据库distant centralized database&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[455,456]},&quot;v&quot;:&quot;维护maintenance&quot;}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[457,458]},&quot;v&quot;:&quot;分布式分层数据库&quot;},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[461,462]},&quot;v&quot;:&quot;DNS: Root name servers&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[463,464]},&quot;v&quot;:&quot;无法解析名称的本地名称服务器联系&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[464,465]},&quot;v&quot;:&quot;根名称服务器：&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[466,467]},&quot;v&quot;:&quot;如果名称映射未知，则联系权威名称服务器(authoritative name serve)&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[467,468]},&quot;v&quot;:&quot;获取映射mapping&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[468,469]},&quot;v&quot;:&quot;返回到本地名称服务器的映射&quot;}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[470,471]},&quot;v&quot;:&quot;TLD and Authoritative Servers(TLD服务器和权威服务器)&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[472,473]},&quot;v&quot;:&quot;顶级域服务器（Top-level domain ，TLD servers）：负责顶级域名（如com,org, net,edu和gov）和所有国家级的顶级名（如cn, uk, fr, ca,jp ）&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[474,475]},&quot;v&quot;:&quot;Network solutions 公司维护com TLD服务器&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[475,476]},&quot;v&quot;:&quot;Educause公司维护edu TLD服务器&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[477,478]},&quot;v&quot;:&quot;Authoritative DNS servers组织的 DNS 服务器，为组织的服务器（例如 Web 和邮件）提供 IP 映射的权威主机名。&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[479,480]},&quot;v&quot;:&quot;可由组织或服务提供商维护&quot;}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[481,482]},&quot;v&quot;:&quot;本地名字服务器（Local Name Server）&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[483,484]},&quot;v&quot;:&quot;并不严格属于层次结构&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[484,485]},&quot;v&quot;:&quot;每个ISP (居民区的ISP、公司、大学）都有一个本地DNS服务器&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[485,486]},&quot;v&quot;:&quot;也称为“默认名字服务器”&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[486,487]},&quot;v&quot;:&quot;当一个主机发起一个DNS查询时，查询被送到其本地DNS服务器&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[487,488]},&quot;v&quot;:&quot;起着代理的作用，将查询转发到层次结构中&quot;}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[489,490]},&quot;v&quot;:&quot;一个栗子：cis.poly.edu 的主机需要 gaia.cs.umass.edu 的 IP 地址&quot;},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[491,492]},&quot;v&quot;:&quot;递归查询recursive query（根服务器的负担太重）&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[493,494]},&quot;v&quot;:&quot;名字解析负担都放在当前联络的名字服务器上&quot;}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[495,496]},&quot;v&quot;:&quot;迭代查询iterated query&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[497,498]},&quot;v&quot;:&quot;已联系的服务器回复要联系的服务器的名称&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[498,499]},&quot;v&quot;:&quot;“我不知道这个名字，但问这个服务器”&quot;}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:2,&quot;p&quot;:{&quot;lines&quot;:[500,501]},&quot;v&quot;:&quot;5.6 P2P file sharing（P2P应用）&quot;},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:2,&quot;p&quot;:{&quot;lines&quot;:[502,503]},&quot;v&quot;:&quot;5.7 Socket programming with TCP（TCP套接字编程）&quot;},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:2,&quot;p&quot;:{&quot;lines&quot;:[504,505]},&quot;v&quot;:&quot;5.8 Socket programming with UDP（UDP套接字编程）&quot;},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:2,&quot;p&quot;:{&quot;lines&quot;:[506,507]},&quot;v&quot;:&quot;5.9 Building a Web server&quot;}]}"/>
+</div>
+
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">今晚不熬夜</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://example.com/2023/01/11/di-liu-zhang-ying-yong-ceng/">http://example.com/2023/01/11/di-liu-zhang-ying-yong-ceng/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">今晚不熬夜</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                                    <span class="chip bg-color">计算机网络</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2023/01/11/di-liu-zhang-ying-yong-ceng/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.png" class="responsive-img" alt="第六章、应用层">
+                        
+                        <span class="card-title">第六章、应用层</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                        <span class="chip bg-color">计算机网络</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/01/11/di-si-zhang-chuan-shu-ceng/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.png" class="responsive-img" alt="第四章、传输层">
+                        
+                        <span class="card-title">第四章、传输层</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                        <span class="chip bg-color">计算机网络</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023</span>
+            
+            <a href="/about" target="_blank">今晚不熬夜</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+                <span id="translate">|&nbsp;繁/简：</span><a id="translateLink" href="javascript:translatePage();">繁</a>
+            
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">63.3k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/quanquan170" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1480105462" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1480105462" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        <script type="text/javascript" src="/js/tw_cn.js"></script>
+        <script type="text/javascript">
+          var defaultEncoding = 2; //网站编写字体是否繁体，1-繁体，2-简体
+          var translateDelay = 0; //延迟时间,若不在前, 要设定延迟翻译时间, 如100表示100ms,默认为0
+          var cookieDomain = "http://example.com"; //Cookie地址, 一定要设定, 通常为你的网址
+          var msgToTraditionalChinese = "繁"; //此处可以更改为你想要显示的文字
+          var msgToSimplifiedChinese = "简"; //同上，但两处均不建议更改
+          var translateButtonId = "translateLink"; //默认互换id
+          translateInitilization();
+        </script>
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script src="/js/markmap.js"></script></body>
+
+</html>
