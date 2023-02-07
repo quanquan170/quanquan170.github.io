@@ -327,9 +327,7 @@
 
 
 <script>
-    // 每天切换 banner 图.  Switch banner image every day.
-    var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
-    $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
+    $('.bg-cover').css('background-image', 'url(/medias/banner/0.jpg)');
 </script>
 
 
@@ -359,10 +357,19 @@
                 </a>
                 
                 
+                <a href="/categories/%E5%A4%8D%E4%B9%A0/" title="复习: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #F5EEF8;">复习
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
                 <a href="/categories/%E4%BD%9C%E4%B8%9A/" title="作业: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-active "
-                            style="background-color: #F5EEF8;">作业
+                            style="background-color: #D5F5E3;">作业
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -452,7 +459,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">71.4k</span>
+                        class="white-color">74.6k</span>
             
             
             
