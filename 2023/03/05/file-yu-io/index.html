@@ -4,8 +4,12 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="标签, 今晚不熬夜&#39;s blog">
-    <meta name="description" content="今晚不熬夜&#39;s blog">
+    <meta name="keywords" content="File与IO, 今晚不熬夜&#39;s blog">
+    <meta name="description" content="1.java.io.File
+关于相对路径：在Test方法中和main()中不同，Test中为当前Module，main()中为当前Project
+关于renameTo():
+
+public boolean renameTo(File de">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +21,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>标签 | 今晚不熬夜&#39;s blog</title>
+    <title>File与IO | 今晚不熬夜&#39;s blog</title>
     <link rel="icon" type="image/svg+xml" href="/medias/avatar.svg">
     
 
@@ -292,12 +296,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/images/File%E4%B8%8EIO.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">tags</h1>
+                    <h1 class="description center-align post-title">File与IO</h1>
                 </div>
             </div>
         </div>
@@ -319,12 +323,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Java/">
+                                <span class="chip bg-color">Java</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%A4%8D%E4%B9%A0/" class="post-category">
+                                复习
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -333,7 +350,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-01-11
+                    2023-03-05
                 </div>
                 
 
@@ -342,7 +359,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    3.3k
                 </div>
                 
 
@@ -367,7 +384,281 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h2 id="1-java-io-File"><a href="#1-java-io-File" class="headerlink" title="1.java.io.File"></a>1.java.io.File</h2><ul>
+<li>关于相对路径：在Test方法中和main()中不同，Test中为当前Module，main()中为当前Project</li>
+<li>关于renameTo():</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">renameTo</span><span class="token punctuation">(</span><span class="token class-name">File</span> dest<span class="token punctuation">)</span><span class="token comment">//把文件重命名为指定的文件路径</span>
+file1<span class="token punctuation">.</span><span class="token function">renameTo</span><span class="token punctuation">(</span>file2<span class="token punctuation">)</span>
+<span class="token comment">/*
+	重命名（移动文件）成功要求：
+	1.file1必须存在
+	2.file2必须不存在
+	3.file2的父目录必须存在
+*/</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>关于删除<code>delete()</code>：① Java中的删除不走回收站。② 要删除一个文件目录，请注意该文件目录内不能包含文件或者文件目录。</li>
+<li>筛选文件<code>FilenameFilter</code>：</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test3</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token class-name">File</span> srcFile <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span><span class="token string">"d:\\code"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token class-name">File</span><span class="token punctuation">[</span><span class="token punctuation">]</span> subFiles <span class="token operator">=</span> srcFile<span class="token punctuation">.</span><span class="token function">listFiles</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">FilenameFilter</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token annotation punctuation">@Override</span>
+        <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">accept</span><span class="token punctuation">(</span><span class="token class-name">File</span> dir<span class="token punctuation">,</span> <span class="token class-name">String</span> name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> name<span class="token punctuation">.</span><span class="token function">endsWith</span><span class="token punctuation">(</span><span class="token string">".jpg"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token class-name">File</span> file <span class="token operator">:</span> subFiles<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>file<span class="token punctuation">.</span><span class="token function">getAbsolutePath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="2-IO流分类和常见API"><a href="#2-IO流分类和常见API" class="headerlink" title="2.IO流分类和常见API"></a>2.IO流分类和常见API</h2><p>按数据的流向不同分为：输入流和输出流。（相对于程序（内存）来说）</p>
+<ul>
+<li>输入input：读取外部数据（磁盘、光盘等存储设备的数据）到程序（内存）中。</li>
+<li>输出output：将程序（内存）数据输出到磁盘、光盘等存储设备中。</li>
+</ul>
+<p>按操作数据单位的不同分为：字节流（8bit）和字符流（16bit）</p>
+<ul>
+<li>字节流 ：以字节为单位，读写数据的流。<br>以InputStream、OutputStream结尾</li>
+<li>字符流 ：以字符为单位，读写数据的流。<br>以Reader、Writer结尾<br>根据</li>
+</ul>
+<p>IO流的角色不同分为：节点流和处理流</p>
+<ul>
+<li><p>节点流：直接从数据源或目的地读写数据</p>
+</li>
+<li><p>处理流：不直接连接到数据源或目的地，而是“连接”在已存在的流（节点流或处理流）之上，通过对数据的处理为程序提供更为强大的读写功能。</p>
+</li>
+</ul>
+<p>Java的IO流共涉及40多个类，实际上非常规则，都是从如下4个抽象基类派生的。</p>
+<table>
+<thead>
+<tr>
+<th>（抽象基类）</th>
+<th>输入流</th>
+<th>输出流</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>字节流</td>
+<td>InputStream</td>
+<td>OutputStream</td>
+</tr>
+<tr>
+<td>字符流</td>
+<td>Reader</td>
+<td>Writer</td>
+</tr>
+</tbody></table>
+<p>由这四个类派生出来的子类名称都是以其父类名作为子类名后缀。</p>
+<p><img src="/2023/03/05/file-yu-io/image-20220412230501953.png"></p>
+<p>常用的节点流：</p>
+<ul>
+<li>文件流： FileInputStream、FileOutputStrean、FileReader、FileWriter</li>
+<li>字节/字符数组流： ByteArrayInputStream、ByteArrayOutputStream、CharArrayReader、CharArrayWriter<br>对数组进行处理的节点流（对应的不再是文件，而是内存中的一个数组）。</li>
+</ul>
+<p>常用处理流：</p>
+<ul>
+<li><p>缓冲流：BufferedInputStream、BufferedOutputStream、BufferedReader、BufferedWriter</p>
+<ul>
+<li>作用：增加缓冲功能，避免频繁读写硬盘，进而提升读写效率。</li>
+</ul>
+</li>
+<li><p>转换流：InputStreamReader、OutputStreamReader</p>
+<ul>
+<li>作用：实现字节流和字符流之间的转换。</li>
+</ul>
+</li>
+<li><p>对象流：ObjectInputStream、ObjectOutputStream</p>
+<ul>
+<li>作用：提供直接读写Java对象功能</li>
+</ul>
+</li>
+</ul>
+<h3 id="节点流："><a href="#节点流：" class="headerlink" title="节点流："></a>节点流：</h3><h4 id="FileReader-x2F-FileWriter字符流使用："><a href="#FileReader-x2F-FileWriter字符流使用：" class="headerlink" title="FileReader/FileWriter字符流使用："></a>FileReader/FileWriter字符流使用：</h4><p>（处理文本文件）</p>
+<ol>
+<li>创建读取或写出的File类的对象<ul>
+<li>注意：输入流的File对象对应的物理磁盘上的文件必须存在，否则会报FileNotFoundException<ul>
+<li>输出流当不存在时会自动创建，存在时可以选择覆盖文件（默认）/追加</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>创建输入流或输出流</li>
+<li>具体的读入或写出的过程<ul>
+<li>读入：<code>read(char[] cbuffer)</code></li>
+<li>写出：<code>write(String str)</code>/<code>write(char[] cbuffer, 0, len)</code>&nbsp; // 注意len</li>
+</ul>
+</li>
+<li>关闭流资源，避免内存泄漏 <ul>
+<li>注意使用finally关闭</li>
+</ul>
+</li>
+</ol>
+<h4 id="FileInputStream-x2F-FileOutputStream字节流使用："><a href="#FileInputStream-x2F-FileOutputStream字节流使用：" class="headerlink" title="FileInputStream/FileOutputStream字节流使用："></a>FileInputStream/FileOutputStream字节流使用：</h4><p>（通常处理非文本文件，处理中文文本文件时可能乱码，可以只复制，如果是英文都可以处理，因为英文都是用一个字节存储的）</p>
+<ol>
+<li>创建读取或写出的File类的对象<ul>
+<li>注意：输入流的File对象对应的物理磁盘上的文件必须存在，否则会报FileNotFoundException<ul>
+<li>输出流当不存在时会自动创建，存在时可以选择覆盖文件（默认）/追加</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>创建输入流或输出流</li>
+<li>具体的读入或写出的过程<ul>
+<li>读入：<code>read(byte[] buffer)</code></li>
+<li>写出：<code>write(byte[] buffer, 0, len)</code>&nbsp; // 注意len</li>
+</ul>
+</li>
+<li>关闭流资源，避免内存泄漏 <ul>
+<li>注意使用finally关闭</li>
+</ul>
+</li>
+</ol>
+<h3 id="处理流："><a href="#处理流：" class="headerlink" title="处理流："></a>处理流：</h3><h4 id="1-缓冲流"><a href="#1-缓冲流" class="headerlink" title="1.缓冲流"></a>1.缓冲流</h4><p>提升文件读写的效率</p>
+<p>缓冲流对应的就是文件流，要“套接”在相应的文件流之上</p>
+<table>
+<thead>
+<tr>
+<th>抽象基类</th>
+<th>4个节点流（文件流）</th>
+<th>4个缓冲流（处理流的一种）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>InputStream</td>
+<td>FileInputStream</td>
+<td>BufferedInputStream</td>
+</tr>
+<tr>
+<td>OutputStream</td>
+<td>FileOutputStream</td>
+<td>BufferedOutputStream</td>
+</tr>
+<tr>
+<td>Reader</td>
+<td>FileReader</td>
+<td>BufferedReader</td>
+</tr>
+<tr>
+<td>Writer</td>
+<td>FileWriter</td>
+<td>BufferedWriter</td>
+</tr>
+</tbody></table>
+<p>使用方法：</p>
+<p>处理非文本文件的字节流：</p>
+<p>BufferedInputStream：<code>read(byte[] buffer)</code></p>
+<p>BufferedOutputStream：<code>write(byte[] buffer, 0, len)</code></p>
+<p>处理文本文件的字符流：</p>
+<p>BufferedReader：<code>read(char[] cbuffer)</code>&nbsp; / <code>readLine()</code></p>
+<p>BufferedWriter：<code>write(char[] cbuffer, 0, len)</code>&nbsp; / <code>write(String str)</code>&nbsp;/+ <code>newLine()</code>（换行符）</p>
+<p>关闭资源顺序：从外到内关闭，由于外层流的关闭也会自动的对内层的流进行关闭，所以可以省略内层流的关闭</p>
+<h4 id="2-转换流"><a href="#2-转换流" class="headerlink" title="2.转换流"></a>2.转换流</h4><p>作用：转换流是字节与字符间的桥梁！</p>
+<p>使用情况：</p>
+<p>使用FileReader 读取项目中的文本文件。由于IDEA设置中针对项目设置了UTF-8编码，当读取Windows系统中创建的文本文件时，如果Windows系统默认的是GBK编码，则读入内存中会出现乱码。</p>
+<p>针对文本文件，现在使用一个字节流进行数据的读入，希望将数据显示在控制台上。此时针对包含中文的文本数据，可能会出现乱码。</p>
+<p><img src="/2023/03/05/file-yu-io/image-20220412231533768.png"></p>
+<p>InputStreamReader：将一个输入型的<strong>字节流</strong>转换为输入型的<strong>字符流</strong></p>
+<p>OutputStreamWriter：将一个输出型的<strong>字符流</strong>转换为输出型的<strong>字节流</strong></p>
+<p>从构造器制定编码规则</p>
+<p><img src="/2023/03/05/file-yu-io/%E5%AD%97%E7%AC%A6%E9%9B%86.jpg" alt="字符集"></p>
+<h4 id="3-数据流、对象流"><a href="#3-数据流、对象流" class="headerlink" title="3.数据流、对象流"></a>3.数据流、对象流</h4><p>作用：可以读写基本数据类型的变量、引用数据类型的变量</p>
+<p>数据流：DataOutputStream、DataInputStream</p>
+<ul>
+<li>DataOutputStream：允许应用程序将基本数据类型、String类型的变量写入输出流中</li>
+<li>DataInputStream：允许应用程序以与机器无关的方式从底层输入流中读取基本数据类型、String类型的变量。</li>
+</ul>
+<p>数据流DataInputStream中的方法：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">byte</span> <span class="token function">readByte</span><span class="token punctuation">(</span><span class="token punctuation">)</span>                <span class="token keyword">short</span> <span class="token function">readShort</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">int</span> <span class="token function">readInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span>                  <span class="token keyword">long</span> <span class="token function">readLong</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">float</span> <span class="token function">readFloat</span><span class="token punctuation">(</span><span class="token punctuation">)</span>              <span class="token keyword">double</span> <span class="token function">readDouble</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">char</span> <span class="token function">readChar</span><span class="token punctuation">(</span><span class="token punctuation">)</span>				 <span class="token keyword">boolean</span> <span class="token function">readBoolean</span><span class="token punctuation">(</span><span class="token punctuation">)</span>					
+<span class="token class-name">String</span> <span class="token function">readUTF</span><span class="token punctuation">(</span><span class="token punctuation">)</span>               <span class="token keyword">void</span> <span class="token function">readFully</span><span class="token punctuation">(</span><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> b<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>数据流DataOutputStream中的方法：将上述的方法的read改为相应的write即可。</p>
+<p>数据流的弊端：只支持Java基本数据类型和字符串的读写，而不支持其它Java对象的类型。而ObjectOutputStream和ObjectInputStream既支持Java基本数据类型的数据读写，又支持Java对象的读写，所以主要使用对象流ObjectOutputStream和ObjectInputStream。</p>
+<p>对象流：ObjectOutputStream、ObjectInputStream</p>
+<ul>
+<li>ObjectOutputStream：将 Java 基本数据类型和对象写入字节输出流中。通过在流中使用文件可以实现Java各种基本数据类型的数据以及对象的持久存储。</li>
+<li>ObjectInputStream：ObjectInputStream 对以前使用 ObjectOutputStream 写出的基本数据类型的数据和对象进行读入操作，保存在内存中。</li>
+</ul>
+<h5 id="1-对象的序列化机制"><a href="#1-对象的序列化机制" class="headerlink" title="1.对象的序列化机制"></a>1.对象的序列化机制</h5><p>对象的序列化机制允许把内存中的Java对象转换成平台无关的二进制流，从而允许把这种二进制流持久地保存在磁盘上，或通过网络将这种二进制流传输到另一个网络节点。//当其他程序获取了着这种二进制流，就可以恢复成原来的Java对象。</p>
+<ul>
+<li><p>序列化过程：用一个字节序列可以表示一个对象，该字节序列包含该<code>对象的类型</code>和<code>对象中存储的属性</code>等信息。字节序列写出到文件之后，相当于文件中<code>持久保存</code>了一个对象的信息。</p>
+</li>
+<li><p>反序列化过程：该字节序列还可以从文件中读取回来，重构对象，对它进行<code>反序列化</code>。<code>对象的数据</code>、<code>对象的类型</code>和<code>对象中存储的数据</code>信息，都可以用来在内存中创建对象。</p>
+</li>
+</ul>
+<p><img src="/2023/03/05/file-yu-io/image-20220503123328452-16780014423175.png"></p>
+<h5 id="2-序列化机制的重要性"><a href="#2-序列化机制的重要性" class="headerlink" title="2.序列化机制的重要性"></a>2.序列化机制的重要性</h5><p>序列化是 RMI（Remote Method Invoke、远程方法调用）过程的参数和返回值都必须实现的机制，而 RMI 是 JavaEE 的基础。因此序列化机制是 JavaEE 平台的基础。</p>
+<p>序列化的好处，在于可将任何实现了Serializable接口的对象转化为<strong>字节数据</strong>，使其在保存和传输时可被还原。</p>
+<h5 id="3-序列化实现原理"><a href="#3-序列化实现原理" class="headerlink" title="3.序列化实现原理"></a>3.序列化实现原理</h5><ul>
+<li>序列化：用ObjectOutputStream类保存基本类型数据或对象的机制。方法为：<ul>
+<li><code>public final void writeObject (Object obj) </code>: 将指定的对象写出。</li>
+</ul>
+</li>
+<li>反序列化：用ObjectInputStream类读取基本类型数据或对象的机制。方法为：<ul>
+<li><code>public final Object readObject () </code>: 读取一个对象。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2023/03/05/file-yu-io/3_xuliehua.jpg"></p>
+<h5 id="4-实现序列化机制"><a href="#4-实现序列化机制" class="headerlink" title="4.实现序列化机制"></a>4.实现序列化机制</h5><p>如果需要让某个对象支持序列化机制，则必须让对象所属的类及其属性是可序列化的，为了让某个类是可序列化的，该类必须实现<code>java.io.Serializable </code>接口。<code>Serializable</code> 是一个<code>标记接口</code>(内部为空)，不实现此接口的类将不会使任何状态序列化或反序列化，会抛出<code>NotSerializableException</code> 。</p>
+<ul>
+<li>如果对象的某个属性也是引用数据类型，那么如果该属性也要序列化的话，也要实现Serializable 接口，该类的所有属性必须是可序列化的。<ul>
+<li>对于基本数据类型的属性：默认就是可以序列化的</li>
+<li>对于引用数据类型的属性：要求实现Serializable</li>
+</ul>
+</li>
+<li>如果有一个属性不需要可序列化的，则该属性必须注明是<strong>瞬态的</strong>，使用<code>transient </code>关键字修饰。</li>
+<li><strong>静态（static）变量的值</strong>不会序列化。因为静态变量的值不属于某个对象。</li>
+</ul>
+<blockquote>
+<p>注意：</p>
+<ul>
+<li>serialVersionUID用来表明类的不同版本间的兼容性。简单来说，Java的序列化机制是通过在运行时判断类的serialVersionUID来验证版本一致性的。在进行反序列化时，JVM会把传来的字节流中的serialVersionUID与本地相应实体类的serialVersionUID进行比较，如果相同就认为是一致的，可以进行反序列化，否则就会出现序列化版本不一致的异常(InvalidCastException)。</li>
+<li>如果类没有显示定义这个静态常量，它的值是Java运行时环境根据类的内部细节自动生成的。若类的实例变量做了修改，serialVersionUID <code>可能发生变化</code>。因此，建议显式声明。</li>
+<li>如果声明了serialVersionUID，即使在序列化完成之后修改了类导致类重新编译，则原来的数据也能正常反序列化，只是新增的字段值是默认值而已。</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>谈谈你对java.io.Serializable接口的理解，我们知道它用于序列化，是空方法接口，还有其它认识吗？</p>
+<p>答：实现了Serializable接口的对象，可将它们转换成一系列字节，并可在以后完全恢复回原来的样子。这一过程亦可通过网络进行。这意味着序列化机制能<code>自动补偿操作系统间的差异</code>。换句话说，可以先在Windows机器上创建一个对象，对其序列化，然后通过网络发给一台Unix机器，然后在那里准确无误地重新“装配”。不必关心数据在不同机器上如何表示，也不必关心字节的顺序或者其他任何细节。</p>
+<p>由于大部分作为参数的类如String、Integer等都实现了java.io.Serializable的接口，也可以利用多态的性质，作为参数使接口更灵活。</p>
+</blockquote>
+<h5 id="5-其他流的使用"><a href="#5-其他流的使用" class="headerlink" title="5.其他流的使用"></a>5.其他流的使用</h5><h6 id="标准输入、输出流"><a href="#标准输入、输出流" class="headerlink" title="标准输入、输出流"></a>标准输入、输出流</h6><ul>
+<li>System.in和System.out分别代表了系统标准的输入和输出设备</li>
+<li>默认输入设备是：键盘，输出设备是：显示器</li>
+<li>System.in的类型是InputStream</li>
+<li>System.out的类型是PrintStream，其是OutputStream的子类FilterOutputStream 的子类</li>
+<li>重定向：通过System类的setIn，setOut方法对默认设备进行改变。<ul>
+<li><code>public static void setIn(InputStream in)</code>：内部由<code>native</code>修饰的方法实现。调用底层C/C++实现重定向</li>
+<li><code>public static void setOut(PrintStream out)</code>：内部由<code>native</code>修饰的方法实现</li>
+</ul>
+</li>
+</ul>
+<p>System类中有三个常量对象：System.out、System.in、System.err，在源码中的声明如下：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token class-name">InputStream</span> in <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token class-name">PrintStream</span> out <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token class-name">PrintStream</span> err <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>final声明的常量，表示在Java的语法体系中它们的值是不能修改的，而这三个常量对象的值是由C/C++等系统函数进行初始化和修改值的，所以它们故意没有用大写，也有set方法。</p>
+<h6 id="打印流"><a href="#打印流" class="headerlink" title="打印流"></a>打印流</h6><ul>
+<li>PrintStream和PrintWriter的输出不会抛出IOException异常</li>
+<li>PrintStream和PrintWriter有自动flush功能</li>
+<li>PrintStream 打印的所有字符都使用平台的默认字符编码转换为字节。在需要写入字符而不是写入字节的情况下，应该使用 PrintWriter 类</li>
+<li>System.out返回的是PrintStream的实例</li>
+</ul>
+<h6 id="Scanner类"><a href="#Scanner类" class="headerlink" title="Scanner类"></a>Scanner类</h6><h3 id="关于flush（刷新）"><a href="#关于flush（刷新）" class="headerlink" title="关于flush（刷新）"></a>关于flush（刷新）</h3><p>因为内置缓冲区的原因，如果FileWriter不关闭输出流，无法写出字符到文件中。但是关闭的流对象，是无法继续写出数据的。如果我们既想写出数据，又想继续使用流，就需要flush() 方法了。</p>
+<p>flush() ：刷新缓冲区，流对象可以继续使用。</p>
+<p>close()：先刷新缓冲区，然后通知系统释放资源。流对象不可以再被使用了。<br>注意：即便是flush()方法写出了数据，操作的最后还是要调用close方法，释放系统资源。</p>
+
                 
             </div>
             <hr/>
@@ -393,7 +684,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/tags/index-1.html">http://example.com/tags/index-1.html</a>
+                    <a href="http://example.com/2023/03/05/file-yu-io/">http://example.com/2023/03/05/file-yu-io/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -430,7 +721,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/Java/">
+                                    <span class="chip bg-color">Java</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -509,13 +804,12 @@
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/tags/index-1.html">
+                <a href="/2023/03/05/file-yu-io/">
                     <div class="card-image">
                         
+                        <img src="/medias/images/File%E4%B8%8EIO.png" class="responsive-img" alt="File与IO">
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="tags">
-                        
-                        <span class="card-title">tags</span>
+                        <span class="card-title">File与IO</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -526,17 +820,29 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-11
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-05
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            今晚不熬夜
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%A4%8D%E4%B9%A0/" class="post-category">
+                                    复习
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -544,16 +850,15 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/tags/index-1.html">
+                <a href="/2023/03/05/java-guan-jian-zi-zong-jie-bu-chang-yong/">
                     <div class="card-image">
                         
+                        <img src="/medias/images/Java%E5%9F%BA%E7%A1%80.png" class="responsive-img" alt="Java关键字学习（更新中）">
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="tags">
-                        
-                        <span class="card-title">tags</span>
+                        <span class="card-title">Java关键字学习（更新中）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -564,17 +869,28 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-11
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-05
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            今晚不熬夜
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%A4%8D%E4%B9%A0/" class="post-category">
+                                    复习
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
