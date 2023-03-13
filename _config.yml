@@ -100,7 +100,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: hexo-theme-matery
+theme: hexo-theme-butterfly
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
@@ -112,6 +112,8 @@ deploy:
 search:
   path: search.xml
   field: post
+  content: true
+  format: html
 
 permalink_pinyin:
   enable: true
@@ -123,3 +125,23 @@ githubEmojis:
   inject: true
   styles:
   customEmojis:
+
+# algolia:
+#   applicationID: 'B8BRZ1L2TD'
+#   apiKey: '8bb4e18949e6c588f375c44adfbad5e0'
+#   indexName: 'quan'
+algolia:
+  appId: "B8BRZ1L2TD"
+  apiKey: "8bb4e18949e6c588f375c44adfbad5e0"
+  adminApiKey: "a1ae4f40e7c0662fcb13b17d85316baf"
+  chunkSize: 5000
+  indexName: "quan"
+  fields:
+    - content:strip:truncate,0,500
+    - excerpt:strip
+    - gallery
+    - permalink
+    - photos
+    - slug
+    - tags
+    - title

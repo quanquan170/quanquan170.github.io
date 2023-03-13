@@ -1,7 +1,8 @@
 ---
 title: File与IO
 date: 2023-03-05 19:58:37
-img: /medias/images/File与IO.png
+top_img: url(/img/imgs/File与IO.png)
+cover: url(/img/imgs/File与IO.png)
 tags: [Java]
 categories: 复习
 ---
@@ -107,7 +108,7 @@ Java的IO流共涉及40多个类，实际上非常规则，都是从如下4个�
 2. 创建输入流或输出流
 3. 具体的读入或写出的过程
    * 读入：`read(char[] cbuffer)`
-   * 写出：`write(String str)`/`write(char[] cbuffer, 0, len)`  // 注意len
+   * 写出：`write(String str)`/`write(char[] cbuffer, 0, len)`  // 注意len
 4. 关闭流资源，避免内存泄漏 
    * 注意使用finally关闭
 
@@ -123,7 +124,7 @@ Java的IO流共涉及40多个类，实际上非常规则，都是从如下4个�
 2. 创建输入流或输出流
 3. 具体的读入或写出的过程
    * 读入：`read(byte[] buffer)`
-   * 写出：`write(byte[] buffer, 0, len)`  // 注意len
+   * 写出：`write(byte[] buffer, 0, len)`  // 注意len
 4. 关闭流资源，避免内存泄漏 
    * 注意使用finally关闭
 
@@ -152,9 +153,9 @@ BufferedOutputStream：`write(byte[] buffer, 0, len)`
 
 处理文本文件的字符流：
 
-BufferedReader：`read(char[] cbuffer)`  / `readLine()`
+BufferedReader：`read(char[] cbuffer)`  / `readLine()`
 
-BufferedWriter：`write(char[] cbuffer, 0, len)`  / `write(String str)` /+ `newLine()`（换行符）
+BufferedWriter：`write(char[] cbuffer, 0, len)`  / `write(String str)` /+ `newLine()`（换行符）
 
 
 

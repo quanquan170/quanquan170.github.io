@@ -1,7 +1,8 @@
 ---
 title: Java关键字学习（更新中）
 date: 2023-03-05 19:58:37
-img: /medias/images/Java基础.png
+top_img: url(/img/imgs/Java基础.png)
+cover: url(/img/background/bg_bggenerator_com.jpg)
 tags: [Java]
 categories: 复习
 ---
