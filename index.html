@@ -1,831 +1,315 @@
-<!DOCTYPE HTML>
-<html lang="zh-CN">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>今晚不熬夜's blog - 记录个人成长</title><meta name="author" content="今晚不熬夜"><meta name="copyright" content="今晚不熬夜"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#e4c6d0"><meta property="og:type" content="website">
+<meta property="og:title" content="今晚不熬夜&#39;s blog">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="今晚不熬夜&#39;s blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/avatar.svg">
+<meta property="article:author" content="今晚不熬夜">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/avatar.svg"><link rel="shortcut icon" href="/img/avatar.svg"><link rel="canonical" href="http://example.com/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"B8BRZ1L2TD","apiKey":"8bb4e18949e6c588f375c44adfbad5e0","indexName":"quan","hits":{"per_page":6},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '今晚不熬夜\'s blog',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-03-13 14:14:02'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
 
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-<head>
-    <meta charset="utf-8">
-    <meta name="keywords" content="今晚不熬夜&#39;s blog">
-    <meta name="description" content="今晚不熬夜&#39;s blog">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="renderer" content="webkit|ie-stand|ie-comp">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="referrer" content="no-referrer-when-downgrade">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
 
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
 
-    <title>今晚不熬夜&#39;s blog</title>
-    <link rel="icon" type="image/svg+xml" href="/medias/avatar.svg">
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#41555d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#e4c6d0')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
-
-
-    <!-- index cover -->
-    <!-- <link rel="stylesheet preload" type="text/css" href="/css/indexcover.css"> -->
-    <style>
-        .carousel-control {
-            width: 45px;
-            height: 45px;
-            line-height: 55px;
-            border-radius: 45px;
-            background: transparent;
-            cursor: pointer;
-            z-index: 100;
-        }
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
         
-        #prev-cover {
-            position: absolute;
-            top: 48%;
-            left: 8px;
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
         }
-        
-        #next-cover {
-            position: absolute;
-            top: 48%;
-            right: 8px;;
-        }
-        
-        #prev-cover i {
-            margin-right: 3px;
-        }
-        
-        #next-cover i {
-            margin-left: 3px;
-        }
-        
-        .carousel-control:hover {
-            background-color: rgba(0, 0, 0, .4);
-        }
-        
-        .carousel-control i {
-            color: #fff;
-            font-size: 2.4rem;
-        }
-    </style>
-
-
-
-<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
-<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
-<link rel="stylesheet" type="text/css" href="/css/matery.css">
-<link rel="stylesheet" type="text/css" href="/css/my.css">
-<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
-
-
-
-
-    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
-    <link rel="stylesheet" href="/css/post.css">
-
-
-
-
-
-
-    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
-
-<meta name="generator" content="Hexo 6.3.0">
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head>
-
-
-<body>
-    <header class="navbar-fixed">
-    <nav id="headNav" class="bg-color nav-transparent">
-        <div id="navContainer" class="nav-wrapper container">
-            <div class="brand-logo">
-                <a href="/" class="waves-effect waves-light">
-                    
-                    <img src="/avatar.svg" class="logo-img" alt="LOGO">
-                    
-                    <span class="logo-span">今晚不熬夜&#39;s blog</span>
-                </a>
-            </div>
-            
-
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
-<ul class="right nav-menu">
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/" class="waves-effect waves-light">
-      
-      <i class="fas fa-home" style="zoom: 0.6;"></i>
-      
-      <span>首页</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/tags" class="waves-effect waves-light">
-      
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
-      
-      <span>标签</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/categories" class="waves-effect waves-light">
-      
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
-      
-      <span>分类</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/archives" class="waves-effect waves-light">
-      
-      <i class="fas fa-archive" style="zoom: 0.6;"></i>
-      
-      <span>归档</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/about" class="waves-effect waves-light">
-      
-      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
-      
-      <span>关于</span>
-    </a>
-    
-  </li>
-  
-  <li>
-    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
-    </a>
-  </li>
-  <!-- <li>
-    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
-      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
-    </a>
-  </li> -->
-</ul>
-
-
-<div id="mobile-nav" class="side-nav sidenav">
-
-    <div class="mobile-head bg-color">
-        
-        <img src="/avatar.svg" class="logo-img circle responsive-img">
-        
-        <div class="logo-name">今晚不熬夜&#39;s blog</div>
-        <div class="logo-desc">
-            
-            Never really desperate, only the lost of the soul.
-            
-        </div>
-    </div>
-
-    <ul class="menu-list mobile-menu-list">
-        
-        <li class="m-nav-item">
-	  
-		<a href="/" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-home"></i>
-			
-			首页
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/tags" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-tags"></i>
-			
-			标签
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/categories" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-bookmark"></i>
-			
-			分类
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/archives" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-archive"></i>
-			
-			归档
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/about" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-user-circle"></i>
-			
-			关于
-		</a>
-          
-        </li>
-        
-        
-        <li><div class="divider"></div></li>
-        <li>
-            <a href="https://github.com/quanquan170" class="waves-effect waves-light" target="_blank">
-                <i class="fab fa-github-square fa-fw"></i>Fork Me
-            </a>
-        </li>
-        
-    </ul>
-</div>
-
-
-        </div>
-
-        
-            <style>
-    .nav-transparent .github-corner {
-        display: none !important;
-    }
-
-    .github-corner {
-        position: absolute;
-        z-index: 10;
-        top: 0;
-        right: 0;
-        border: 0;
-        transform: scale(1.1);
-    }
-
-    .github-corner svg {
-        color: #0f9d58;
-        fill: #fff;
-        height: 64px;
-        width: 64px;
-    }
-
-    .github-corner:hover .octo-arm {
-        animation: a 0.56s ease-in-out;
-    }
-
-    .github-corner .octo-arm {
-        animation: none;
-    }
-
-    @keyframes a {
-        0%,
-        to {
-            transform: rotate(0);
-        }
-        20%,
-        60% {
-            transform: rotate(-25deg);
-        }
-        40%,
-        80% {
-            transform: rotate(10deg);
-        }
-    }
-</style>
-
-<!-- <a href="https://github.com/quanquan170" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
-   data-tooltip="Fork Me" data-position="left" data-delay="50">
-    <svg viewBox="0 0 250 250" aria-hidden="true">
-        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
-              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
-        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
-              fill="currentColor" class="octo-body"></path>
-    </svg>
-</a> -->
-        
-    </nav>
-
-</header>
-
-    
-
-
-<div class="carousel carousel-slider center index-cover" data-indicators="true" style="margin-top: -64px;">
-    
-
-    <div class="carousel-item  white-text bg-cover about-cover">
-        <div class="container">
-            <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                
-                记录个人成长
-                
-            </div>
-
-            <div class="description center-align">
-                
-                <span id="subtitle"></span>
-                <script src="/libs/typed/typed.js"></script>
-                <script>
-                    var typed = new Typed("#subtitle", {
-                        strings: [ 
-                            
-                                "从来没有真正的绝境, 只有心灵的迷途",
-                            
-                                "Never really desperate, only the lost of the soul",
-                            
-                        ],
-                        startDelay: 300,
-                        typeSpeed: 100,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
-                </script>
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<script>
-    $('.bg-cover').css('background-image', 'url(/medias/banner/0.jpg)');
-</script>
-
-
-
-            <div class="cover-btns">
-                <a href="#indexCard" class="waves-effect waves-light btn">
-                    <i class="fa fa-angle-double-down"></i>开始阅读
-                </a>
-
-                
-                    <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light btn" target="_blank">
-                        <i class="fab fa-github-alt"></i>Github
-                    </a>
-                
-            </div>
-            <div class="cover-social-link">
-    <a href="https://github.com/quanquan170" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
-    </a>
-
-
-
-
-
-
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1480105462" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1480105462" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
-
-
-
-
-
-
-
-</div>
-        </div>
-    </div>
-
-    
-</div>
-
-<script>
-    $(function () {
-        let coverSlider = $('.carousel');
-
-        //用户触摸轮播自动 restartPlay 是否生效
-        let initUserPressedOrDraggedActive = false
-
-        //用户触摸轮播自动 restartPlay
-        function initUserPressedOrDragged(instance) {
-            setInterval(() => {
-                if (instance.pressed || instance.dragged) {
-                    // console.log('initUserPressedOrDragged: ',instance.pressed,instance.dragged)
-                    restartPlay()
-                }
-            }, 1000)
-        }
-
-        coverSlider.carousel({
-            duration: Number('120'),
-            fullWidth: true,
-            indicators: 'false' === 'true',
-            onCycleTo() {
-                if (!initUserPressedOrDraggedActive) {
-                    // console.log('initUserPressedOrDraggedActive')
-                    initUserPressedOrDragged(this)
-                    initUserPressedOrDraggedActive = true
-                }
-            },
-        })
-
-        let carouselIntervalId;
-        
-
-        function restartPlay() {
-            
-        };
-
-        
-    });
-</script>
-
-
-
-<main class="content">
-
-    
-    <div id="indexCard" class="index-card">
-        <div class="container ">
-            <div class="card">
-                <div class="card-content">
-                    
-                        <div class="dream">
-    
-    <div class="title center-align">
-        <i class="far fa-lightbulb"></i>&nbsp;&nbsp;我的梦想
-    </div>
-    
-    <div class="row">
-        <div class="col l8 offset-l2 m10 offset-m1 s10 offset-s1 center-align text">
-            不是每个人都应该像我这样去建造一座水晶大教堂，但是每个人都应该拥有自己的梦想，设计自己的梦想，追求自己的梦想，实现自己的梦想。梦想是生命的灵魂，是心灵的灯塔，是引导人走向成功的信仰。有了崇高的梦想，只要矢志不渝地追求，梦想就会成为现实，奋斗就会变成壮举，生命就会创造奇迹。——罗伯·舒乐
-        </div>
-    </div>
-</div>
-
-                    
-
-                    
-
-                    
-
-                    
-                    <div id="recommend-sections" class="recommend">
-                        
-
-
-
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-    
-
-    
-
-    <!-- 所有文章卡片 -->
-    <article id="articles" class="container articles">
-        <div class="row article-row">
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/03/05/file-yu-io/">
-                        <div class="card-image">
-                            
-                            <img src="/medias/images/File%E4%B8%8EIO.png" class="responsive-img" alt="File与IO">
-                            
-                            <span class="card-title">File与IO</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                1.java.io.File
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.svg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa-fw icon-resume-line"></i><span> 关于作者</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/k-bg.svg')"><nav id="nav"><span id="blog-info"><a href="/" title="今晚不熬夜's blog"><span class="site-name">今晚不熬夜's blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa-fw icon-resume-line"></i><span> 关于作者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">今晚不熬夜's blog</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/quanquan170" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/1480105462@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/1480105462" target="_blank" title="QQ"><i class="fa-brands fa-qq"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/2023/03/05/file-yu-io/" title="File与IO"><div class="post-bg" style="background: url(/img/imgs/File与IO.png)"></div></a></div><div class="recent-post-info"><a class="article-title" href="/2023/03/05/file-yu-io/" title="File与IO">File与IO</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-05T11:58:37.000Z" title="发表于 2023-03-05 19:58:37">2023-03-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%A4%8D%E4%B9%A0/">复习</a></span></div><div class="content">1.java.io.File
 关于相对路径：在Test方法中和main()中不同，Test中为当前Module，main()中为当前Project
 关于renameTo():
 
-public boolean renameTo(File de
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-05
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E5%A4%8D%E4%B9%A0/" class="post-category">
-                                    复习
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
+public boolean renameTo(File dest)//把文件重命名为指定的文件路径
+file1.renameTo(file2)
+/*
+	重命名（移动文件）成功要求：
+	1.file1必须存在
+	2.file2必须不存在
+	3.file2的父目录必须存在
+*/
 
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/Java/">
-                            <span class="chip bg-color">Java</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/03/05/java-guan-jian-zi-zong-jie-bu-chang-yong/">
-                        <div class="card-image">
-                            
-                            <img src="/medias/images/Java%E5%9F%BA%E7%A1%80.png" class="responsive-img" alt="Java关键字学习（更新中）">
-                            
-                            <span class="card-title">Java关键字学习（更新中）</span>
-                        </div>
-                    </a>
 
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                1.assert   jdk1.4assert意为断言的意思，这个关键字可以判断布尔值的结果是否和预期的一样，如果一样就正常执行，否则会抛出AssertionError。
+关于删除delete()：① Java中的删除不走回收站。② 要删除一个文件目录，请注意该文件目录内不能包含文件或者文件目录。
+筛选文件FilenameFilter：
+
+@Test
+public void test3(){
+    File srcFile = new File("d:\\code");
+
+    File[] subFiles = srcFile.listFiles(new FilenameFilter() {
+
+        @Override
+        public boolean accept(File ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/03/05/java-guan-jian-zi-zong-jie-bu-chang-yong/" title="Java关键字学习（更新中）"><div class="post-bg" style="background: url(/img/background/bg_bggenerator_com.jpg)"></div></a></div><div class="recent-post-info"><a class="article-title" href="/2023/03/05/java-guan-jian-zi-zong-jie-bu-chang-yong/" title="Java关键字学习（更新中）">Java关键字学习（更新中）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-05T11:58:37.000Z" title="发表于 2023-03-05 19:58:37">2023-03-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%A4%8D%E4%B9%A0/">复习</a></span></div><div class="content">1.assert   jdk1.4assert意为断言的意思，这个关键字可以判断布尔值的结果是否和预期的一样，如果一样就正常执行，否则会抛出AssertionError。
 assert有两种用法：
 （1）asset expression1;
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-05
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E5%A4%8D%E4%B9%A0/" class="post-category">
-                                    复习
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
+（2）asset expression1 : expression2; // expression2允许我们自定义一个异常错误信息抛出。
 
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/Java/">
-                            <span class="chip bg-color">Java</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/02/04/jin-cheng-xian-cheng-fu-xi-pian/">
-                        <div class="card-image">
-                            
-                            <img src="/medias/images/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B.png" class="responsive-img" alt="进程、线程复习篇">
-                            
-                            <span class="card-title">进程、线程复习篇</span>
-                        </div>
-                    </a>
+注意，在运行的时候，正常情况下assert是不会生效的，因为运行时assert是关闭的，想要使用，必须在VM启动参数中开启：
 
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                1.进程与线程
+-enableassertions 或者 -ea
+
+
+即使assert能够精简的判断一些case，并不推荐在生产环境中使用，因为在运行时默认是关闭assert的，因为开启assert校验，也会损耗一定的性能，并且如果在关键部分的校验使用了assert验证，但是忘记开启assert功能，那么肯定会造成重大的失误，所以一般都是在测试类里面使用的比较多。
+那么，既然没法在生产环境中使用assert功能，那么有没有替代的assert的组件？
+替代assert的组件（1）在spring环境中，可 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/02/04/jin-cheng-xian-cheng-fu-xi-pian/" title="进程、线程复习篇"><img class="post-bg" src="/img/background/bg_bggenerator_com%20(2).png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="进程、线程复习篇"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/04/jin-cheng-xian-cheng-fu-xi-pian/" title="进程、线程复习篇">进程、线程复习篇</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-04T11:18:20.000Z" title="发表于 2023-02-04 19:18:20">2023-02-04</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%A4%8D%E4%B9%A0/">复习</a></span></div><div class="content">1.进程与线程
 进程是执行程序的一次执行过程，是一个动态的概念，是系统分配资源的基本单位
 一个进程可以包含若干个线程，线程是CPU调度和执行的单位
 
 程序是指令、数据及其组织形式的描述，进程是程序的实体。
-每个线程有自己独立的虚拟机栈、程序
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-04
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E5%A4%8D%E4%B9%A0/" class="post-category">
-                                    复习
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
+每个线程有自己独立的虚拟机栈、程序计数器
+多个线程共享同一个进程中的结构：方法区、堆
 
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E5%A4%8D%E4%B9%A0/">
-                            <span class="chip bg-color">复习</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/01/29/ji-suan-ji-wang-luo-da-zuo-ye/">
-                        <div class="card-image">
-                            
-                            <img src="/medias/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.png" class="responsive-img" alt="计算机网络大作业">
-                            
-                            <span class="card-title">计算机网络大作业</span>
-                        </div>
-                    </a>
+单核CPU和多核CPU的理解：
 
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                【第一题】：通过比较ISO七层模型、模型、和课堂上介绍的五层模型比较计算机网络体系结构，请画出三种体系结构的示意图，并分别描述、比较各层的功能和支持的协议。答：三种体系结构的示意图及对应简要功能如下图所示：
+单核CPU，其实是一种假的多线程，因为在一个时间单元内，也只能执行一个线程 的任务。例如：虽然有多车道，但是收费站只有一个工作人员在收费，只有收了费 才能通过，那么CPU就好比收费人员。如果有某个人不想交钱，那么收费人员可以 把他“挂起”（晾着他，等他想通了，准备好了钱，再去收费）。但是因为CPU时 间单元特别短，因此感觉不出来。
+多核才能更好的发挥多线程的效率。（现在的服务器都是多核的）
 
-七层模型每层相对应的网络协议如
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-29
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E4%BD%9C%E4%B8%9A/" class="post-category">
-                                    作业
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
+Java应用程序至少3个线程：
 
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                            <span class="chip bg-color">计算机网络</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/01/11/di-liu-zhang-ying-yong-ceng/">
-                        <div class="card-image">
-                            
-                            <img src="/medias/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.png" class="responsive-img" alt="第六章、应用层">
-                            
-                            <span class="card-title">第六章、应用层</span>
-                        </div>
-                    </a>
+main()主线程
+gc()垃圾回收线程（典型的守护线程，如果JVM中只有守护线程，那么将退出）
+异常处理线程
 
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                第六章、应用层Application Layer
+并行与并发：
+并行：多个CPU同时执行多个任务。多个人做多件事。
+并发：一个CPU(采用时间片)同时执行多个任务。一个人做多件事 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/01/29/ji-suan-ji-wang-luo-da-zuo-ye/" title="计算机网络大作业"><img class="post-bg" src="/img/background/bg_bggenerator_com%20(2).png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算机网络大作业"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/01/29/ji-suan-ji-wang-luo-da-zuo-ye/" title="计算机网络大作业">计算机网络大作业</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-01-29T11:40:20.000Z" title="发表于 2023-01-29 19:40:20">2023-01-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E4%BD%9C%E4%B8%9A/">作业</a></span></div><div class="content">【第一题】：通过比较ISO七层模型、模型、和课堂上介绍的五层模型比较计算机网络体系结构，请画出三种体系结构的示意图，并分别描述、比较各层的功能和支持的协议。答：三种体系结构的示意图及对应简要功能如下图所示：
+
+七层模型每层相对应的网络协议如下表所示：
+
+
+
+ISO七层协议模型
+对应的协议
+
+
+
+应用层
+HTTP，TFTP，FTP，NFS，WAIS，SMTP，IMAP
+
+
+表示层
+Telnet，Rlogin，SNMP，Gopher
+
+
+会话层
+SMTP，DNS
+
+
+传输层
+TCP，UDP
+
+
+网络层
+IP，ICMP，ARP，IGMP
+
+
+数据链路层
+PPP，MAC，TDMA，ARP，CSMA
+
+
+物理层
+大量IEEE协议
+
+
+ISO模型的应用层功能为：为计算机用户提供应用接口，也为用户直接提供各种网络服务，是最靠近用户的一层。
+ISO模型的表示层功能为：提供各种用于应用层数据的编码和转换功能,确保一个系统的应用层发送的数据能被另一个系统的应用层识别，此外还可以进行数据压缩和加密。
+ISO模型的会话层功能为：负责建立、管理和终止表示层实体之间的通信会话。该层的通信由不同设备中的应用程序之间 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/01/11/di-liu-zhang-ying-yong-ceng/" title="第六章、应用层"><img class="post-bg" src="/img/background/bg_bggenerator_com%20(2).png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第六章、应用层"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/01/11/di-liu-zhang-ying-yong-ceng/" title="第六章、应用层">第六章、应用层</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-01-11T11:59:50.000Z" title="发表于 2023-01-11 19:59:50">2023-01-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="content">第六章、应用层Application Layer
 编程在不同的端系统上运行通过网络基础设施提供的服务，应用进程彼此通信如Web: Web 服务器软件与浏览器软件通信 
-网络核心中没有应用层软件网络核心没有应用层功能网络应用只在端系统上存在，
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-11
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    笔记
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
+网络核心中没有应用层软件网络核心没有应用层功能网络应用只在端系统上存在，快速网络应用开发和部署
+5.1 Principles of network applications应用层协议原理网络应用的体系结构
+客户-服务器模式（C/S:client/server）
 
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                            <span class="chip bg-color">计算机网络</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/01/11/di-si-zhang-chuan-shu-ceng/">
-                        <div class="card-image">
-                            
-                            <img src="/medias/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.png" class="responsive-img" alt="第四章、传输层">
-                            
-                            <span class="card-title">第四章、传输层</span>
-                        </div>
-                    </a>
+服务器:
 
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                第四章、传输层4.1 transport-layer services在不同主机上运行的应用进程之间提供逻辑通信（logical communication）在终端系统中运行的传输协议
-发送端：将应用消息分成段（segments），传递到网
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-11
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    笔记
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
+一直运行的主机
 
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                            <span class="chip bg-color">计算机网络</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/01/11/di-san-zhang-wang-luo-ceng/">
-                        <div class="card-image">
-                            
-                            <img src="/medias/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.png" class="responsive-img" alt="第三章、网络层">
-                            
-                            <span class="card-title">第三章、网络层</span>
-                        </div>
-                    </a>
+固定（permanent）的IP地址和周知的端口号（约定）
 
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                第三章、网络层这章很重要！！要好好学尼
+扩展性：服务器场（server farms for scaling）
+
+数据中心进行
+扩展性差
+
+
+
+
+客户端:
+
+主动与服务器通信
+与互联网有间歇性的连接
+可能是动态IP 地址
+不直接与其它客户端通信
+
+
+
+
+对等模式(P2P:Peer To Peer)
+
+（几乎）没有一直运行的服务器
+
+任意（arbitrary）端系统之间可以进行通信
+
+参与的主机间歇性连接且可以改变IP 地址
+
+每一个节点既是客户端又是服务器
+
+自扩展性-新peer节点带来新的服务能力，当然也带来新 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/01/11/di-si-zhang-chuan-shu-ceng/" title="第四章、传输层"><img class="post-bg" src="/img/background/bg_bggenerator_com%20(2).png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第四章、传输层"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/01/11/di-si-zhang-chuan-shu-ceng/" title="第四章、传输层">第四章、传输层</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-01-11T11:59:48.000Z" title="发表于 2023-01-11 19:59:48">2023-01-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="content">第四章、传输层4.1 transport-layer services在不同主机上运行的应用进程之间提供逻辑通信（logical communication）在终端系统中运行的传输协议
+发送端：将应用消息分成段（segments），传递到网络层
+接收端rcv side：将段重新组合成消息，传递到应用层
+
+多个传输协议可用于应用
+互联网：TCP和UDP
+
+Transport vs. network layer
+网络层：主机之间的逻辑通信
+
+传输层：进程之间的逻辑通信（processes）
+从通信和信息处理的角度看，运输层向它上面的应用层提供通信服务，它属于面向通信部分的最高层，同时也是用户功能中的最低层。当网络的边缘部分中的两个主机使用网络的核心部分的功能进行端到端的通信时，只有位于网络边缘部分的主机的协议栈才有运输层，而网络核心部分中的路由器在转发分组时都只用到下三层的功能。两个主机进行通信实际上就是两个主机中的应用进程互相通信。应用进程之间的通信又称为端到端的通信。 
+
+运输层的一个很重要的功能就是复用和分用。应用层不同进程的报文通过不同的端口向下交到运输层，再往下就共用网络层提供的 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/01/11/di-san-zhang-wang-luo-ceng/" title="第三章、网络层"><img class="post-bg" src="/img/background/bg_bggenerator_com%20(2).png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第三章、网络层"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/01/11/di-san-zhang-wang-luo-ceng/" title="第三章、网络层">第三章、网络层</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-01-11T11:59:37.000Z" title="发表于 2023-01-11 19:59:37">2023-01-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="content">第三章、网络层这章很重要！！要好好学尼
 3.1介绍网络层在主机和路由器实现，交换机无网络层的关键功能
 转发forwarding
 路由routing（选路）
@@ -834,493 +318,128 @@ assert有两种用法：
 数据平面data plane
 
 本地的，每个路由都提供的功能
-决定如何
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-11
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    笔记
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
+决定如何将路由器输入端口的数据报转发到输出端口
+转发功能（通过判断到达数据报的头部就可以决定）
 
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                            <span class="chip bg-color">计算机网络</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/01/11/di-er-zhang-lian-lu-ceng-he-ju-yu-wang/">
-                        <div class="card-image">
-                            
-                            <img src="/medias/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.png" class="responsive-img" alt="第二章、链路层和局域网">
-                            
-                            <span class="card-title">第二章、链路层和局域网</span>
-                        </div>
-                    </a>
 
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                第二章、链路层和局域网2.1介绍和链路层的服务术语
+控制平面control plane
+
+network-wide logic网络范围的逻辑
+
+决定数据报如何选择从哪个端口输出能到达目标主机
+
+两个控制平面实现方法
+
+传统路由算法（每个路由器配置自己的算法）eg.Dijkstra算法
+software-defined networking (SDN)全网实现，将硬件软件网络软件化（数据平面与控制平面分离
+
+
+
+
+
+网络服务模式Network service model
+单个数据报（individual datagrams）的服务
+
+保证安全
+保证不太慢less than 40 msec delay
+
+
+数据报流（a flow of datagrams）的服务
+
+有序的数据报传输
+保证最小流量带宽
+对数据包间距更 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/01/11/di-er-zhang-lian-lu-ceng-he-ju-yu-wang/" title="第二章、链路层和局域网"><img class="post-bg" src="/img/background/bg_bggenerator_com%20(2).png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第二章、链路层和局域网"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/01/11/di-er-zhang-lian-lu-ceng-he-ju-yu-wang/" title="第二章、链路层和局域网">第二章、链路层和局域网</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-01-11T11:58:37.000Z" title="发表于 2023-01-11 19:58:37">2023-01-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="content">第二章、链路层和局域网2.1介绍和链路层的服务术语
 datagram数据报
 communication link链路
 communication link链路
 routing algorithm路由算法
 
 链路层服务
-Framing, li
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-11
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    笔记
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
+Framing, link access: 帧的封装和链路的访问
 
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                            <span class="chip bg-color">计算机网络</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/01/11/di-yi-zhang-ji-suan-ji-wang-luo-jie-shao/">
-                        <div class="card-image">
-                            
-                            <img src="/medias/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.png" class="responsive-img" alt="第一章、介绍introduction">
-                            
-                            <span class="card-title">第一章、介绍introduction</span>
-                        </div>
-                    </a>
+将数据包封装成帧，加上头部和尾部encapsulate datagram into frame, adding header, trailer
+信道访问channel access if shared medium
+链路层寻址（帧的头部使用的mac地址，用于识别源和目的）“MAC” addresses used in frame headers to identify source, dest
 
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                第一章、介绍introduction术语termsTCP: Transmission Control Protocol
+
+Reliable delivery between adjacent nodes相邻节点间的可靠传输
+
+至少要保证不错，很少用在低位错误链路（光纤fiber、双绞线twisted pair）
+第三章学习如何实现
+
+
+Flow Control: 流量控制
+
+相邻发送节点和接受节点之间的步调
+
+
+Error Det ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/01/11/di-yi-zhang-ji-suan-ji-wang-luo-jie-shao/" title="第一章、介绍introduction"><img class="post-bg" src="/img/background/bg_bggenerator_com%20(2).png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第一章、介绍introduction"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/01/11/di-yi-zhang-ji-suan-ji-wang-luo-jie-shao/" title="第一章、介绍introduction">第一章、介绍introduction</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-01-11T11:50:37.000Z" title="发表于 2023-01-11 19:50:37">2023-01-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="content">第一章、介绍introduction术语termsTCP: Transmission Control Protocol
 UDP: User Datagram Protocol
 ISP: Internet Service Provider
-L
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-11
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    笔记
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                            <span class="chip bg-color">计算机网络</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/01/10/shu-ju-ku-gai-lun-bi-ji/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="数据库概论笔记">
-                            
-                            <span class="card-title">数据库概论笔记</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                第一章introductionDatabase System (DBS)：
+LAN: Local Area Network
+WAN: Wide Area Network
+FDM: Frequency Division Multiplexing
+TDM: Time Division Multiplexing
+1.1 what’s the Internet定义：连通性connected和共享性sharing，是基本功能计算机网络：一般地说，将分散的多台计算机、终端和外部设备用通信线路互联起来，彼此间实现互相通信，并且计算机的硬件、软件和数据资源大家都可以共同使用，实现资源共享的整个系统就叫做计算机网络。
+计算机网络连接两台或多台自主计算机。计算机可以位于地理位置上的任何位置。如果两台计算机能够交换信息，则称它们相互连接。网络有多种规模size、形状shape和形式form。
+自动计算机Autonomous computer 由软件 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/01/10/shu-ju-ku-gai-lun-bi-ji/" title="数据库概论笔记"><img class="post-bg" src="/img/background/bg_bggenerator_com%20(2).png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据库概论笔记"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/01/10/shu-ju-ku-gai-lun-bi-ji/" title="数据库概论笔记">数据库概论笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-01-10T05:59:37.000Z" title="发表于 2023-01-10 13:59:37">2023-01-10</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="content">第一章introductionDatabase System (DBS)：
 收集相互关联的数据
 
 Database (DB): contains information about a particular enterprise
 
 
-用于访
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-10
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    笔记
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
+用于访问数据的程序集
 
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
-                            <span class="chip bg-color">数据库</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
+Database Management System数据库管理系统(DBMS)：提供一种既方便又高效的数据库信息存储和检索方法
+
+
+
+分层体系结构Hierarchical Architecture：
+
+使用文件系统来存储和操作数据的缺点drawbacks
+数据冗余redundancy和不一致inconsistency——不同文件中的信息重复
+访问数据困难Difficulty in accessing data ——需要编写一个新程序来执行每个新任务
+数据隔离isolation — 多种文件和格式
+完整性问题lIntegrity problems
+完整性约束（例如，帐户余额&gt; 0）被“埋没”在程序代码中，而不是明确说明
+难以添加新约束或更改现有约束
+
+
+更新的原子性Atomicity of updates
+失败可能会使数据处于不 ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.svg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">今晚不熬夜</div><div class="author-info__description">努力且幸运</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/quanquan170"><i class="fab fa-github"></i><span>Github</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/quanquan170" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/1480105462@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/1480105462" target="_blank" title="QQ"><i class="fa-brands fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">来了都是缘分，祝你今天高兴</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/03/05/file-yu-io/" title="File与IO"><div style="background: url(/img/imgs/File与IO.png)"></div></a><div class="content"><a class="title" href="/2023/03/05/file-yu-io/" title="File与IO">File与IO</a><time datetime="2023-03-05T11:58:37.000Z" title="发表于 2023-03-05 19:58:37">2023-03-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/05/java-guan-jian-zi-zong-jie-bu-chang-yong/" title="Java关键字学习（更新中）"><div style="background: url(/img/background/bg_bggenerator_com.jpg)"></div></a><div class="content"><a class="title" href="/2023/03/05/java-guan-jian-zi-zong-jie-bu-chang-yong/" title="Java关键字学习（更新中）">Java关键字学习（更新中）</a><time datetime="2023-03-05T11:58:37.000Z" title="发表于 2023-03-05 19:58:37">2023-03-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/04/jin-cheng-xian-cheng-fu-xi-pian/" title="进程、线程复习篇"><img src="/img/background/bg_bggenerator_com%20(2).png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="进程、线程复习篇"/></a><div class="content"><a class="title" href="/2023/02/04/jin-cheng-xian-cheng-fu-xi-pian/" title="进程、线程复习篇">进程、线程复习篇</a><time datetime="2023-02-04T11:18:20.000Z" title="发表于 2023-02-04 19:18:20">2023-02-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/29/ji-suan-ji-wang-luo-da-zuo-ye/" title="计算机网络大作业"><img src="/img/background/bg_bggenerator_com%20(2).png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算机网络大作业"/></a><div class="content"><a class="title" href="/2023/01/29/ji-suan-ji-wang-luo-da-zuo-ye/" title="计算机网络大作业">计算机网络大作业</a><time datetime="2023-01-29T11:40:20.000Z" title="发表于 2023-01-29 19:40:20">2023-01-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/11/di-liu-zhang-ying-yong-ceng/" title="第六章、应用层"><img src="/img/background/bg_bggenerator_com%20(2).png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第六章、应用层"/></a><div class="content"><a class="title" href="/2023/01/11/di-liu-zhang-ying-yong-ceng/" title="第六章、应用层">第六章、应用层</a><time datetime="2023-01-11T11:59:50.000Z" title="发表于 2023-01-11 19:59:50">2023-01-11</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
             </div>
-              <!-- 隐藏某个文章 -->
-            
-        </div>
-    </article>
-
-</main>
-
-
-
-
-    <footer class="page-footer bg-color">
-    
-
-    <div class="container row center-align"
-         style="margin-bottom: 0px !important;">
-        <div class="col s12 m8 l8 copy-right">
-            Copyright&nbsp;&copy;
-            
-                <span id="year">2023</span>
-            
-            <a href="/about" target="_blank">今晚不熬夜</a>
-            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
-            
-                <span id="translate">|&nbsp;繁/简：</span><a id="translateLink" href="javascript:translatePage();">繁</a>
-            
-            <br>
-            
-                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">79.7k</span>
-            
-            
-            
-                
-            
-            
-                <span id="busuanzi_container_site_pv">
-                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
-                    <span id="busuanzi_value_site_pv" class="white-color"></span>
-            </span>
-            
-            
-                <span id="busuanzi_container_site_uv">
-                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
-                    <span id="busuanzi_value_site_uv" class="white-color"></span>
-            </span>
-            
-            <br>
-
-            <!-- 运行天数提醒. -->
-            
-            <br>
-            
-        </div>
-        <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/quanquan170" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
-    </a>
-
-
-
-
-
-
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1480105462" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1480105462" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
-
-
-
-
-
-
-
-</div>
-    </div>
-</footer>
-
-<div class="progress-bar"></div>
-
-
-    <!-- 搜索遮罩框 -->
-<div id="searchModal" class="modal">
-    <div class="modal-content">
-        <div class="search-header">
-            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
-            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
-                   class="search-input">
-        </div>
-        <div id="searchResult"></div>
-    </div>
-</div>
-
-<script type="text/javascript">
-$(function () {
-    var searchFunc = function (path, search_id, content_id) {
-        'use strict';
-        $.ajax({
-            url: path,
-            dataType: "xml",
-            success: function (xmlResponse) {
-                // get the contents from search data
-                var datas = $("entry", xmlResponse).map(function () {
-                    return {
-                        title: $("title", this).text(),
-                        content: $("content", this).text(),
-                        url: $("url", this).text()
-                    };
-                }).get();
-                var $input = document.getElementById(search_id);
-                var $resultContent = document.getElementById(content_id);
-                $input.addEventListener('input', function () {
-                    var str = '<ul class=\"search-result-list\">';
-                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                    $resultContent.innerHTML = "";
-                    if (this.value.trim().length <= 0) {
-                        return;
-                    }
-                    // perform local searching
-                    datas.forEach(function (data) {
-                        var isMatch = true;
-                        var data_title = data.title.trim().toLowerCase();
-                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
-                        var data_url = data.url;
-                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
-                        var index_title = -1;
-                        var index_content = -1;
-                        var first_occur = -1;
-                        // only match artiles with not empty titles and contents
-                        if (data_title !== '' && data_content !== '') {
-                            keywords.forEach(function (keyword, i) {
-                                index_title = data_title.indexOf(keyword);
-                                index_content = data_content.indexOf(keyword);
-                                if (index_title < 0 && index_content < 0) {
-                                    isMatch = false;
-                                } else {
-                                    if (index_content < 0) {
-                                        index_content = 0;
-                                    }
-                                    if (i === 0) {
-                                        first_occur = index_content;
-                                    }
-                                }
-                            });
-                        }
-                        // show search results
-                        if (isMatch) {
-                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
-                            var content = data.content.trim().replace(/<[^>]+>/g, "");
-                            if (first_occur >= 0) {
-                                // cut out 100 characters
-                                var start = first_occur - 20;
-                                var end = first_occur + 80;
-                                if (start < 0) {
-                                    start = 0;
-                                }
-                                if (start === 0) {
-                                    end = 100;
-                                }
-                                if (end > content.length) {
-                                    end = content.length;
-                                }
-                                var match_content = content.substr(start, end);
-                                // highlight all keywords
-                                keywords.forEach(function (keyword) {
-                                    var regS = new RegExp(keyword, "gi");
-                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
-                                });
-
-                                str += "<p class=\"search-result\">" + match_content + "...</p>"
-                            }
-                            str += "</li>";
-                        }
-                    });
-                    str += "</ul>";
-                    $resultContent.innerHTML = str;
-                });
-            }
-        });
-    };
-
-    searchFunc('/search.xml', 'searchInput', 'searchResult');
-});
-</script>
-
-    <!-- 白天和黑夜主题 -->
-<div class="stars-con">
-    <div id="stars"></div>
-    <div id="stars2"></div>
-    <div id="stars3"></div>  
-</div>
-
-<script>
-    function switchNightMode() {
-        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
-        setTimeout(function () {
-            $('body').hasClass('DarkMode') 
-            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
-            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
-            
-            setTimeout(function () {
-            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
-                $(this).remove()
-            })
-            }, 2e3)
-        })
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E4%BD%9C%E4%B8%9A/"><span class="card-category-list-name">作业</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%A4%8D%E4%B9%A0/"><span class="card-category-list-name">复习</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">笔记</span><span class="card-category-list-count">6</span></a></li>
+            </ul></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">三月 2023</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/02/"><span class="card-archive-list-date">二月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/01/"><span class="card-archive-list-date">一月 2023</span><span class="card-archive-list-count">7</span></a></li></ul></div></div></div></main><footer id="footer" style="background-image: url('/img/k-bg.svg')"><div id="footer-wrap"><div class="footer_custom_text">谢谢看到这er~没有更多了奥</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: (str) => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: (subtitleType) => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        getScript('https://cdn.jsdelivr.net/npm/typed.js/lib/typed.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
     }
-</script>
-
-    <!-- 回到顶部按钮 -->
-<div id="backTop" class="top-scroll">
-    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fas fa-arrow-up"></i>
-    </a>
-</div>
-
-
-    <script src="/libs/materialize/materialize.min.js"></script>
-    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="/libs/aos/aos.js"></script>
-    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="/js/matery.js"></script>
-
-    
-
-    
-        <script type="text/javascript" src="/js/tw_cn.js"></script>
-        <script type="text/javascript">
-          var defaultEncoding = 2; //网站编写字体是否繁体，1-繁体，2-简体
-          var translateDelay = 0; //延迟时间,若不在前, 要设定延迟翻译时间, 如100表示100ms,默认为0
-          var cookieDomain = "http://example.com"; //Cookie地址, 一定要设定, 通常为你的网址
-          var msgToTraditionalChinese = "繁"; //此处可以更改为你想要显示的文字
-          var msgToSimplifiedChinese = "简"; //同上，但两处均不建议更改
-          var translateButtonId = "translateLink"; //默认互换id
-          translateInitilization();
-        </script>
-    
-    
-    
-
-    <!-- 雪花特效 -->
-    
-
-    <!-- 鼠标星星特效 -->
-    
-
-     
-        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
-        <script src="/libs/others/TencentCaptcha.js"></script>
-        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
-    
-
-    <!-- Baidu Analytics -->
-
-    <!-- Baidu Push -->
-
-<script>
-    (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
-
-    
-    
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
-    
-
-    
-
-    
-
-    <!--腾讯兔小巢-->
-    
-    
-
-    
-
-    
-
-    
-    <script src="/libs/instantpage/instantpage.js" type="module"></script>
-    
-
-</body>
-
-</html>
+  }
+}
+</script><script>function subtitleType () {
+  if (true) {
+    typedJSFn.init(["要成为不声不响，什么都做得很好的人"])
+  } else {
+    document.getElementById("subtitle").innerHTML = '要成为不声不响，什么都做得很好的人'
+  }
+}
+typedJSFn.run(subtitleType)</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></body></html>

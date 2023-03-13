@@ -1,393 +1,169 @@
-<!DOCTYPE HTML>
-<html lang="zh-CN">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>第二章、链路层和局域网 | 今晚不熬夜's blog</title><meta name="author" content="今晚不熬夜"><meta name="copyright" content="今晚不熬夜"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#e4c6d0"><meta name="description" content="第二章、链路层和局域网2.1介绍和链路层的服务术语 datagram数据报 communication link链路 communication link链路 routing algorithm路由算法  链路层服务 Framing, link access: 帧的封装和链路的访问  将数据包封装成帧，加上头部和尾部encapsulate datagram into frame, adding h">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第二章、链路层和局域网">
+<meta property="og:url" content="http://example.com/2023/01/11/di-er-zhang-lian-lu-ceng-he-ju-yu-wang/index.html">
+<meta property="og:site_name" content="今晚不熬夜&#39;s blog">
+<meta property="og:description" content="第二章、链路层和局域网2.1介绍和链路层的服务术语 datagram数据报 communication link链路 communication link链路 routing algorithm路由算法  链路层服务 Framing, link access: 帧的封装和链路的访问  将数据包封装成帧，加上头部和尾部encapsulate datagram into frame, adding h">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/background/bg_bggenerator_com%20(2).png">
+<meta property="article:published_time" content="2023-01-11T11:58:37.000Z">
+<meta property="article:modified_time" content="2023-01-11T13:22:22.002Z">
+<meta property="article:author" content="今晚不熬夜">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/background/bg_bggenerator_com%20(2).png"><link rel="shortcut icon" href="/img/avatar.svg"><link rel="canonical" href="http://example.com/2023/01/11/di-er-zhang-lian-lu-ceng-he-ju-yu-wang/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"B8BRZ1L2TD","apiKey":"8bb4e18949e6c588f375c44adfbad5e0","indexName":"quan","hits":{"per_page":6},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '第二章、链路层和局域网',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-01-11 21:22:22'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
 
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-<head>
-    <meta charset="utf-8">
-    <meta name="keywords" content="第二章、链路层和局域网, 今晚不熬夜&#39;s blog">
-    <meta name="description" content="第二章、链路层和局域网2.1介绍和链路层的服务术语
-datagram数据报
-communication link链路
-communication link链路
-routing algorithm路由算法
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
 
-链路层服务
-Framing, li">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="renderer" content="webkit|ie-stand|ie-comp">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="referrer" content="no-referrer-when-downgrade">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
 
-
-    <title>第二章、链路层和局域网 | 今晚不熬夜&#39;s blog</title>
-    <link rel="icon" type="image/svg+xml" href="/medias/avatar.svg">
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#41555d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#e4c6d0')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
-
-
-    <!-- bg-cover style     -->
-
-
-
-<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
-<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
-<link rel="stylesheet" type="text/css" href="/css/matery.css">
-<link rel="stylesheet" type="text/css" href="/css/my.css">
-<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
-
-
-
-
-    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
-    <link rel="stylesheet" href="/css/post.css">
-
-
-
-
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
     
-        <link rel="stylesheet" type="text/css" href="/css/reward.css">
-    
-
-
-
-    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
-
-<meta name="generator" content="Hexo 6.3.0">
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head>
-
-
-<body>
-    <header class="navbar-fixed">
-    <nav id="headNav" class="bg-color nav-transparent">
-        <div id="navContainer" class="nav-wrapper container">
-            <div class="brand-logo">
-                <a href="/" class="waves-effect waves-light">
-                    
-                    <img src="/avatar.svg" class="logo-img" alt="LOGO">
-                    
-                    <span class="logo-span">今晚不熬夜&#39;s blog</span>
-                </a>
-            </div>
-            
-
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
-<ul class="right nav-menu">
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/" class="waves-effect waves-light">
-      
-      <i class="fas fa-home" style="zoom: 0.6;"></i>
-      
-      <span>首页</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/tags" class="waves-effect waves-light">
-      
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
-      
-      <span>标签</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/categories" class="waves-effect waves-light">
-      
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
-      
-      <span>分类</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/archives" class="waves-effect waves-light">
-      
-      <i class="fas fa-archive" style="zoom: 0.6;"></i>
-      
-      <span>归档</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/about" class="waves-effect waves-light">
-      
-      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
-      
-      <span>关于</span>
-    </a>
-    
-  </li>
-  
-  <li>
-    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
-    </a>
-  </li>
-  <!-- <li>
-    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
-      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
-    </a>
-  </li> -->
-</ul>
-
-
-<div id="mobile-nav" class="side-nav sidenav">
-
-    <div class="mobile-head bg-color">
-        
-        <img src="/avatar.svg" class="logo-img circle responsive-img">
-        
-        <div class="logo-name">今晚不熬夜&#39;s blog</div>
-        <div class="logo-desc">
-            
-            Never really desperate, only the lost of the soul.
-            
-        </div>
-    </div>
-
-    <ul class="menu-list mobile-menu-list">
-        
-        <li class="m-nav-item">
-	  
-		<a href="/" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-home"></i>
-			
-			首页
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/tags" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-tags"></i>
-			
-			标签
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/categories" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-bookmark"></i>
-			
-			分类
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/archives" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-archive"></i>
-			
-			归档
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/about" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-user-circle"></i>
-			
-			关于
-		</a>
-          
-        </li>
-        
-        
-        <li><div class="divider"></div></li>
-        <li>
-            <a href="https://github.com/quanquan170" class="waves-effect waves-light" target="_blank">
-                <i class="fab fa-github-square fa-fw"></i>Fork Me
-            </a>
-        </li>
-        
-    </ul>
-</div>
-
-
-        </div>
-
-        
-            <style>
-    .nav-transparent .github-corner {
-        display: none !important;
-    }
-
-    .github-corner {
-        position: absolute;
-        z-index: 10;
-        top: 0;
-        right: 0;
-        border: 0;
-        transform: scale(1.1);
-    }
-
-    .github-corner svg {
-        color: #0f9d58;
-        fill: #fff;
-        height: 64px;
-        width: 64px;
-    }
-
-    .github-corner:hover .octo-arm {
-        animation: a 0.56s ease-in-out;
-    }
-
-    .github-corner .octo-arm {
-        animation: none;
-    }
-
-    @keyframes a {
-        0%,
-        to {
-            transform: rotate(0);
-        }
-        20%,
-        60% {
-            transform: rotate(-25deg);
-        }
-        40%,
-        80% {
-            transform: rotate(10deg);
-        }
-    }
-</style>
-
-<!-- <a href="https://github.com/quanquan170" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
-   data-tooltip="Fork Me" data-position="left" data-delay="50">
-    <svg viewBox="0 0 250 250" aria-hidden="true">
-        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
-              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
-        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
-              fill="currentColor" class="octo-body"></path>
-    </svg>
-</a> -->
-        
-    </nav>
-
-</header>
-
-    
-
-
-
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.png')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">第二章、链路层和局域网</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-<main class="post-container content">
-
-    
-    <div class="row">
-    <div id="main-content" class="col s12 m12 l9">
-        <!-- 文章内容详情 -->
-<div id="artDetail">
-    <div class="card">
-        <div class="card-content article-info">
-            <div class="row tag-cate">
-                <div class="col s7">
-                    
-                    <div class="article-tag">
-                        
-                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                                <span class="chip bg-color">计算机网络</span>
-                            </a>
-                        
-                    </div>
-                    
-                </div>
-                <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E7%AC%94%E8%AE%B0/" class="post-category">
-                                笔记
-                            </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-
-            <div class="post-info">
-                
-                <div class="post-date info-break-policy">
-                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-01-11
-                </div>
-                
-
-                
-
-                
-                <div class="info-break-policy">
-                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    5.8k
-                </div>
-                
-
-                
-
-                
-                    <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
-                        <span id="busuanzi_value_page_pv"></span>
-                    </div>
-				
-            </div>
-        </div>
-        <hr class="clearfix">
-
-        
-        <!-- 是否加载使用自带的 prismjs. -->
-        <link rel="stylesheet" href="/libs/prism/prism.min.css">
-        
-
-        
-
-        <div class="card-content article-card-content">
-            <div id="articleContent">
-                <h1 id="第二章、链路层和局域网"><a href="#第二章、链路层和局域网" class="headerlink" title="第二章、链路层和局域网"></a>第二章、链路层和局域网</h1><h2 id="2-1介绍和链路层的服务"><a href="#2-1介绍和链路层的服务" class="headerlink" title="2.1介绍和链路层的服务"></a>2.1介绍和链路层的服务</h2><h3 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h3><ul>
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.svg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa-fw icon-resume-line"></i><span> 关于作者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/background/bg_bggenerator_com%20(2).png')"><nav id="nav"><span id="blog-info"><a href="/" title="今晚不熬夜's blog"><span class="site-name">今晚不熬夜's blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa-fw icon-resume-line"></i><span> 关于作者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">第二章、链路层和局域网</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-01-11T11:58:37.000Z" title="发表于 2023-01-11 19:58:37">2023-01-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-11T13:22:22.002Z" title="更新于 2023-01-11 21:22:22">2023-01-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="第二章、链路层和局域网"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="第二章、链路层和局域网"><a href="#第二章、链路层和局域网" class="headerlink" title="第二章、链路层和局域网"></a>第二章、链路层和局域网</h1><h2 id="2-1介绍和链路层的服务"><a href="#2-1介绍和链路层的服务" class="headerlink" title="2.1介绍和链路层的服务"></a>2.1介绍和链路层的服务</h2><h3 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h3><ul>
 <li>datagram数据报</li>
 <li>communication link链路</li>
 <li>communication link链路</li>
@@ -1141,645 +917,4 @@ Framing, li">
   <svg data="{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:1,&quot;p&quot;:{&quot;lines&quot;:[1,2]},&quot;v&quot;:&quot;第二章、链路层和局域网&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:2,&quot;p&quot;:{&quot;lines&quot;:[3,4]},&quot;v&quot;:&quot;2.1介绍和链路层的服务&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[5,6]},&quot;v&quot;:&quot;术语&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[7,8]},&quot;v&quot;:&quot;datagram数据报&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[8,9]},&quot;v&quot;:&quot;communication link链路&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[9,10]},&quot;v&quot;:&quot;communication link链路&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[10,11]},&quot;v&quot;:&quot;routing algorithm路由算法&quot;}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[12,13]},&quot;v&quot;:&quot;链路层服务&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[14,15]},&quot;v&quot;:&quot;Framing, link access: 帧的封装和链路的访问&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[16,18]},&quot;v&quot;:&quot;将数据包封装成帧，加上头部和尾部<br>\nencapsulate datagram into frame, adding header, trailer&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[18,20]},&quot;v&quot;:&quot;信道访问<br>\nchannel access if shared medium&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[20,22]},&quot;v&quot;:&quot;链路层寻址（帧的头部使用的mac地址，用于识别源和目的）<br>\n“MAC” addresses used in frame headers to identify source, dest&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[23,25]},&quot;v&quot;:&quot;Reliable delivery between adjacent nodes<br>\n相邻节点间的可靠传输&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[26,27]},&quot;v&quot;:&quot;至少要保证不错，很少用在低位错误链路（光纤fiber、双绞线twisted pair）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[27,28]},&quot;v&quot;:&quot;第三章学习如何实现&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[29,30]},&quot;v&quot;:&quot;Flow Control: 流量控制&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[31,32]},&quot;v&quot;:&quot;相邻发送节点和接受节点之间的步调&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[33,34]},&quot;v&quot;:&quot;Error Detection: 错误检测&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[35,36]},&quot;v&quot;:&quot;由信号衰减、噪声引起的误差&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[36,37]},&quot;v&quot;:&quot;接收方检测是否存在（presence）错误&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[37,38]},&quot;v&quot;:&quot;信号发送方用于检查是否重新传输或丢帧&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[39,40]},&quot;v&quot;:&quot;Error Correction: 错误修正&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[41,42]},&quot;v&quot;:&quot;接收方识别并纠正错误&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[43,44]},&quot;v&quot;:&quot;Half-duplex and full-duplex全双工和半双工&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[45,46]},&quot;v&quot;:&quot;使用半双工，链路两端节点不可以同时传输&quot;}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[47,48]},&quot;v&quot;:&quot;链路层实现位置&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[49,51]},&quot;v&quot;:&quot;网络边缘<br>\nin each and every host&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[51,53]},&quot;v&quot;:&quot;适配器（网络接口卡网卡）和网卡<br>\nadaptor  chip&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[56,57]},&quot;v&quot;:&quot;连接主机的系统总线&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[57,58]},&quot;v&quot;:&quot;硬件、软件、固件组合&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[58,60]},&quot;v&quot;:&quot;&quot;}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:2,&quot;p&quot;:{&quot;lines&quot;:[60,61]},&quot;v&quot;:&quot;2.2校验和纠正&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[63,64]},&quot;v&quot;:&quot;EDC：Error Detection and Correction bits检错纠错码（为后添加的冗余数据）&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[67,68]},&quot;v&quot;:&quot;检错流程（可能发生比特位发生翻转）&quot;}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[69,70]},&quot;v&quot;:&quot;1.Parity checking(奇偶位校验)&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[71,72]},&quot;v&quot;:&quot;Single Bit Parity(奇偶校验)&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[73,74]},&quot;v&quot;:&quot;最不实用但简单&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[74,75]},&quot;v&quot;:&quot;缺点：不能改错，有误报情况，只能测出一半的错误（奇位错）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[75,77]},&quot;v&quot;:&quot;&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[77,78]},&quot;v&quot;:&quot;Two Dimensional Bit Parity:二维奇偶校验&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[79,80]},&quot;v&quot;:&quot;优：可定位错误&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[80,81]},&quot;v&quot;:&quot;缺：有误报&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[81,83]},&quot;v&quot;:&quot;&quot;}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[83,84]},&quot;v&quot;:&quot;2.Internet checksum(校验和)&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[85,86]},&quot;v&quot;:&quot;只能检测不能纠正，只在❗传输层使用（因为实现麻烦，需要cpu辅助）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[86,88]},&quot;v&quot;:&quot;目标：检测在传输段中的错误:<br>\ndetect “errors” in transmitted segment&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[88,89]},&quot;v&quot;:&quot;发送端sender&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[90,92]},&quot;v&quot;:&quot;将段的内容视为十六位整数<br>\ntreat segment contents as sequence of 16-bit integers&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[92,94]},&quot;v&quot;:&quot;校验和：段内容的反码和<br>\naddition (1’s complement sum) of segment 进位contents（最高位循环加到最后一位，不丢数据）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[94,95]},&quot;v&quot;:&quot;把校验和放到udp校验和字段中&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[96,97]},&quot;v&quot;:&quot;UDP(User Datagram Protocol)用户数据报协议&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[97,99]},&quot;v&quot;:&quot;&quot;}]}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[99,100]},&quot;v&quot;:&quot;接收端receiver&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[101,102]},&quot;v&quot;:&quot;计算接受端的校验和&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[102,103]},&quot;v&quot;:&quot;检查计算的校验和是否等于校验和字段值（）&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[104,105]},&quot;v&quot;:&quot;如果不为0，则有错误&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[105,106]},&quot;v&quot;:&quot;为0，则正确（发送端计算为反码）&quot;}]}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[107,108]},&quot;v&quot;:&quot;3.Checksumming: Cyclic Redundancy Check&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[110,117]},&quot;v&quot;:&quot;&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[112,113]},&quot;v&quot;:&quot;D：要发送的数据，看成的二进制数&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[113,114]},&quot;v&quot;:&quot;G：r+1位模式（生成器），一个接收方知道的数&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[114,115]},&quot;v&quot;:&quot;最后R加到数据末尾&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[115,116]},&quot;v&quot;:&quot;检测用到异或，计算方便&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[117,118]},&quot;v&quot;:&quot;够用就行,G位数越多检测能力越强&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[118,119]},&quot;v&quot;:&quot;每个CRC标准能够检测不多于r+1位的猝发错误和任意的奇数个比特错误&quot;}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:2,&quot;p&quot;:{&quot;lines&quot;:[120,121]},&quot;v&quot;:&quot;2.3 多路访问协议（解决共享信道的问题）&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[123,124]},&quot;v&quot;:&quot;Multiple Access Links and Protocols多个访问链接和协议（两类连接）&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[125,126]},&quot;v&quot;:&quot;点对点point-to-point&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[127,128]},&quot;v&quot;:&quot;家用或路由器&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[128,129]},&quot;v&quot;:&quot;以太网&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[130,132]},&quot;v&quot;:&quot;广播broadcast<br>\n（shared wire or medium共享电路和介质&quot;}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[133,134]},&quot;v&quot;:&quot;分类法a taxonomy&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[135,136]},&quot;v&quot;:&quot;Channel Partitioning信道划分&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[137,138]},&quot;v&quot;:&quot;特点&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[139,140]},&quot;v&quot;:&quot;divide channel into smaller “pieces” (time slots, frequency, code)&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[140,141]},&quot;v&quot;:&quot;allocate piece to node for exclusive专属 use&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[142,143]},&quot;v&quot;:&quot;TDMA：time division multiple access&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[144,145]},&quot;v&quot;:&quot;每个站在每轮中获得固定长度的插槽（长度= pkt传输时间）&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[146,147]},&quot;v&quot;:&quot;利用率低 FDMA&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[148,149]},&quot;v&quot;:&quot;因为没有使用的信道都是空闲的&quot;}]}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[150,151]},&quot;v&quot;:&quot;Random Access随机访问&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[152,153]},&quot;v&quot;:&quot;channel not divided, allow collisions&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[153,154]},&quot;v&quot;:&quot;“recover” from collisions冲突&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[154,155]},&quot;v&quot;:&quot;处理的问题&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[156,157]},&quot;v&quot;:&quot;如何检测碰撞&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[158,159]},&quot;v&quot;:&quot;“碰撞检测”就是计算机边发送数据边检测信道上的信号电压大小。当几个站同时在总线上发送数据时，总线上的信号电压摆动值将会增大（互相叠加）。当一个站检测到的信号电压摆动值超过一定的门限值时，就认为总线上至少有两个站同时在发送数据，表明产生了碰撞。所谓“碰撞”就是发生了冲突。因此“碰撞检测”也称为“冲突检测”。结果就是两个帧都变得无用&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[160,161]},&quot;v&quot;:&quot;如何从冲突中恢复（例如，通过延迟转播）&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[162,163]},&quot;v&quot;:&quot;分类&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[164,165]},&quot;v&quot;:&quot;slotted ALOHA（有时隙的）&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[166,167]},&quot;v&quot;:&quot;假设，所有帧都等长，时间等分时隙（slot），一个时隙恰好发送一个数据帧，只能从开始的地方发送，节点间同步，两个节点冲突，所有节点都可以检测到&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[167,170]},&quot;v&quot;:&quot;操作：当节点获得新帧时，它会在下一个插槽中传输<br>\n如果没有冲突，节点可以在下一个槽中发送新帧<br>\n如果发生冲突，节点在每个后续插槽中用 prob. p 重新传输帧直到成功&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[170,171]},&quot;v&quot;:&quot;优点（pros）&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:13,&quot;p&quot;:{&quot;lines&quot;:[172,173]},&quot;v&quot;:&quot;单个主动节点可以全速率连续传输通道独占带宽&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:13,&quot;p&quot;:{&quot;lines&quot;:[173,174]},&quot;v&quot;:&quot;高度去中心化：去中心化节点中只有插槽需要同步&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:13,&quot;p&quot;:{&quot;lines&quot;:[174,175]},&quot;v&quot;:&quot;简单&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[176,177]},&quot;v&quot;:&quot;缺点cons&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:13,&quot;p&quot;:{&quot;lines&quot;:[178,179]},&quot;v&quot;:&quot;碰撞，浪费slot&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:13,&quot;p&quot;:{&quot;lines&quot;:[179,180]},&quot;v&quot;:&quot;空闲slot&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:13,&quot;p&quot;:{&quot;lines&quot;:[180,181]},&quot;v&quot;:&quot;节点可能能够在传输数据包的不到一段时间内检测到冲突&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:13,&quot;p&quot;:{&quot;lines&quot;:[181,182]},&quot;v&quot;:&quot;时钟同步困难&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[183,184]},&quot;v&quot;:&quot;基于时间同步，n无限大时，可达到37%传输效率&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[185,186]},&quot;v&quot;:&quot;Pure (unslotted) ALOHA无时隙的（始终不用同步&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[187,188]},&quot;v&quot;:&quot;效率不高，但简单，最高0.18&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[189,190]},&quot;v&quot;:&quot;CSMA (Carrier Sense Multiple Access)载波监听&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[191,192]},&quot;v&quot;:&quot;传输前就监听&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:13,&quot;p&quot;:{&quot;lines&quot;:[193,194]},&quot;v&quot;:&quot;如果通道检测到空闲：传输整个帧&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:13,&quot;p&quot;:{&quot;lines&quot;:[194,195]},&quot;v&quot;:&quot;如果信道检测到繁忙，就推迟传输&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[196,197]},&quot;v&quot;:&quot;冲突问题：由于传播时延导致没有及时监听到&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:13,&quot;p&quot;:{&quot;lines&quot;:[198,199]},&quot;v&quot;:&quot;如果冲突，整个数据包也传输，却不能用，所以浪费时间，且半径越小越容易检测冲突&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:13,&quot;p&quot;:{&quot;lines&quot;:[199,200]},&quot;v&quot;:&quot;距离越远，带宽越低（传的慢）出现传播时延造成的冲突的可能性越大&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:13,&quot;p&quot;:{&quot;lines&quot;:[200,202]},&quot;v&quot;:&quot;&quot;}]}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[202,203]},&quot;v&quot;:&quot;CSMA/CD (Collision Detection)载波监听冲突检测多路复用used in Ethernet&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[204,205]},&quot;v&quot;:&quot;在短时间内检测到冲突&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[205,206]},&quot;v&quot;:&quot;碰撞传输中止（aborted），减少通道浪费&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[206,207]},&quot;v&quot;:&quot;碰撞检测&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:13,&quot;p&quot;:{&quot;lines&quot;:[208,209]},&quot;v&quot;:&quot;易于在有线LAN中：测量信号强度，比较发射和接收的信号&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:13,&quot;p&quot;:{&quot;lines&quot;:[209,210]},&quot;v&quot;:&quot;无线局域网中的困难：接收机在传输时关闭&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[211,213]},&quot;v&quot;:&quot;&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[213,214]},&quot;v&quot;:&quot;CSMA/CA used in 802.11&quot;}]}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[215,216]},&quot;v&quot;:&quot;“Taking turns”轮转&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[217,218]},&quot;v&quot;:&quot;Nodes take turns, but nodes with more to send can take longer turns&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[218,219]},&quot;v&quot;:&quot;通道分区MAC协议（channel partitioning MAC protocols）：在高负载下高效、公平地共享通道&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[220,221]},&quot;v&quot;:&quot;低负载时效率低下：通道访问延迟，即使只有1个主动节点，也分配1/N带宽！&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[222,223]},&quot;v&quot;:&quot;随机访问 MAC 协议&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[224,225]},&quot;v&quot;:&quot;低负载时高效：单节点可充分利用通道&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[225,226]},&quot;v&quot;:&quot;高负载：碰撞开销&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[227,228]},&quot;v&quot;:&quot;方式：&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[229,230]},&quot;v&quot;:&quot;轮询polling&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[231,232]},&quot;v&quot;:&quot;主节点&amp;quot;邀请&amp;quot;从属节点依次传输master node “invites” slave nodes to transmit in turn&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[232,233]},&quot;v&quot;:&quot;通常与哑设备（“dumb” slave devices）一起使用&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[233,234]},&quot;v&quot;:&quot;缺点&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:13,&quot;p&quot;:{&quot;lines&quot;:[235,236]},&quot;v&quot;:&quot;polling overhead 轮循开销&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:13,&quot;p&quot;:{&quot;lines&quot;:[236,237]},&quot;v&quot;:&quot;latency延迟&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:13,&quot;p&quot;:{&quot;lines&quot;:[237,238]},&quot;v&quot;:&quot;single point of failure (master）一旦master主节点故障，所有都出问题&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[239,240]},&quot;v&quot;:&quot;优点：利用random优势&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[241,242]},&quot;v&quot;:&quot;token（令牌） passing依次传递&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[243,244]},&quot;v&quot;:&quot;控制令牌按顺序（sequentially）从一个节点传递到下一个节点。&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[244,245]},&quot;v&quot;:&quot;令牌消息&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[245,246]},&quot;v&quot;:&quot;缺点&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:13,&quot;p&quot;:{&quot;lines&quot;:[247,248]},&quot;v&quot;:&quot;令牌开销token overhead&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:13,&quot;p&quot;:{&quot;lines&quot;:[248,249]},&quot;v&quot;:&quot;延迟latency&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:13,&quot;p&quot;:{&quot;lines&quot;:[249,250]},&quot;v&quot;:&quot;单点故障（令牌token)任何一个故障，都不能运转&quot;}]}]}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[251,252]},&quot;v&quot;:&quot;Bluetooth, FDDI使用&quot;}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[253,254]},&quot;v&quot;:&quot;Cable access network有线接入网络？？？&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[255,256]},&quot;v&quot;:&quot;DOCSIS：电缆数据服务接口规范data over cable service interface spec&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[256,257]},&quot;v&quot;:&quot;上行、下行频率通道上 FDM&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[257,258]},&quot;v&quot;:&quot;TDM 上行：已分配某些插槽，某些插槽存在争用&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[259,260]},&quot;v&quot;:&quot;下行 MAP 帧：分配上游插槽&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[260,261]},&quot;v&quot;:&quot;请求在选定插槽中传输的上游插槽（和数据）传输随机访问（二进制退避）&quot;}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[262,263]},&quot;v&quot;:&quot;LAN technologies局域网技术？？？&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[264,265]},&quot;v&quot;:&quot;services, error detection/correction, multiple access&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[265,267]},&quot;v&quot;:&quot;&quot;}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[267,268]},&quot;v&quot;:&quot;争用期&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[269,270]},&quot;v&quot;:&quot;最先发送数据帧的站，在发送数据帧后至多经过时间 2τ（两倍的端到端往返时延）就可知道发送的数据帧是否遭受了碰撞。&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[270,271]},&quot;v&quot;:&quot;以太网的端到端往返时延 2τ 称为争用期，或碰撞窗口。&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[271,272]},&quot;v&quot;:&quot;经过争用期这段时间还没有检测到碰撞，才能肯定这次发送不会发生碰撞。&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[272,273]},&quot;v&quot;:&quot;以太网争用期：&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[274,275]},&quot;v&quot;:&quot;以太网取 51.2 μs 为争用期的长度。&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[275,276]},&quot;v&quot;:&quot;对于 10 Mb/s 以太网，在争用期内可发送512 bit，即 64 字节。&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[276,277]},&quot;v&quot;:&quot;以太网在发送数据时，若前 64 字节没有发生冲突，则后续的数据就不会发生冲突。&quot;}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[278,279]},&quot;v&quot;:&quot;最短有效帧长&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[280,281]},&quot;v&quot;:&quot;以太网规定了最短有效帧长为 64 字节，凡长度小于 64 字节的帧都是由于冲突而异常中止的无效帧。&quot;}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[282,283]},&quot;v&quot;:&quot;帧间最小间隔&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[284,285]},&quot;v&quot;:&quot;帧间最小间隔为 9.6 μs，相当于 96 bit 的发送时间。&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[285,286]},&quot;v&quot;:&quot;一个站在检测到总线开始空闲后，还要等待 9.6μs 才能再次发送数据。&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[286,287]},&quot;v&quot;:&quot;这样做是为了使刚刚收到数据帧的站的接收缓存来得及清理，做好接收下一帧的准备。&quot;}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:2,&quot;p&quot;:{&quot;lines&quot;:[288,289]},&quot;v&quot;:&quot;2.4 Addressing寻址&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[290,291]},&quot;v&quot;:&quot;MAC地址(or LAN or physical or Ethernet) 身份证号一样独一无二&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[292,293]},&quot;v&quot;:&quot;功能&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[294,295]},&quot;v&quot;:&quot;在&amp;quot;本地&amp;quot;使用，将帧从一个接口获取到另一个物理连接的接口（同一网络，在IP寻址意义上）（同一局域网）&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[296,297]},&quot;v&quot;:&quot;48 位（12位16进制） MAC 地址（对于大多数 LAN）刻录在 NIC ROM 中（写在主机的配置文件中），有时软件也可设置&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[297,298]},&quot;v&quot;:&quot;每一个链路层端口都有一个mac地址&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[298,299]},&quot;v&quot;:&quot;由 IEEE 管理的 MAC 地址分配&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[299,300]},&quot;v&quot;:&quot;制造商购买部分MAC地址空间（以确保唯一性）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[300,301]},&quot;v&quot;:&quot;MAC 平面地址 ➜ 便携性&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[302,303]},&quot;v&quot;:&quot;可以将局域网卡从一个局域网移动到另一个局域网&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[304,305]},&quot;v&quot;:&quot;IP 分层地址不可移植&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[306,307]},&quot;v&quot;:&quot;取决于节点附加到的 IP 子网&quot;}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[308,309]},&quot;v&quot;:&quot;ARP协议（Address Resolution Protocol）地址解析协议&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[310,311]},&quot;v&quot;:&quot;LAN 上的每个 IP 节点（主机、路由器）都有 ARP 表&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[311,312]},&quot;v&quot;:&quot;ARP 表：某些 LAN 节点的 IP/MAC 地址映射&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[313,314]},&quot;v&quot;:&quot;&amp;lt; IP 地址;MAC 地址;TTL&amp;gt;&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[315,316]},&quot;v&quot;:&quot;TTL（Time To Live生存时间）：地址映射将被遗忘的时间（通常为 20 分钟）&quot;}]}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[317,318]},&quot;v&quot;:&quot;同一个局域网下查询&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[319,320]},&quot;v&quot;:&quot;A 希望将数据报发送到 B，而 B 的 MAC 地址不在 A 的 ARP 表中。&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[320,321]},&quot;v&quot;:&quot;A （广播broadcasts） ARP 查询数据包（其中包含A的mac地址），其中包含 B 的 IP 地址&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[322,323]},&quot;v&quot;:&quot;Dest MAC 地址 = FF-FF-FF-FF-FF-FF-FF&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[323,324]},&quot;v&quot;:&quot;LAN 上的所有计算机都接收 ARP 查询&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[325,326]},&quot;v&quot;:&quot;B 接收 ARP 数据包，使用其 （B 的） MAC 地址回复 A（ARP应答包）&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[327,328]},&quot;v&quot;:&quot;发送到 A 的 MAC 地址的帧（单播）&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[329,330]},&quot;v&quot;:&quot;在其 ARP 表中缓存（保存）IP 到 MAC 地址对，直到信息变旧（超时times out ），过期后需要重新问&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[331,332]},&quot;v&quot;:&quot;软状态soft state：除非刷新，否则超时（消失）的信息&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[333,334]},&quot;v&quot;:&quot;ARP 是&amp;quot;即插即用（plug-and-play）&amp;quot;的：&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[335,336]},&quot;v&quot;:&quot;节点创建其 ARP 表，无需网络管理员干预（intervention）&quot;}]}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[337,338]},&quot;v&quot;:&quot;寻址Addressing：路由到另一个 LAN（跨局域）（A通过R和B发数据报）&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[339,340]},&quot;v&quot;:&quot;问题：&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[341,342]},&quot;v&quot;:&quot;专注于寻址 – 在 IP（数据报）和 MAC 层（帧）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[342,343]},&quot;v&quot;:&quot;A 知道 B 的 IP 地址&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[343,344]},&quot;v&quot;:&quot;A 怎么知道第一跳路由器 R 的 IP 地址（由路由协议完成&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[344,345]},&quot;v&quot;:&quot;A怎么知道 R 的 MAC 地址（同一个局域网可以问&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[346,347]},&quot;v&quot;:&quot;步骤&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[348,349]},&quot;v&quot;:&quot;A 使用 IP 源 A（目标 B）创建 IP 数据报&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[349,350]},&quot;v&quot;:&quot;A 创建链路层帧，将 R 的 MAC 地址作为目标地址，帧包含 A 到 B IP 数据报&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[350,351]},&quot;v&quot;:&quot;R 使用 IP 源 A（目标 B）转发数据报&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[351,352]},&quot;v&quot;:&quot;R 创建链路层帧，其中 B 的 MAC 地址为 dest，帧包含 A 到 B 的 IP 数据报&quot;}]}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:2,&quot;p&quot;:{&quot;lines&quot;:[353,354]},&quot;v&quot;:&quot;2.5 Ethernet以太网&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[355,356]},&quot;v&quot;:&quot;&amp;quot;占主导地位dominant&amp;quot;的有线局域网技术：&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[357,358]},&quot;v&quot;:&quot;便宜$20 100Mbs！&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[358,359]},&quot;v&quot;:&quot;首次广泛使用局域网技术&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[359,360]},&quot;v&quot;:&quot;比令牌 LAN 和 ATM 更简单、更便宜&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[360,361]},&quot;v&quot;:&quot;跟上速度赛速：10 Mbps – 10 Gbps&quot;}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[362,363]},&quot;v&quot;:&quot;物理拓扑：physical topology&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[364,365]},&quot;v&quot;:&quot;bus: popular through mid 90s&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[366,367]},&quot;v&quot;:&quot;all nodes in same collision domain (can collide with each other)&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[368,369]},&quot;v&quot;:&quot;star: prevails today现在占上风&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[370,371]},&quot;v&quot;:&quot;active switch in center&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[371,372]},&quot;v&quot;:&quot;each “spoke分支” runs a (separate) Ethernet protocol (nodes do not collide冲突 with each other)&quot;}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[373,374]},&quot;v&quot;:&quot;以太网帧的结构v1&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[375,377]},&quot;v&quot;:&quot;7 个字节，模式为10101010，后跟一个字节，最终模式：10101011<br>\n用于同步接收机、发送器时钟速率&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[377,378]},&quot;v&quot;:&quot;Addresses: 6 byte source, destination MAC addresses&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[379,380]},&quot;v&quot;:&quot;如果适配器接收具有匹配目标地址或广播地址（例如ARP数据包）的帧，则它将帧中的数据传递到网络层协议&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[380,381]},&quot;v&quot;:&quot;否则，适配器将丢弃帧&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[382,383]},&quot;v&quot;:&quot;Type: 表示（indicate）更高层的协议（主要是 IP，但可能支持其他协议，如 Novell IPX 和 AppleTalk）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[383,384]},&quot;v&quot;:&quot;CRC: 在接收器处检查，如果检测到错误，则浅丢一下帧（以太网中32位，4个字节）&quot;}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[385,386]},&quot;v&quot;:&quot;以太网 V2 的 MAC 帧格式（数据字段的正式名称是 MAC 客户数据字段，最小长度 64 字节-18 字节的首部和尾部 = 数据字段的最小长度 ）&quot;},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[387,388]},&quot;v&quot;:&quot;无效的 MAC 帧&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[389,390]},&quot;v&quot;:&quot;帧的长度不是整数个字节；&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[390,391]},&quot;v&quot;:&quot;用收到的帧检验序列 FCS 查出有差错；&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[391,392]},&quot;v&quot;:&quot;数据字段的长度不在 46 ~ 1500 字节之间。&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[392,393]},&quot;v&quot;:&quot;有效的 MAC 帧长度为 64 ~ 1518 字节之间。&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[393,394]},&quot;v&quot;:&quot;对于检查出的无效 MAC 帧就简单地丢弃。以太网不负责重传丢弃的帧（以太网不提供有效传输）。&quot;}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[395,396]},&quot;v&quot;:&quot;Unreliable, connectionless service&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[397,398]},&quot;v&quot;:&quot;无连接：发送和接收 NIC 之间无需握手&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[398,399]},&quot;v&quot;:&quot;不可靠：接收 NIC 不会向发送 NIC 发送确认或 nack&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[400,401]},&quot;v&quot;:&quot;仅当初始发送方使用更高层 rdt（例如 TCP）时，才会恢复丢弃帧中的数据，否则丢弃的数据将丢失&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[402,403]},&quot;v&quot;:&quot;以太网的 MAC 协议：无插槽 CSMA/CD，带二进制退避&quot;}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[404,405]},&quot;v&quot;:&quot;Ethernet uses  CSMA/CD&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[406,407]},&quot;v&quot;:&quot;carrier sense载波监听&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[407,408]},&quot;v&quot;:&quot;collision detection冲突检测&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[409,410]},&quot;v&quot;:&quot;<strong>处理采用指数退避Exponential Backoff：</strong>&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[411,412]},&quot;v&quot;:&quot;目标：使重新传输尝试适应估计的当前负载&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[413,414]},&quot;v&quot;:&quot;负载重：随机等待会更长&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[415,416]},&quot;v&quot;:&quot;第一次冲突：从 {0，1} 中选择 K;延迟为K·512位传输次数&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[416,417]},&quot;v&quot;:&quot;第二次冲突后：从 {0，1，2，3} 中选择 K...&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[417,418]},&quot;v&quot;:&quot;在十次冲突后，从 {0，1，2，3，4,...,1023} 中选择 K&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[418,419]},&quot;v&quot;:&quot;当重传达 16 次仍不能成功时即丢弃该帧，并向高层报告。&quot;}]}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[420,421]},&quot;v&quot;:&quot;在尝试重新传输之前，适配器会等待随机时间，即随机访问&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[421,422]},&quot;v&quot;:&quot;无时隙&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[422,423]},&quot;v&quot;:&quot;算法实现&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[424,425]},&quot;v&quot;:&quot;&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[424,425],&quot;index&quot;:1},&quot;v&quot;:&quot;1. 网卡（NIC）从网络层接收数据报，创建帧&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[425,426]},&quot;v&quot;:&quot;&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[425,426],&quot;index&quot;:2},&quot;v&quot;:&quot;2. 如果 NIC 检测到通道空闲，则开始帧传输。如果 NIC 检测到信道繁忙，则等待通道空闲（idle），然后进行传输。&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[426,427]},&quot;v&quot;:&quot;&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[426,427],&quot;index&quot;:3},&quot;v&quot;:&quot;3. 如果网卡传输整个帧而没检测到另一个传输，则网卡是用帧完成的！&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[427,428]},&quot;v&quot;:&quot;&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[427,428],&quot;index&quot;:4},&quot;v&quot;:&quot;4. 如果 NIC 在传输时检测到另一个传输，则中止并发送卡纸信号&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[428,433]},&quot;v&quot;:&quot;&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;ordered_list&quot;,&quot;d&quot;:8,&quot;p&quot;:{&quot;lines&quot;:[428,430],&quot;start&quot;:5},&quot;v&quot;:&quot;&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[428,429],&quot;index&quot;:5},&quot;v&quot;:&quot;5. 中止后，NIC 进入二进制（指数）退避：&quot;}]},{&quot;t&quot;:&quot;bullet_list&quot;,&quot;d&quot;:8,&quot;p&quot;:{&quot;lines&quot;:[430,433]},&quot;v&quot;:&quot;&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[430,431]},&quot;v&quot;:&quot;在第 m 次冲突后，NIC 从 {0，1，2， ...， 2m-1} 中随机选择 K。网卡等待 K·512 位时间，返回步骤 2&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[431,432]},&quot;v&quot;:&quot;更长的回退间隔，更多的碰撞&quot;}]}]}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[433,434]},&quot;v&quot;:&quot;效率&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[435,436]},&quot;v&quot;:&quot;Tprop = max prop between 2 nodes in LAN最远两个节点间的传播时延&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[436,437]},&quot;v&quot;:&quot;Ttrans = time to transmit max-size frame最大帧的发送时延&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[437,438]},&quot;v&quot;:&quot;Efficiency goes to 1 as tprop goes to 0&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[438,439]},&quot;v&quot;:&quot;Goes to 1 as ttrans goes to infinity传播时延无限大时效率高？&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[439,440]},&quot;v&quot;:&quot;Much better than ALOHA, but still decentralized分散, simple, and cheap&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[440,441]},&quot;v&quot;:&quot;效率公式显示，帧越多效率越高，带宽足够低效率高，但这是不可能的，就像慢慢走，但是一直在走着&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[442,443]},&quot;v&quot;:&quot;使用 CSMA/CD 协议的以太网不能进行全双工通信而只能进行双向交替通信（半双工通信）。&quot;}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[444,445]},&quot;v&quot;:&quot;节点连接到集线器（hub）：&amp;quot;星形拓扑&amp;quot;;节点和集线器之间的最大距离为 100 m&quot;}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:2,&quot;p&quot;:{&quot;lines&quot;:[446,447]},&quot;v&quot;:&quot;2.6 Interconnections &amp;amp; VLAN&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[448,449]},&quot;v&quot;:&quot;Interconnections&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;bullet_list&quot;,&quot;d&quot;:4,&quot;p&quot;:{&quot;lines&quot;:[450,494]},&quot;v&quot;:&quot;&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[450,451]},&quot;v&quot;:&quot;中继器repeater/relay: （物理层）对信号整形放大&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[451,452]},&quot;v&quot;:&quot;Manchester encoding（物理层）改变编码方式，采用高低电平变化表示01，允许发送节点和接收节点中的时钟彼此同步，无需在节点间使用集中的全局时钟&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[452,453]},&quot;v&quot;:&quot;转换器Translater/transformer：信号转换的中继器（两边类型不一样）&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[454,455]},&quot;v&quot;:&quot;如光电转换, 10base-2转换到10BaseT&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[456,457]},&quot;v&quot;:&quot;集线器hub: （物理层）（多端口中继器）&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[458,459]},&quot;v&quot;:&quot;集线器是中继器的一种形式，也称为多端口中继器。&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[459,460]},&quot;v&quot;:&quot;不检测冲突（由端节点检测）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[460,461]},&quot;v&quot;:&quot;无缓存&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[461,462]},&quot;v&quot;:&quot;可能会让网络很混乱&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[462,463]},&quot;v&quot;:&quot;5-4-3-2-1 Rule&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[464,465]},&quot;v&quot;:&quot;5：允许5个网段，每网段最大长度100米。&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[465,466]},&quot;v&quot;:&quot;4：在同一信道上允许连接4个中继器或集线器。&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[466,467]},&quot;v&quot;:&quot;3：在其中的三个网段上可以增加节点。&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[467,468]},&quot;v&quot;:&quot;2：在另外两个网段上，除做中继器链路外，不能接任何节点。&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[468,469]},&quot;v&quot;:&quot;1：上述将组建一个大型的冲突域，最大站点数1024，网络直径达2500米。&quot;}]}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[470,471]},&quot;v&quot;:&quot;交换机switch: （链路层）前身为网桥&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[472,473]},&quot;v&quot;:&quot;交换机是网桥的一种形式，也称为多端口网桥（网桥连接的为两个网络）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[473,474]},&quot;v&quot;:&quot;takes an active role链路层，可以存储转发，能选择性转发&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[475,476]},&quot;v&quot;:&quot;存储，转发以太网帧&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[476,477]},&quot;v&quot;:&quot;检查传入帧的 MAC 地址，在要在分段上转发帧时有选择地将帧转发到一个或多个传出链路，使用 CSMA/CD 访问分段&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[478,479]},&quot;v&quot;:&quot;透明transparent&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[480,481]},&quot;v&quot;:&quot;主机不知道交换机的存在&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[482,483]},&quot;v&quot;:&quot;即插即用，自学plug-and-play, self-learning&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[484,485]},&quot;v&quot;:&quot;交换机不需要配置configured&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[486,487]},&quot;v&quot;:&quot;多个同时传输multiple simultaneous transmissions时：每个传入链路上使用以太网协议，但没有冲突;全双工，每个链路都是其自身的冲突域（隔离冲突）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[487,488]},&quot;v&quot;:&quot;Switch forwarding table交换机转发表：一个交换机一个&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[489,490]},&quot;v&quot;:&quot;（主机的 MAC 地址、到达主机的接口、时间戳）看起来像一个路由表！&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[491,492]},&quot;v&quot;:&quot;frame filtering/forwarding帧过滤/转发，当帧到达交换机时&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[493,494],&quot;index&quot;:1},&quot;v&quot;:&quot;1. record incoming link, MAC address of sending host&quot;}]}]}]},{&quot;t&quot;:&quot;ordered_list&quot;,&quot;d&quot;:4,&quot;p&quot;:{&quot;lines&quot;:[494,513],&quot;start&quot;:2},&quot;v&quot;:&quot;&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[494,495],&quot;index&quot;:2},&quot;v&quot;:&quot;2. index switch table using MAC destination address&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[495,500],&quot;index&quot;:3},&quot;v&quot;:&quot;3. if entry found for destination\u000b  then {<br>\nif destination on segment from which frame arrived\u000b       then drop frame<br>\nelse forward frame on interface indicated by entry<br>\n}<br>\nelse flood  /* forward on all interfaces except arriving  interface */&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[501,502]},&quot;v&quot;:&quot;Switches vs. routers&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[503,504]},&quot;v&quot;:&quot;两者都是存储和转发：&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[505,506]},&quot;v&quot;:&quot;路由器：网络层设备（检查网络层标头）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[506,507]},&quot;v&quot;:&quot;交换机：链路层设备（检查链路层标头）&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[508,509]},&quot;v&quot;:&quot;两者都有转发表：&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[510,511]},&quot;v&quot;:&quot;路由器：使用路由算法的计算表，IP 地址&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:11,&quot;p&quot;:{&quot;lines&quot;:[511,512]},&quot;v&quot;:&quot;交换机：使用 flooding, learning, MAC addresses学习转发&quot;}]}]}]}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[513,514]},&quot;v&quot;:&quot;VLANs: motivation虚拟局域网&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[515,516]},&quot;v&quot;:&quot;Port-based VLAN基于端口的虚拟局域网&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[517,518]},&quot;v&quot;:&quot;流量隔离traffic isolationn&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[518,519]},&quot;v&quot;:&quot;动态成员资格：可以在 VLAN 之间动态分配端口&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[519,520]},&quot;v&quot;:&quot;VLAN 之间的转发：通过路由完成（就像使用单独的交换机一样）&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[521,522]},&quot;v&quot;:&quot;在实践中，供应商销售组合交换机和路由器&quot;}]}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[523,524]},&quot;v&quot;:&quot;VLANS spanning multiple switches跨多个交换机的 VLAN&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[525,526]},&quot;v&quot;:&quot;中继端口trunk port：在通过多个物理交换机定义的 VLAN 之间传输帧&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[527,528]},&quot;v&quot;:&quot;交换机之间在 VLAN 中转发的帧不能是普通(vanilla)的 802.1 帧（必须携带 VLAN ID 信息info）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[528,529]},&quot;v&quot;:&quot;802.1q 协议为中继端口之间转发的帧添加/删除了其他标头字段&quot;}]}]}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:2,&quot;p&quot;:{&quot;lines&quot;:[530,531]},&quot;v&quot;:&quot;2.7 PPP&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[532,533]},&quot;v&quot;:&quot;Point to Point Data Link Control点对点数据链路控制&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[534,535]},&quot;v&quot;:&quot;一个发送方，一个接收方，一个链路：比广播链路更容易：&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[536,537]},&quot;v&quot;:&quot;无媒体访问控制&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[537,538]},&quot;v&quot;:&quot;无需显式 MAC 寻址&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[539,540]},&quot;v&quot;:&quot;流行的点对点DLC协议：&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[541,542]},&quot;v&quot;:&quot;PPP（点对点协议）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[542,543]},&quot;v&quot;:&quot;HDLC：高级数据链路控制&quot;}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[544,545]},&quot;v&quot;:&quot;数据链路层传送的是帧（在数据链路层，规程=协议）&quot;},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[546,547]},&quot;v&quot;:&quot;数据链路层的三个基本问题&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[548,549]},&quot;v&quot;:&quot;(1) 封装成帧&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[550,551]},&quot;v&quot;:&quot;封装成帧(framing)就是在一段数据的前后分别添加首部和尾部，然后就构成了一个帧。确定帧的界限&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[551,552]},&quot;v&quot;:&quot;首部和尾部的一个重要作用就是进行❗帧定界。&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[553,554]},&quot;v&quot;:&quot;(2) 透明传输&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[555,556]},&quot;v&quot;:&quot;发送端的数据链路层在数据中出现控制字符“SOH” ”(其十六进制编码是 01)或“EOT” (其十六进制编码是 04)的前面插入一个转义字符“ESC”(其十六进制编码是 1B)。&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[556,557]},&quot;v&quot;:&quot;字节填充(byte stuffing)或字符填充(character stuffing)——接收端的数据链路层在将数据送往网络层之前删除插入的转义字符。&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[557,558]},&quot;v&quot;:&quot;如果转义字符也出现数据当中，那么应在转义字符前面插入一个转义字符。当接收端收到连续的两个转义字符时，就删除其中前面的一个。&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[559,560]},&quot;v&quot;:&quot;(3) 差错控制&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[561,562]},&quot;v&quot;:&quot;在传输过程中可能会产生比特差错：1 可能会变成 0 而 0 也可能变成 1。&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[562,563]},&quot;v&quot;:&quot;在一段时间内，传输错误的比特占所传输比特总数的比率称为误码率 BER (Bit Error Rate)。&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[564,565]},&quot;v&quot;:&quot;误码率与信噪比有很大的关系。&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[566,567]},&quot;v&quot;:&quot;为了保证数据传输的可靠性，在计算机网络传输数据时，必须采用各种差错检测措施。&quot;}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[568,569]},&quot;v&quot;:&quot;PPP协议的三个组成部分&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[570,571]},&quot;v&quot;:&quot;一个将 IP 数据报封装到串行链路的方法。&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[572,573]},&quot;v&quot;:&quot;数据包成帧：将网络层数据报封装在数据链路帧中&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[574,575]},&quot;v&quot;:&quot;同时承载任何网络层协议（而不仅仅是IP）的网络层数据&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:9,&quot;p&quot;:{&quot;lines&quot;:[575,577]},&quot;v&quot;:&quot;向上解复用（demultiplex upwards<br>\n）的能力&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[578,579]},&quot;v&quot;:&quot;位透明度：必须在数据字段中携带任何位模式&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[579,581]},&quot;v&quot;:&quot;错误检测（无校正）<br>\nerror detection (no correction)&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[581,582]},&quot;v&quot;:&quot;连接活性connection liveness：检测，信号链路故障到网络层&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[582,583]},&quot;v&quot;:&quot;网络层地址协商：端点可以学习/配置彼此的网络地址&quot;}]},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[584,585]},&quot;v&quot;:&quot;链路控制协议 LCP (Link Control Protocol)。&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[585,586]},&quot;v&quot;:&quot;网络控制协议 NCP (Network Control Protocol)。&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[586,587]},&quot;v&quot;:&quot;PPP不要求&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[588,589]},&quot;v&quot;:&quot;no error correction/recovery不错误检测&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[589,590]},&quot;v&quot;:&quot;no flow control没有流控制&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[590,591]},&quot;v&quot;:&quot;out of order delivery OK 乱序也可以传输&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[591,592]},&quot;v&quot;:&quot;no need to support multipoint links (e.g., polling)无需支持多点链接（如，轮询）&quot;}]}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[593,594]},&quot;v&quot;:&quot;PPP Data Frame&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[597,598]},&quot;v&quot;:&quot;Flag: delimiter (framing)分隔符（框架）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[598,599]},&quot;v&quot;:&quot;Address:  does nothing (only one option)不执行任何操作（只有一个选项）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[599,600]},&quot;v&quot;:&quot;Control: 什么都不做;未来可能的多个控制领域&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[600,601]},&quot;v&quot;:&quot;Protocol:上层协议，将帧传送到哪个帧（例如，PPP-LCP，IPCP等）&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[601,602]},&quot;v&quot;:&quot;info: 正在承载的上层数据&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:7,&quot;p&quot;:{&quot;lines&quot;:[602,603]},&quot;v&quot;:&quot;check:  cyclic redundancy check for error detection用于错误检测的循环冗余检查&quot;}]},{&quot;t&quot;:&quot;heading&quot;,&quot;d&quot;:3,&quot;p&quot;:{&quot;lines&quot;:[604,605]},&quot;v&quot;:&quot;PPP协议的工作状态&quot;,&quot;c&quot;:[{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[606,607]},&quot;v&quot;:&quot;当用户拨号接入 ISP 时，路由器的调制解调器对拨号做出确认，并建立一条物理连接。&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[607,608]},&quot;v&quot;:&quot;PC 机向路由器发送一系列的 LCP 分组（封装成多个 PPP 帧）。&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[608,609]},&quot;v&quot;:&quot;这些分组及其响应选择一些 PPP 参数，和进行网络层配置，NCP 给新接入的 PC机分配一个临时的 IP 地址，使 PC 机成为因特网上的一个主机。&quot;},{&quot;t&quot;:&quot;list_item&quot;,&quot;d&quot;:5,&quot;p&quot;:{&quot;lines&quot;:[609,610]},&quot;v&quot;:&quot;通信完毕时，NCP 释放网络层连接，收回原来分配出去的 IP 地址。接着，LCP 释放数据链路层连接。最后释放的是物理层的连接。&quot;}]}]}]}">
 </svg></div>
 
-
-                
-            </div>
-            <hr/>
-
-            
-
-    <div class="reprint" id="reprint-statement">
-        
-            <div class="reprint__author">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-user">
-                        文章作者:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">今晚不熬夜</a>
-                </span>
-            </div>
-            <div class="reprint__type">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-link">
-                        文章链接:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    <a href="http://example.com/2023/01/11/di-er-zhang-lian-lu-ceng-he-ju-yu-wang/">http://example.com/2023/01/11/di-er-zhang-lian-lu-ceng-he-ju-yu-wang/</a>
-                </span>
-            </div>
-            <div class="reprint__notice">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-copyright">
-                        版权声明:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    本博客所有文章除特別声明外，均采用
-                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
-                    许可协议。转载请注明来源
-                    <a href="/about" target="_blank">今晚不熬夜</a>
-                    !
-                </span>
-            </div>
-        
-    </div>
-
-    <script async defer>
-      document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
-        M.toast({html: toastHTML})
-      });
-
-      function navToReprintStatement() {
-        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
-      }
-    </script>
-
-
-
-            <div class="tag_share" style="display: block;">
-                <div class="post-meta__tag-list" style="display: inline-block;">
-                    
-                        <div class="article-tag">
-                            
-                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                                    <span class="chip bg-color">计算机网络</span>
-                                </a>
-                            
-                        </div>
-                    
-                </div>
-                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
-<div id="article-share">
-
-    
-
-    
-
-</div>
-
-                </div>
-            </div>
-            
-                <div id="reward">
-    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
-
-    <!-- Modal Structure -->
-    <div id="rewardModal" class="modal">
-        <div class="modal-content">
-            <a class="close modal-close"><i class="fas fa-times"></i></a>
-            <h4 class="reward-title">你的赏识是我前进的动力</h4>
-            <div class="reward-content">
-                <div class="reward-tabs">
-                    <ul class="tabs row">
-                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
-                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
-                    </ul>
-                    <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
-                    </div>
-                    <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    $(function () {
-        $('.tabs').tabs();
-    });
-</script>
-
-            
-        </div>
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-<article id="prenext-posts" class="prev-next articles">
-    <div class="row article-row">
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
-            <div class="card">
-                <a href="/2023/01/11/di-san-zhang-wang-luo-ceng/">
-                    <div class="card-image">
-                        
-                        <img src="/medias/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.png" class="responsive-img" alt="第三章、网络层">
-                        
-                        <span class="card-title">第三章、网络层</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-01-11
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    笔记
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                        <span class="chip bg-color">计算机网络</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2023/01/11/di-yi-zhang-ji-suan-ji-wang-luo-jie-shao/">
-                    <div class="card-image">
-                        
-                        <img src="/medias/images/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.png" class="responsive-img" alt="第一章、介绍introduction">
-                        
-                        <span class="card-title">第一章、介绍introduction</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-11
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    笔记
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                        <span class="chip bg-color">计算机网络</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-    </div>
-</article>
-
-</div>
-
-
-
-<!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
-
-
-  <!-- 是否加载使用自带的 prismjs. -->
-  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
-
-
-<!-- 代码语言 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
-
-
-<!-- 代码块复制 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
-
-
-<!-- 代码块收缩 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
-
-
-
-    </div>
-    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
-        <div class="toc-widget card" style="background-color: white;">
-            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
-            <div id="toc-content"></div>
-        </div>
-    </div>
-</div>
-
-<!-- TOC 悬浮按钮. -->
-
-<div id="floating-toc-btn" class="hide-on-med-and-down">
-    <a class="btn-floating btn-large bg-color">
-        <i class="fas fa-list-ul"></i>
-    </a>
-</div>
-
-
-<script src="/libs/tocbot/tocbot.min.js"></script>
-<script>
-    $(function () {
-        tocbot.init({
-            tocSelector: '#toc-content',
-            contentSelector: '#articleContent',
-            headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('0'),
-            headingSelector: 'h2, h3, h4'
-        });
-
-        // Set scroll toc fixed.
-        let tocHeight = parseInt($(window).height() * 0.4 - 64);
-        let $tocWidget = $('.toc-widget');
-        $(window).scroll(function () {
-            let scroll = $(window).scrollTop();
-            /* add post toc fixed. */
-            if (scroll > tocHeight) {
-                $tocWidget.addClass('toc-fixed');
-            } else {
-                $tocWidget.removeClass('toc-fixed');
-            }
-        });
-
-        
-        /* 修复文章卡片 div 的宽度. */
-        let fixPostCardWidth = function (srcId, targetId) {
-            let srcDiv = $('#' + srcId);
-            if (srcDiv.length === 0) {
-                return;
-            }
-
-            let w = srcDiv.width();
-            if (w >= 450) {
-                w = w + 21;
-            } else if (w >= 350 && w < 450) {
-                w = w + 18;
-            } else if (w >= 300 && w < 350) {
-                w = w + 16;
-            } else {
-                w = w + 14;
-            }
-            $('#' + targetId).width(w);
-        };
-
-        // 切换TOC目录展开收缩的相关操作.
-        const expandedClass = 'expanded';
-        let $tocAside = $('#toc-aside');
-        let $mainContent = $('#main-content');
-        $('#floating-toc-btn .btn-floating').click(function () {
-            if ($tocAside.hasClass(expandedClass)) {
-                $tocAside.removeClass(expandedClass).hide();
-                $mainContent.removeClass('l9');
-            } else {
-                $tocAside.addClass(expandedClass).show();
-                $mainContent.addClass('l9');
-            }
-            fixPostCardWidth('artDetail', 'prenext-posts');
-        });
-        
-    });
-</script>
-
-    
-
-</main>
-
-
-
-
-    <footer class="page-footer bg-color">
-    
-
-    <div class="container row center-align"
-         style="margin-bottom: 0px !important;">
-        <div class="col s12 m8 l8 copy-right">
-            Copyright&nbsp;&copy;
-            
-                <span id="year">2023</span>
-            
-            <a href="/about" target="_blank">今晚不熬夜</a>
-            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
-            
-                <span id="translate">|&nbsp;繁/简：</span><a id="translateLink" href="javascript:translatePage();">繁</a>
-            
-            <br>
-            
-                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">79.7k</span>
-            
-            
-            
-                
-            
-            
-                <span id="busuanzi_container_site_pv">
-                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
-                    <span id="busuanzi_value_site_pv" class="white-color"></span>
-            </span>
-            
-            
-                <span id="busuanzi_container_site_uv">
-                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
-                    <span id="busuanzi_value_site_uv" class="white-color"></span>
-            </span>
-            
-            <br>
-
-            <!-- 运行天数提醒. -->
-            
-            <br>
-            
-        </div>
-        <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/quanquan170" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
-    </a>
-
-
-
-
-
-
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1480105462" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1480105462" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
-
-
-
-
-
-
-
-</div>
-    </div>
-</footer>
-
-<div class="progress-bar"></div>
-
-
-    <!-- 搜索遮罩框 -->
-<div id="searchModal" class="modal">
-    <div class="modal-content">
-        <div class="search-header">
-            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
-            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
-                   class="search-input">
-        </div>
-        <div id="searchResult"></div>
-    </div>
-</div>
-
-<script type="text/javascript">
-$(function () {
-    var searchFunc = function (path, search_id, content_id) {
-        'use strict';
-        $.ajax({
-            url: path,
-            dataType: "xml",
-            success: function (xmlResponse) {
-                // get the contents from search data
-                var datas = $("entry", xmlResponse).map(function () {
-                    return {
-                        title: $("title", this).text(),
-                        content: $("content", this).text(),
-                        url: $("url", this).text()
-                    };
-                }).get();
-                var $input = document.getElementById(search_id);
-                var $resultContent = document.getElementById(content_id);
-                $input.addEventListener('input', function () {
-                    var str = '<ul class=\"search-result-list\">';
-                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                    $resultContent.innerHTML = "";
-                    if (this.value.trim().length <= 0) {
-                        return;
-                    }
-                    // perform local searching
-                    datas.forEach(function (data) {
-                        var isMatch = true;
-                        var data_title = data.title.trim().toLowerCase();
-                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
-                        var data_url = data.url;
-                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
-                        var index_title = -1;
-                        var index_content = -1;
-                        var first_occur = -1;
-                        // only match artiles with not empty titles and contents
-                        if (data_title !== '' && data_content !== '') {
-                            keywords.forEach(function (keyword, i) {
-                                index_title = data_title.indexOf(keyword);
-                                index_content = data_content.indexOf(keyword);
-                                if (index_title < 0 && index_content < 0) {
-                                    isMatch = false;
-                                } else {
-                                    if (index_content < 0) {
-                                        index_content = 0;
-                                    }
-                                    if (i === 0) {
-                                        first_occur = index_content;
-                                    }
-                                }
-                            });
-                        }
-                        // show search results
-                        if (isMatch) {
-                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
-                            var content = data.content.trim().replace(/<[^>]+>/g, "");
-                            if (first_occur >= 0) {
-                                // cut out 100 characters
-                                var start = first_occur - 20;
-                                var end = first_occur + 80;
-                                if (start < 0) {
-                                    start = 0;
-                                }
-                                if (start === 0) {
-                                    end = 100;
-                                }
-                                if (end > content.length) {
-                                    end = content.length;
-                                }
-                                var match_content = content.substr(start, end);
-                                // highlight all keywords
-                                keywords.forEach(function (keyword) {
-                                    var regS = new RegExp(keyword, "gi");
-                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
-                                });
-
-                                str += "<p class=\"search-result\">" + match_content + "...</p>"
-                            }
-                            str += "</li>";
-                        }
-                    });
-                    str += "</ul>";
-                    $resultContent.innerHTML = str;
-                });
-            }
-        });
-    };
-
-    searchFunc('/search.xml', 'searchInput', 'searchResult');
-});
-</script>
-
-    <!-- 白天和黑夜主题 -->
-<div class="stars-con">
-    <div id="stars"></div>
-    <div id="stars2"></div>
-    <div id="stars3"></div>  
-</div>
-
-<script>
-    function switchNightMode() {
-        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
-        setTimeout(function () {
-            $('body').hasClass('DarkMode') 
-            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
-            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
-            
-            setTimeout(function () {
-            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
-                $(this).remove()
-            })
-            }, 2e3)
-        })
-    }
-</script>
-
-    <!-- 回到顶部按钮 -->
-<div id="backTop" class="top-scroll">
-    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fas fa-arrow-up"></i>
-    </a>
-</div>
-
-
-    <script src="/libs/materialize/materialize.min.js"></script>
-    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="/libs/aos/aos.js"></script>
-    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="/js/matery.js"></script>
-
-    
-
-    
-        <script type="text/javascript" src="/js/tw_cn.js"></script>
-        <script type="text/javascript">
-          var defaultEncoding = 2; //网站编写字体是否繁体，1-繁体，2-简体
-          var translateDelay = 0; //延迟时间,若不在前, 要设定延迟翻译时间, 如100表示100ms,默认为0
-          var cookieDomain = "http://example.com"; //Cookie地址, 一定要设定, 通常为你的网址
-          var msgToTraditionalChinese = "繁"; //此处可以更改为你想要显示的文字
-          var msgToSimplifiedChinese = "简"; //同上，但两处均不建议更改
-          var translateButtonId = "translateLink"; //默认互换id
-          translateInitilization();
-        </script>
-    
-    
-    
-
-    <!-- 雪花特效 -->
-    
-
-    <!-- 鼠标星星特效 -->
-    
-
-     
-        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
-        <script src="/libs/others/TencentCaptcha.js"></script>
-        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
-    
-
-    <!-- Baidu Analytics -->
-
-    <!-- Baidu Push -->
-
-<script>
-    (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
-
-    
-    
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
-    
-
-    
-
-    
-
-    <!--腾讯兔小巢-->
-    
-    
-
-    
-
-    
-
-    
-    <script src="/libs/instantpage/instantpage.js" type="module"></script>
-    
-
-<script src="/js/markmap.js"></script></body>
-
-</html>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">今晚不熬夜</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/01/11/di-er-zhang-lian-lu-ceng-he-ju-yu-wang/">http://example.com/2023/01/11/di-er-zhang-lian-lu-ceng-he-ju-yu-wang/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">今晚不熬夜's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/01/11/di-san-zhang-wang-luo-ceng/" title="第三章、网络层"><img class="cover" src="/img/background/bg_bggenerator_com%20(2).png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">第三章、网络层</div></div></a></div><div class="next-post pull-right"><a href="/2023/01/11/di-yi-zhang-ji-suan-ji-wang-luo-jie-shao/" title="第一章、介绍introduction"><img class="cover" src="/img/background/bg_bggenerator_com%20(2).png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">第一章、介绍introduction</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/01/11/di-yi-zhang-ji-suan-ji-wang-luo-jie-shao/" title="第一章、介绍introduction"><img class="cover" src="/img/background/bg_bggenerator_com%20(2).png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-11</div><div class="title">第一章、介绍introduction</div></div></a></div><div><a href="/2023/01/11/di-liu-zhang-ying-yong-ceng/" title="第六章、应用层"><img class="cover" src="/img/background/bg_bggenerator_com%20(2).png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-11</div><div class="title">第六章、应用层</div></div></a></div><div><a href="/2023/01/11/di-san-zhang-wang-luo-ceng/" title="第三章、网络层"><img class="cover" src="/img/background/bg_bggenerator_com%20(2).png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-11</div><div class="title">第三章、网络层</div></div></a></div><div><a href="/2023/01/29/ji-suan-ji-wang-luo-da-zuo-ye/" title="计算机网络大作业"><img class="cover" src="/img/background/bg_bggenerator_com%20(2).png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-29</div><div class="title">计算机网络大作业</div></div></a></div><div><a href="/2023/01/11/di-si-zhang-chuan-shu-ceng/" title="第四章、传输层"><img class="cover" src="/img/background/bg_bggenerator_com%20(2).png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-11</div><div class="title">第四章、传输层</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.svg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">今晚不熬夜</div><div class="author-info__description">努力且幸运</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/quanquan170"><i class="fab fa-github"></i><span>Github</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/quanquan170" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/1480105462@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/1480105462" target="_blank" title="QQ"><i class="fa-brands fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">来了都是缘分，祝你今天高兴</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%81%E9%93%BE%E8%B7%AF%E5%B1%82%E5%92%8C%E5%B1%80%E5%9F%9F%E7%BD%91"><span class="toc-text">第二章、链路层和局域网</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1%E4%BB%8B%E7%BB%8D%E5%92%8C%E9%93%BE%E8%B7%AF%E5%B1%82%E7%9A%84%E6%9C%8D%E5%8A%A1"><span class="toc-text">2.1介绍和链路层的服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AF%E8%AF%AD"><span class="toc-text">术语</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%B7%AF%E5%B1%82%E6%9C%8D%E5%8A%A1"><span class="toc-text">链路层服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%B7%AF%E5%B1%82%E5%AE%9E%E7%8E%B0%E4%BD%8D%E7%BD%AE"><span class="toc-text">链路层实现位置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2%E6%A0%A1%E9%AA%8C%E5%92%8C%E7%BA%A0%E6%AD%A3"><span class="toc-text">2.2校验和纠正</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#EDC%EF%BC%9AError-Detection-and-Correction-bits%E6%A3%80%E9%94%99%E7%BA%A0%E9%94%99%E7%A0%81%EF%BC%88%E4%B8%BA%E5%90%8E%E6%B7%BB%E5%8A%A0%E7%9A%84%E5%86%97%E4%BD%99%E6%95%B0%E6%8D%AE%EF%BC%89"><span class="toc-text">EDC：Error Detection and Correction bits检错纠错码（为后添加的冗余数据）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Parity-checking-%E5%A5%87%E5%81%B6%E4%BD%8D%E6%A0%A1%E9%AA%8C"><span class="toc-text">1.Parity checking(奇偶位校验)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Internet-checksum-%E6%A0%A1%E9%AA%8C%E5%92%8C"><span class="toc-text">2.Internet checksum(校验和)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Checksumming-Cyclic-Redundancy-Check"><span class="toc-text">3.Checksumming: Cyclic Redundancy Check</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE%E5%8D%8F%E8%AE%AE%EF%BC%88%E8%A7%A3%E5%86%B3%E5%85%B1%E4%BA%AB%E4%BF%A1%E9%81%93%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%89"><span class="toc-text">2.3 多路访问协议（解决共享信道的问题）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Multiple-Access-Links-and-Protocols%E5%A4%9A%E4%B8%AA%E8%AE%BF%E9%97%AE%E9%93%BE%E6%8E%A5%E5%92%8C%E5%8D%8F%E8%AE%AE%EF%BC%88%E4%B8%A4%E7%B1%BB%E8%BF%9E%E6%8E%A5%EF%BC%89"><span class="toc-text">Multiple Access Links and Protocols多个访问链接和协议（两类连接）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%B1%BB%E6%B3%95a-taxonomy"><span class="toc-text">分类法a taxonomy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cable-access-network%E6%9C%89%E7%BA%BF%E6%8E%A5%E5%85%A5%E7%BD%91%E7%BB%9C%EF%BC%9F%EF%BC%9F%EF%BC%9F"><span class="toc-text">Cable access network有线接入网络？？？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LAN-technologies%E5%B1%80%E5%9F%9F%E7%BD%91%E6%8A%80%E6%9C%AF%EF%BC%9F%EF%BC%9F%EF%BC%9F"><span class="toc-text">LAN technologies局域网技术？？？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%89%E7%94%A8%E6%9C%9F"><span class="toc-text">争用期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E7%9F%AD%E6%9C%89%E6%95%88%E5%B8%A7%E9%95%BF"><span class="toc-text">最短有效帧长</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%A7%E9%97%B4%E6%9C%80%E5%B0%8F%E9%97%B4%E9%9A%94"><span class="toc-text">帧间最小间隔</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-Addressing%E5%AF%BB%E5%9D%80"><span class="toc-text">2.4 Addressing寻址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MAC%E5%9C%B0%E5%9D%80-or-LAN-or-physical-or-Ethernet-%E8%BA%AB%E4%BB%BD%E8%AF%81%E5%8F%B7%E4%B8%80%E6%A0%B7%E7%8B%AC%E4%B8%80%E6%97%A0%E4%BA%8C"><span class="toc-text">MAC地址(or LAN or physical or Ethernet) 身份证号一样独一无二</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ARP%E5%8D%8F%E8%AE%AE%EF%BC%88Address-Resolution-Protocol%EF%BC%89%E5%9C%B0%E5%9D%80%E8%A7%A3%E6%9E%90%E5%8D%8F%E8%AE%AE"><span class="toc-text">ARP协议（Address Resolution Protocol）地址解析协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BB%E5%9D%80Addressing%EF%BC%9A%E8%B7%AF%E7%94%B1%E5%88%B0%E5%8F%A6%E4%B8%80%E4%B8%AA-LAN%EF%BC%88%E8%B7%A8%E5%B1%80%E5%9F%9F%EF%BC%89%EF%BC%88A%E9%80%9A%E8%BF%87R%E5%92%8CB%E5%8F%91%E6%95%B0%E6%8D%AE%E6%8A%A5%EF%BC%89"><span class="toc-text">寻址Addressing：路由到另一个 LAN（跨局域）（A通过R和B发数据报）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-Ethernet%E4%BB%A5%E5%A4%AA%E7%BD%91"><span class="toc-text">2.5 Ethernet以太网</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%9C%E5%8D%A0%E4%B8%BB%E5%AF%BC%E5%9C%B0%E4%BD%8Ddominant%E2%80%9D%E7%9A%84%E6%9C%89%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91%E6%8A%80%E6%9C%AF%EF%BC%9A"><span class="toc-text">“占主导地位dominant”的有线局域网技术：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%A9%E7%90%86%E6%8B%93%E6%89%91%EF%BC%9Aphysical-topology"><span class="toc-text">物理拓扑：physical topology</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A5%E5%A4%AA%E7%BD%91%E5%B8%A7%E7%9A%84%E7%BB%93%E6%9E%84v1"><span class="toc-text">以太网帧的结构v1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A5%E5%A4%AA%E7%BD%91-V2-%E7%9A%84-MAC-%E5%B8%A7%E6%A0%BC%E5%BC%8F%EF%BC%88%E6%95%B0%E6%8D%AE%E5%AD%97%E6%AE%B5%E7%9A%84%E6%AD%A3%E5%BC%8F%E5%90%8D%E7%A7%B0%E6%98%AF-MAC-%E5%AE%A2%E6%88%B7%E6%95%B0%E6%8D%AE%E5%AD%97%E6%AE%B5%EF%BC%8C%E6%9C%80%E5%B0%8F%E9%95%BF%E5%BA%A6-64-%E5%AD%97%E8%8A%82-18-%E5%AD%97%E8%8A%82%E7%9A%84%E9%A6%96%E9%83%A8%E5%92%8C%E5%B0%BE%E9%83%A8-x3D-%E6%95%B0%E6%8D%AE%E5%AD%97%E6%AE%B5%E7%9A%84%E6%9C%80%E5%B0%8F%E9%95%BF%E5%BA%A6-%EF%BC%89"><span class="toc-text">以太网 V2 的 MAC 帧格式（数据字段的正式名称是 MAC 客户数据字段，最小长度 64 字节-18 字节的首部和尾部 &#x3D; 数据字段的最小长度 ）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E6%95%88%E7%9A%84-MAC-%E5%B8%A7"><span class="toc-text">无效的 MAC 帧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Unreliable-connectionless-service"><span class="toc-text">Unreliable, connectionless service</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ethernet-uses-CSMA-x2F-CD"><span class="toc-text">Ethernet uses  CSMA&#x2F;CD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8A%82%E7%82%B9%E8%BF%9E%E6%8E%A5%E5%88%B0%E9%9B%86%E7%BA%BF%E5%99%A8%EF%BC%88hub%EF%BC%89%EF%BC%9A%E2%80%9D%E6%98%9F%E5%BD%A2%E6%8B%93%E6%89%91%E2%80%9D-%E8%8A%82%E7%82%B9%E5%92%8C%E9%9B%86%E7%BA%BF%E5%99%A8%E4%B9%8B%E9%97%B4%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%9D%E7%A6%BB%E4%B8%BA-100-m"><span class="toc-text">节点连接到集线器（hub）：”星形拓扑”;节点和集线器之间的最大距离为 100 m</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-6-Interconnections-amp-VLAN"><span class="toc-text">2.6 Interconnections &amp; VLAN</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Interconnections"><span class="toc-text">Interconnections</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VLANs-motivation%E8%99%9A%E6%8B%9F%E5%B1%80%E5%9F%9F%E7%BD%91"><span class="toc-text">VLANs: motivation虚拟局域网</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-7-PPP"><span class="toc-text">2.7 PPP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Point-to-Point-Data-Link-Control%E7%82%B9%E5%AF%B9%E7%82%B9%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E6%8E%A7%E5%88%B6"><span class="toc-text">Point to Point Data Link Control点对点数据链路控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E4%BC%A0%E9%80%81%E7%9A%84%E6%98%AF%E5%B8%A7%EF%BC%88%E5%9C%A8%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%EF%BC%8C%E8%A7%84%E7%A8%8B-x3D-%E5%8D%8F%E8%AE%AE%EF%BC%89"><span class="toc-text">数据链路层传送的是帧（在数据链路层，规程&#x3D;协议）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E7%9A%84%E4%B8%89%E4%B8%AA%E5%9F%BA%E6%9C%AC%E9%97%AE%E9%A2%98"><span class="toc-text">数据链路层的三个基本问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PPP%E5%8D%8F%E8%AE%AE%E7%9A%84%E4%B8%89%E4%B8%AA%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="toc-text">PPP协议的三个组成部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PPP-Data-Frame"><span class="toc-text">PPP Data Frame</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PPP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%B7%A5%E4%BD%9C%E7%8A%B6%E6%80%81"><span class="toc-text">PPP协议的工作状态</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/03/05/file-yu-io/" title="File与IO"><div style="background: url(/img/imgs/File与IO.png)"></div></a><div class="content"><a class="title" href="/2023/03/05/file-yu-io/" title="File与IO">File与IO</a><time datetime="2023-03-05T11:58:37.000Z" title="发表于 2023-03-05 19:58:37">2023-03-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/05/java-guan-jian-zi-zong-jie-bu-chang-yong/" title="Java关键字学习（更新中）"><div style="background: url(/img/background/bg_bggenerator_com.jpg)"></div></a><div class="content"><a class="title" href="/2023/03/05/java-guan-jian-zi-zong-jie-bu-chang-yong/" title="Java关键字学习（更新中）">Java关键字学习（更新中）</a><time datetime="2023-03-05T11:58:37.000Z" title="发表于 2023-03-05 19:58:37">2023-03-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/04/jin-cheng-xian-cheng-fu-xi-pian/" title="进程、线程复习篇"><img src="/img/background/bg_bggenerator_com%20(2).png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="进程、线程复习篇"/></a><div class="content"><a class="title" href="/2023/02/04/jin-cheng-xian-cheng-fu-xi-pian/" title="进程、线程复习篇">进程、线程复习篇</a><time datetime="2023-02-04T11:18:20.000Z" title="发表于 2023-02-04 19:18:20">2023-02-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/29/ji-suan-ji-wang-luo-da-zuo-ye/" title="计算机网络大作业"><img src="/img/background/bg_bggenerator_com%20(2).png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算机网络大作业"/></a><div class="content"><a class="title" href="/2023/01/29/ji-suan-ji-wang-luo-da-zuo-ye/" title="计算机网络大作业">计算机网络大作业</a><time datetime="2023-01-29T11:40:20.000Z" title="发表于 2023-01-29 19:40:20">2023-01-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/11/di-liu-zhang-ying-yong-ceng/" title="第六章、应用层"><img src="/img/background/bg_bggenerator_com%20(2).png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第六章、应用层"/></a><div class="content"><a class="title" href="/2023/01/11/di-liu-zhang-ying-yong-ceng/" title="第六章、应用层">第六章、应用层</a><time datetime="2023-01-11T11:59:50.000Z" title="发表于 2023-01-11 19:59:50">2023-01-11</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/background/bg_bggenerator_com%20(2).png')"><div id="footer-wrap"><div class="footer_custom_text">谢谢看到这er~没有更多了奥</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div><script src="/js/markmap.js"></script></body></html>
