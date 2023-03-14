@@ -25,7 +25,7 @@
     "hexo-generator-searchdb": "^1.4.1",
     "hexo-generator-tag": "^2.0.0",
     "hexo-markmap": "^1.1.6",
-    "hexo-pagination": "^2.0.0",
+    "hexo-pagination": "^3.0.0",
     "hexo-permalink-pinyin": "^1.1.0",
     "hexo-renderer-ejs": "^2.0.0",
     "hexo-renderer-inferno": "^0.1.3",
