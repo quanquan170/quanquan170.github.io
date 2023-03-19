@@ -1,9 +1,15 @@
-用hexo搭建的个人博客
+hexo+butterfly
 
 运行效果👉https://quanquan170.github.io/
 
 
 
-成长中的程序yuan
+大三在校
 
-记录个人成长，随缘更新
+目标职位：Java后端工程师
+
+整理一些笔记，随缘更新
+
+
+
+祝你今天高兴
