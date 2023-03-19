@@ -2,7 +2,6 @@
 title: File与IO
 date: 2023-03-05 19:58:37
 top_img: url(/img/imgs/File与IO.png)
-cover: url(/img/imgs/File与IO.png)
 tags: [Java]
 categories: 复习
 ---
