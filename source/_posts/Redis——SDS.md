@@ -6,7 +6,7 @@ tags: [Redis]
 categories: 复习
 ---
 
-## 1.数据结构
+## 1 数据结构
 
  SDS（Simple Dynamic String，简单动态字符串）,源码底层就是`typedef char *sds;`
 
@@ -257,29 +257,83 @@ sds sdsMakeRoomFor(sds s, size_t addlen) {
 }
 ```
 
-##### **自动扩容机制总结：**
+##### 自动扩容机制总结：
 
 **扩容阶段：**
 
 - 若 SDS 中剩余空闲空间 avail 大于新增内容的长度 addlen，则无需扩容；
-
 - 若 SDS 中剩余空闲空间 avail 小于或等于新增内容的长度 addlen：
-
-- - 若新增后总长度 len+addlen < 1MB，则按新长度的两倍扩容；
+  - 若新增后总长度 len+addlen < 1MB，则按新长度的两倍扩容；
   - 若新增后总长度 len+addlen > 1MB，则按新长度加上 1MB 扩容。
+
 
 **内存分配阶段：**
 
 - 根据扩容后的长度选择对应的 SDS 类型：
-
-- - 若类型不变，则只需通过 `s_realloc_usable`扩大 buf 数组即可；
+  - 若类型不变，则只需通过 `s_realloc_usable`扩大 buf 数组即可；
   - 若类型变化，则需要为整个 SDS 重新分配内存，并将原来的 SDS 内容拷贝至新位置。
+
 
 **自动扩容流程图：**
 
 ![](Redis——SDS/640.png)
 
 > 扩容后的 SDS 不会恰好容纳下新增的字符，而是多分配了一些空间(预分配策略)，这减少了修改字符串时带来的内存重分配次数
+
+##### 根据不同的type确定对应的数据结构——sdsHdrSize方法
+
+```c
+static inline int sdsHdrSize(char type) {
+    // #define SDS_TYPE_MASK 7，二进制为0000 0111
+    switch(type&SDS_TYPE_MASK) {
+        // #define SDS_TYPE_5  0
+        case SDS_TYPE_5:
+            return sizeof(struct sdshdr5);
+        // #define SDS_TYPE_8  1
+        case SDS_TYPE_8:
+            return sizeof(struct sdshdr8);
+        // #define SDS_TYPE_16 2
+        case SDS_TYPE_16:
+            return sizeof(struct sdshdr16);
+        // #define SDS_TYPE_32 3
+        case SDS_TYPE_32:
+            return sizeof(struct sdshdr32);
+        // #define SDS_TYPE_64 4
+        case SDS_TYPE_64:
+            return sizeof(struct sdshdr64);
+    }
+    return 0;
+}
+```
+
+
+
+##### 根据字符串长度选择对应数据结构——sdsReqType方法
+
+```c
+static inline char sdsReqType(size_t string_size) {
+    if (string_size < 1<<5)
+       // #define SDS_TYPE_5  0
+        return SDS_TYPE_5;
+    if (string_size < 1<<8)
+        // #define SDS_TYPE_8  1
+        return SDS_TYPE_8;
+    if (string_size < 1<<16)
+        // #define SDS_TYPE_16 2
+        return SDS_TYPE_16;
+#if (LONG_MAX == LLONG_MAX)
+    if (string_size < 1ll<<32)
+        // #define SDS_TYPE_32 3
+        return SDS_TYPE_32;
+    // #define SDS_TYPE_64 4
+    return SDS_TYPE_64;
+#else
+    return SDS_TYPE_32;
+#endif
+}
+```
+
+通过位运算`type&SDS_TYPE_MASK`选择对应的数据结构，和子网划分有点相似，都是和一个MASK做位运算。
 
 ### 3.4 内存重分配次数优化
 
@@ -483,5 +537,11 @@ void sdsfree(sds s) {
     s_free((char*)s-sdsHdrSize(s[-1]));
 }
 ```
+
+
+
+
+
+
 
 [完整含详细解释来源](https://mp.weixin.qq.com/s/uYUQ1P8Dq1Cdknxif7lF-g)
