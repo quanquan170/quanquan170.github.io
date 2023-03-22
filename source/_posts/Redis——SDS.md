@@ -3,7 +3,7 @@ title: Redis——SDS结构模型
 date: 2023-03-19 13:01:20
 top_img: url(/img/imgs/redis.png)
 tags: [Redis]
-categories: 复习
+categories: 面试准备
 ---
 
 ## 1 数据结构

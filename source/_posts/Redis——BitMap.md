@@ -3,7 +3,7 @@ title: Redis——BitMap
 date: 2023-03-20 11:59:20
 top_img: url(/img/imgs/redis.png)
 tags: [Redis]
-categories: 复习
+categories: 面试准备
 ---
 
 ### 1 基本命令
@@ -190,7 +190,7 @@ uint32_t swar(uint32_t i) {
 3. 步骤三计算出的值i的二进制表示可以按**每八个二进制位为一组进行分组**，各组的十进制表示就是该组的1的数量；
 4. 步骤四的`i*0x01010101`语句计算出bitarray中1的数量并记录在二进制位的最高八位，而`>>24`语句则通过右移运算，将bitarray的汉明重量移动到最低八位，得出的结果就是bitarray的汉明重量。
 
->  **Integer.bitCount方法，也是基于SWAR算法的思想**
+>  **Integer.bitCount方法，也是基于SWAR算法的思想**
 
 ##### 2.4.4 源码分析
 
