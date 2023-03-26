@@ -1,12 +1,16 @@
 ---
-title: MySQL——单表访问方法
+title: MySQL——访问方法合集
 date: 2023-03-21 11:59:20
 top_img: url(/img/imgs/MySQL.png)
 tags: [MySQL]
 categories: 面试准备
 ---
 
-执行查询语句的方式称之为`访问方法`或者`访问类型`。
+执行查询语句的方式称之为`访问方法`或者`访问类型`。可以通过explain语句在执行计划的`type`列查看。
+
+完整的访问方法如下：`system`，`const`，`eq_ref`，`ref`，`fulltext`，`ref_or_null`，`index_merge`，`unique_subquery`，`index_subquery`，`range`，`index`，`ALL`。
+
+除了`All`这个访问方法外，其余的访问方法都能用到索引，除了`index_merge`访问方法外，其余的访问方法都最多只能用到一个索引
 
 建表语句：
 
@@ -34,6 +38,8 @@ CREATE TABLE single_table (
 - 为`key3`列建立的`idx_key3`二级索引。
 - 为`key_part1`、`key_part2`、`key_part3`列建立的`idx_key_part`二级索引，这也是一个联合索引。
 
+## 单表访问方法（InnoDB）
+
 ### const
 
 通过**主键**或者**唯一二级索引列与常数的等值比较**来定位**一条记录**
@@ -48,7 +54,7 @@ CREATE TABLE single_table (
 
     不论是普通的二级索引，还是唯一二级索引，它们的索引列对包含`NULL`值的数量并不限制，所以我们采用`key IS NULL`这种形式的搜索条件最多只能使用`ref`的访问方法，而不是`const`的访问方法。
 
-- 对于某个包含多个索引列的二级索引来说，只要是最**左边的连续索引列是与常数的等值比较**就可能采用`ref`的访问方法
+- 对于某个包含多个索引列的二级索引来说，只要是最**左边的连续索引列是与常数的等值比较**就**可能**采用`ref`的访问方法（还可能是全表扫描）
 
 ### ref_or_null
 
@@ -173,6 +179,104 @@ SELECT * FROM single_table WHERE key1 < 'a' OR key3 > 'z'
 
 > 小贴士：为什么有Sort-Union索引合并，就没有Sort-Intersection索引合并么？是的，的确没有Sort-Intersection索引合并这么一说，Sort-Union的适用场景是单独根据搜索条件从某个二级索引中获取的记录数比较少，这样即使对这些二级索引记录按照主键值进行排序的成本也不会太高，而Intersection索引合并的适用场景是单独根据搜索条件从某个二级索引中获取的记录数太多，导致回表开销太大，合并后可以明显降低回表开销，但是如果加入Sort-Intersection后，就需要为大量的二级索引记录按照主键值进行排序，这个成本可能比回表查询都高了，所以也就没有引入Sort-Intersection这个玩意儿。  
 
+## 其他
+
+### system
+
+  当表中只有一条记录并且该表使用的存储引擎的统计数据是精确的，比如MyISAM、Memory，那么对该表的访问方法就是`system`。比方说我们新建一个`MyISAM`表，并为其插入一条记录：
+
+```sql
+mysql> CREATE TABLE t(i int) Engine=MyISAM;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> INSERT INTO t VALUES(1);
+Query OK, 1 row affected (0.01 sec)
+```
+
+  然后我们看一下查询这个表的执行计划：
+
+```sql
+mysql> EXPLAIN SELECT * FROM t;
++----+-------------+-------+------------+--------+---------------+------+---------+------+------+----------+-------+
+| id | select_type | table | partitions | type   | possible_keys | key  | key_len | ref  | rows | filtered | Extra |
++----+-------------+-------+------------+--------+---------------+------+---------+------+------+----------+-------+
+|  1 | SIMPLE      | t     | NULL       | system | NULL          | NULL | NULL    | NULL |    1 |   100.00 | NULL  |
++----+-------------+-------+------------+--------+---------------+------+---------+------+------+----------+-------+
+1 row in set, 1 warning (0.00 sec)
+```
+
+  可以看到`type`列的值就是`system`了。
+
+​		如果是InnoDB存储引擎，那么`type`为ALL~
+
+```sql
+mysql> explain select * from (select * from t1 where m1 = 2) as t3
+    -> ;
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------------+
+| id | select_type | table | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra       |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------------+
+|  1 | SIMPLE      | t1    | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    3 |    33.33 | Using where |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------------+
+1 row in set, 1 warning (0.00 sec)
+```
+
+### eq_ref
+
+  在连接查询时，如果被驱动表是通过主键或者唯一二级索引列等值匹配的方式进行访问的（如果该主键或者唯一二级索引是联合索引的话，所有的索引列都必须进行等值比较），则对该被驱动表的访问方法就是`eq_ref`，比方说：
+
+```sql
+mysql> EXPLAIN SELECT * FROM s1 INNER JOIN s2 ON s1.id = s2.id;
++----+-------------+-------+------------+--------+---------------+---------+---------+-----------------+------+----------+-------+
+| id | select_type | table | partitions | type   | possible_keys | key     | key_len | ref             | rows | filtered | Extra |
++----+-------------+-------+------------+--------+---------------+---------+---------+-----------------+------+----------+-------+
+|  1 | SIMPLE      | s1    | NULL       | ALL    | PRIMARY       | NULL    | NULL    | NULL            | 9688 |   100.00 | NULL  |
+|  1 | SIMPLE      | s2    | NULL       | eq_ref | PRIMARY       | PRIMARY | 4       | xiaohaizi.s1.id |    1 |   100.00 | NULL  |
++----+-------------+-------+------------+--------+---------------+---------+---------+-----------------+------+----------+-------+
+2 rows in set, 1 warning (0.01 sec)
+```
+
+  从执行计划的结果中可以看出，`MySQL`打算将`s1`作为驱动表，`s2`作为被驱动表，重点关注`s2`的访问方法是`eq_ref`，表明在访问`s2`表的时候可以通过主键的等值匹配来进行访问。
+
+### fulltext
+
+  全文索引，我们没有细讲过，跳过～
+
+### unique_subquery
+
+  类似于两表连接中被驱动表的`eq_ref`访问方法，`unique_subquery`是针对在一些包含`IN`子查询的查询语句中，如果查询优化器决定将`IN`子查询转换为`EXISTS`子查询，而且子查询可以使用到主键进行等值匹配的话，那么该子查询执行计划的`type`列的值就是`unique_subquery`，比如下面的这个查询语句：
+
+```sql
+mysql> EXPLAIN SELECT * FROM s1 WHERE key2 IN (SELECT id FROM s2 where s1.key1 = s2.key1) OR key3 = 'a';
++----+--------------------+-------+------------+-----------------+------------------+---------+---------+------+------+----------+-------------+
+| id | select_type        | table | partitions | type            | possible_keys    | key     | key_len | ref  | rows | filtered | Extra       |
++----+--------------------+-------+------------+-----------------+------------------+---------+---------+------+------+----------+-------------+
+|  1 | PRIMARY            | s1    | NULL       | ALL             | idx_key3         | NULL    | NULL    | NULL | 9688 |   100.00 | Using where |
+|  2 | DEPENDENT SUBQUERY | s2    | NULL       | unique_subquery | PRIMARY,idx_key1 | PRIMARY | 4       | func |    1 |    10.00 | Using where |
++----+--------------------+-------+------------+-----------------+------------------+---------+---------+------+------+----------+-------------+
+2 rows in set, 2 warnings (0.00 sec)
+```
+
+  可以看到执行计划的第二条记录的`type`值就是`unique_subquery`，说明在执行子查询时会使用到`id`列的索引。
+
+### index_subquery
+
+  `index_subquery`与`unique_subquery`类似，只不过访问子查询中的表时使用的是普通的索引，比如这样：
+
+```sql
+mysql> EXPLAIN SELECT * FROM s1 WHERE common_field IN (SELECT key3 FROM s2 where s1.key1 = s2.key1) OR key3 = 'a';
++----+--------------------+-------+------------+----------------+-------------------+----------+---------+------+------+----------+-------------+
+| id | select_type        | table | partitions | type           | possible_keys     | key      | key_len | ref  | rows | filtered | Extra       |
++----+--------------------+-------+------------+----------------+-------------------+----------+---------+------+------+----------+-------------+
+|  1 | PRIMARY            | s1    | NULL       | ALL            | idx_key3          | NULL     | NULL    | NULL | 9688 |   100.00 | Using where |
+|  2 | DEPENDENT SUBQUERY | s2    | NULL       | index_subquery | idx_key1,idx_key3 | idx_key3 | 303     | func |    1 |    10.00 | Using where |
++----+--------------------+-------+------------+----------------+-------------------+----------+---------+------+------+----------+-------------+
+2 rows in set, 2 warnings (0.01 sec)
+```
+
+
+
+
+
 
 
 
@@ -180,5 +284,7 @@ SELECT * FROM single_table WHERE key1 < 'a' OR key3 > 'z'
 
 
 完整文章为：《MySQL 是怎样运行的：从根儿上理解 MySQL》——第10章 条条大路通罗马-单表访问方法
+
+《MySQL 是怎样运行的：从根儿上理解 MySQL》——第15章 查询优化的百科全书-Explain详解（上）
 
 以上只是一些自己想要记录且方便查找的笔记

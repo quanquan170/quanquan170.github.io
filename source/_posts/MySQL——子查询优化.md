@@ -6,7 +6,77 @@ tags: [MySQL]
 categories: 面试准备
 ---
 
+### 子查询语法注意事项
 
+- 子查询必须用小括号扩起来。
+
+    不扩起来的子查询是非法的，比如这样：
+
+  ```sql
+  mysql> SELECT SELECT m1 FROM t1;
+  
+  ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SELECT m1 FROM t1' at line 1
+  ```
+
+- 在`SELECT`子句中的子查询必须是标量子查询。
+
+    如果子查询结果集中有多个列或者多个行，都不允许放在`SELECT`子句中，也就是查询列表中，比如这样就是非法的：
+
+  ```sql
+  mysql> SELECT (SELECT m1, n1 FROM t1);
+  
+  ERROR 1241 (21000): Operand should contain 1 column(s)
+  ```
+
+- 在想要得到标量子查询或者行子查询，但又不能保证子查询的结果集只有一条记录时，应该使用`LIMIT 1`语句来限制记录数量。
+
+- 对于`[NOT] IN/ANY/SOME/ALL`子查询来说，子查询中不允许有`LIMIT`语句。
+
+    比如这样是非法的：
+
+  ```sql
+  mysql> SELECT * FROM t1 WHERE m1 IN (SELECT * FROM t2 LIMIT 2);
+  
+  ERROR 1235 (42000): This version of MySQL doesn't yet support 'LIMIT & IN/ALL/ANY/SOME subquery'
+  ```
+
+    为什么不合法？人家就这么规定的，不解释～ 可能以后的版本会支持吧。正因为`[NOT] IN/ANY/SOME/ALL`子查询不支持`LIMIT`语句，所以子查询中的这些语句也就是多余的了：
+
+  - `ORDER BY`子句
+
+      子查询的结果其实就相当于一个集合，集合里的值排不排序一点儿都不重要，比如下面这个语句中的`ORDER BY`子句简直就是画蛇添足：
+
+    ```sql
+    SELECT * FROM t1 WHERE m1 IN (SELECT m2 FROM t2 ORDER BY m2);
+    ```
+
+  - `DISTINCT`语句
+
+      集合里的值去不去重也没什么意义，比如这样：
+
+    ```sql
+    SELECT * FROM t1 WHERE m1 IN (SELECT DISTINCT m2 FROM t2);
+    ```
+
+  - 没有聚集函数以及`HAVING`子句的`GROUP BY`子句。
+
+      在没有聚集函数以及`HAVING`子句时，`GROUP BY`子句就是个摆设，比如这样：
+
+    ```sql
+    SELECT * FROM t1 WHERE m1 IN (SELECT m2 FROM t2 GROUP BY m2);
+    ```
+
+      对于这些冗余的语句，查询优化器在一开始就把它们给干掉了。
+
+- 不允许在一条语句中增删改某个表的记录时同时还对该表进行子查询。
+
+    比方说这样：
+
+  ```sql
+  mysql> DELETE FROM t1 WHERE m1 < (SELECT MAX(m1) FROM t1);
+  
+  ERROR 1093 (HY000): You can't specify target table 't1' for update in FROM clause
+  ```
 
 ## 标量子查询、行子查询的执行方式
 
@@ -61,6 +131,8 @@ SELECT * FROM s1 WHERE
 
 将子查询结果集中的记录保存到临时表的过程称之为`物化`（英文名：`Materialize`）。为了方便起见，我们就把那个存储子查询结果集的临时表称之为`物化表`。正因为物化表中的记录都建立了索引（基于内存的物化表有哈希索引，基于磁盘的有B+树索引），通过索引执行`IN`语句判断某个操作数在不在子查询结果集中变得非常快，从而提升了子查询语句的性能。
 
+查询语句转化成表和物化表内连接之后，查询优化器可以评估不同连接顺序需要的成本是多少，选取成本最低的那种查询方式执行查询。
+
 ### 将子查询转换为semi-join
 
 #### Table pullout （子查询中的表上拉）
@@ -80,7 +152,7 @@ SELECT * FROM s1
 
 在子查询中，对于`s2`表的访问可以使用到`key1`列的索引，而恰好子查询的查询列表处就是`key1`列，这样在将该查询转换为半连接查询后，如果将`s2`作为驱动表执行查询的话，那么执行过程就是这样：
 
-![](子查询优化/14-03.png)
+![](MySQL——子查询优化/14-03.png)
 
 如图所示，在`s2`表的`idx_key1`索引中，值为`'aa'`的二级索引记录一共有3条，那么只需要取第一条的值到`s1`表中查找`s1.key3 = 'aa'`的记录，如果能在`s1`表中找到对应的记录，那么就把对应的记录加入到结果集。依此类推，其他值相同的二级索引记录，也只需要取第一条记录的值到`s1`表中找匹配的记录，这种虽然是扫描索引，但只取值相同的记录的第一条去做匹配操作的方式称之为`松散索引扫描`。
 
@@ -416,3 +488,9 @@ SELECT * FROM  (
   - ... 还有些不常用的情况就不多说了～
 
   所以`MySQL`在执行带有派生表的时候，优先尝试把派生表和外层查询合并掉，如果不行的话，再把派生表物化掉执行查询。
+
+
+
+
+
+完整文章为：《MySQL 是怎样运行的：从根儿上理解 MySQL》——第14章 不好看就要多整容-MySQL基于规则的优化（内含关于子查询优化二三事儿）
