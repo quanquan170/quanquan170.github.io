@@ -1,6 +1,6 @@
 ---
 title: MyBatis——使用配置文档1
-date: 2023-03-25 21:30:20
+date: 2023-03-26 21:30:20
 top_img: url(/img/imgs/MyBatis.png)
 tags: [MyBatis]
 categories: 面试准备
@@ -622,7 +622,7 @@ ${} 的特点
 
 ### 3.4.1 resultType
 
-resultType属性： 在执行select时使用， 作为<select>标签的属性出现的。
+resultType属性： 在执行select时使用， 作为\<select\>标签的属性出现的。
 
 resultType:表示结果类型 ，  mysql执行sql语句，得到java对象的类型。  它的值有两种
 
