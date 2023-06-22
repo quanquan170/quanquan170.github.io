@@ -876,7 +876,7 @@
   version "0.8.0"
   resolved "https://registry.npmmirror.com/@babel/regjsgen/-/regjsgen-0.8.0.tgz"
 
-"@babel/runtime@^7.12.1", "@babel/runtime@^7.12.5", "@babel/runtime@^7.8.4":
+"@babel/runtime@^7.8.4":
   version "7.20.7"
   resolved "https://registry.npmmirror.com/@babel/runtime/-/runtime-7.20.7.tgz"
   dependencies:
@@ -1069,12 +1069,6 @@ archy@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmmirror.com/archy/-/archy-1.0.0.tgz"
 
-argparse@^1.0.10:
-  version "1.0.10"
-  resolved "https://registry.npmmirror.com/argparse/-/argparse-1.0.10.tgz"
-  dependencies:
-    sprintf-js "~1.0.2"
-
 argparse@^2.0.1:
   version "2.0.1"
   resolved "https://registry.npmmirror.com/argparse/-/argparse-2.0.1.tgz"
@@ -1098,12 +1092,6 @@ asynckit@^0.4.0:
 atob@^2.1.2:
   version "2.1.2"
   resolved "https://registry.npmmirror.com/atob/-/atob-2.1.2.tgz"
-
-autolinker@^3.11.0:
-  version "3.16.2"
-  resolved "https://registry.npmmirror.com/autolinker/-/autolinker-3.16.2.tgz"
-  dependencies:
-    tslib "^2.3.0"
 
 babel-plugin-inferno@^6.1.0:
   version "6.6.0"
@@ -1321,10 +1309,6 @@ combined-stream@^1.0.8:
 command-exists@^1.2.8:
   version "1.2.9"
   resolved "https://registry.npmmirror.com/command-exists/-/command-exists-1.2.9.tgz"
-
-commander@^2.19.0:
-  version "2.20.3"
-  resolved "https://registry.npmmirror.com/commander/-/commander-2.20.3.tgz"
 
 commander@^5.1.0:
   version "5.1.0"
@@ -1978,13 +1962,9 @@ hexo-log@^3.0.0, hexo-log@^3.2.0:
   dependencies:
     picocolors "^1.0.0"
 
-hexo-markmap@^1.1.7:
-  version "1.1.7"
-  resolved "https://registry.yarnpkg.com/hexo-markmap/-/hexo-markmap-1.1.7.tgz#7fd368637591dbd723b2c8fb5a2a81336c78622c"
-  dependencies:
-    lodash.get "^4.4.2"
-    markmap-common "^0.1.6"
-    markmap-lib "^0.11.6"
+hexo-markmap@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/hexo-markmap/-/hexo-markmap-1.2.0.tgz#15f54acb1653d21180440d171ed0544e0eef3151"
 
 hexo-pagination@3.0.0, hexo-pagination@^3.0.0:
   version "3.0.0"
@@ -2444,12 +2424,6 @@ jstransformer@1.0.0:
     is-promise "^2.0.0"
     promise "^7.0.1"
 
-katex@^0.12.0:
-  version "0.12.0"
-  resolved "https://registry.npmmirror.com/katex/-/katex-0.12.0.tgz"
-  dependencies:
-    commander "^2.19.0"
-
 kind-of@^6.0.2:
   version "6.0.3"
   resolved "https://registry.npmmirror.com/kind-of/-/kind-of-6.0.3.tgz"
@@ -2477,10 +2451,6 @@ locate-path@^3.0.0:
 lodash.debounce@^4.0.8:
   version "4.0.8"
   resolved "https://registry.npmmirror.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz"
-
-lodash.get@^4.4.2:
-  version "4.4.2"
-  resolved "https://registry.npmmirror.com/lodash.get/-/lodash.get-4.4.2.tgz"
 
 lodash@^3.2.0:
   version "3.10.1"
@@ -2528,23 +2498,6 @@ map-age-cleaner@^0.1.1:
 marked@^4.1.1:
   version "4.2.5"
   resolved "https://registry.npmmirror.com/marked/-/marked-4.2.5.tgz"
-
-markmap-common@^0.1.5, markmap-common@^0.1.6:
-  version "0.1.6"
-  resolved "https://registry.npmmirror.com/markmap-common/-/markmap-common-0.1.6.tgz"
-  dependencies:
-    "@babel/runtime" "^7.12.1"
-
-markmap-lib@^0.11.6:
-  version "0.11.6"
-  resolved "https://registry.npmmirror.com/markmap-lib/-/markmap-lib-0.11.6.tgz"
-  dependencies:
-    "@babel/runtime" "^7.12.5"
-    katex "^0.12.0"
-    markmap-common "^0.1.5"
-    prismjs "^1.21.0"
-    remarkable "^2.0.0"
-    remarkable-katex "^1.1.6"
 
 mem@^4.0.0:
   version "4.3.0"
@@ -2869,7 +2822,7 @@ pretty-hrtime@^1.0.3:
   version "1.0.3"
   resolved "https://registry.npmmirror.com/pretty-hrtime/-/pretty-hrtime-1.0.3.tgz"
 
-prismjs@^1.17.1, prismjs@^1.21.0:
+prismjs@^1.17.1:
   version "1.29.0"
   resolved "https://registry.npmmirror.com/prismjs/-/prismjs-1.29.0.tgz"
 
@@ -3057,17 +3010,6 @@ regjsparser@^0.9.1:
   dependencies:
     jsesc "~0.5.0"
 
-remarkable-katex@^1.1.6:
-  version "1.2.1"
-  resolved "https://registry.npmmirror.com/remarkable-katex/-/remarkable-katex-1.2.1.tgz"
-
-remarkable@^2.0.0:
-  version "2.0.1"
-  resolved "https://registry.npmmirror.com/remarkable/-/remarkable-2.0.1.tgz"
-  dependencies:
-    argparse "^1.0.10"
-    autolinker "^3.11.0"
-
 require-directory@^2.1.1:
   version "2.1.1"
   resolved "https://registry.npmmirror.com/require-directory/-/require-directory-2.1.1.tgz"
@@ -3229,10 +3171,6 @@ sprintf-js@^1.0.3:
   version "1.1.2"
   resolved "https://registry.npmmirror.com/sprintf-js/-/sprintf-js-1.1.2.tgz"
 
-sprintf-js@~1.0.2:
-  version "1.0.3"
-  resolved "https://registry.npmmirror.com/sprintf-js/-/sprintf-js-1.0.3.tgz"
-
 statuses@2.0.1:
   version "2.0.1"
   resolved "https://registry.npmmirror.com/statuses/-/statuses-2.0.1.tgz"
@@ -3386,7 +3324,7 @@ transliteration@^1.6.2:
   dependencies:
     yargs "^12.0.1"
 
-tslib@^2.0.3, tslib@^2.3.0:
+tslib@^2.0.3:
   version "2.4.1"
   resolved "https://registry.npmmirror.com/tslib/-/tslib-2.4.1.tgz"
 
