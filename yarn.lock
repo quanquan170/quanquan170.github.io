@@ -1978,9 +1978,9 @@ hexo-log@^3.0.0, hexo-log@^3.2.0:
   dependencies:
     picocolors "^1.0.0"
 
-hexo-markmap@^1.1.7:
-  version "1.1.7"
-  resolved "https://registry.yarnpkg.com/hexo-markmap/-/hexo-markmap-1.1.7.tgz#7fd368637591dbd723b2c8fb5a2a81336c78622c"
+hexo-markmap@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/hexo-markmap/-/hexo-markmap-1.2.2.tgz#e2b93727df3630c4e211627dfed2c3792de28cda"
   dependencies:
     lodash.get "^4.4.2"
     markmap-common "^0.1.6"
