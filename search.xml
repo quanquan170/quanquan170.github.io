@@ -4,31 +4,6 @@
   
     
     <entry>
-      <title>23-秋招9.8-面经一</title>
-      <link href="/2023/09/08/23-qiu-zhao-9.8-mian-jing-yi/"/>
-      <url>/2023/09/08/23-qiu-zhao-9.8-mian-jing-yi/</url>
-      
-        <content type="html"><![CDATA[<p>全程68min一面</p><p>项目相关（20min）</p><p>1.对Java多态的理解 多态存在的必然条件有哪些</p><p>2.有没有用过什么设计模式，介绍用在哪些场景中</p><p>3.介绍一下线程池</p><p>4.newFixedThreadPool的核心参数</p><p>5.线程的生命周期</p><p>6.有哪些原因会造成线程阻塞</p><p>7.说一下Java的NIO，Java实现NIO有哪些核心组件</p><p>8.Spring的IOC</p><p>9.Spring默认是单例还是多例</p><p>10.Spring的bean的生命周期</p><p>11.数据库的事务的特性</p><p>12.MySQL是怎么实现这四个特性的</p><p>13.MySQL可重复读隔离级别，解决幻读了吗</p><p>14.对当前读是怎么解决的</p><p>15.知道哪些数据库的索引</p><p>16.为什么选择B+树作为索引</p><p>17.为什么联合索引存在匹配规则</p><p>18.redo log和bin log的区别</p><p>19.知道几种缓存的场景 缓存击穿 缓存穿透 缓存雪崩 怎么解决</p><p>20.Redis的线程模型</p><p>21.Redis分布式锁怎么实现 加锁和释放锁要用什么指令</p><p>22.做算法题：和为K的连续子数组，妈妈呀，我写了二十分钟</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 面经 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Java面经 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>MySQL——分库分表</title>
       <link href="/2023/04/22/mysql-fen-ku-fen-biao/"/>
       <url>/2023/04/22/mysql-fen-ku-fen-biao/</url>
